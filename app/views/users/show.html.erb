@@ -1,0 +1,18 @@
+<div style="max-width: 600px; margin: 40px auto; padding: 30px; font-family: sans-serif; background-color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-radius: 8px;">
+  <h1 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; margin-bottom: 20px;">マイプロフィール（一般社員画面）</h1>
+
+  <div style="margin-bottom: 15px;">
+    <strong style="color: #555; display: block;">氏名:</strong>
+    <span style="font-size: 18px; color: #333;"><%= @user.name %></span>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <strong style="color: #555; display: block;">社員番号:</strong>
+    <span style="font-size: 18px; color: #333;"><%= @user.employee_number %></span>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <strong style="color: #555; display: block;">メールアドレス:</strong>
+    <span style="font-size: 18px; color: #333;"><%= @user.email_address %></span>
+  </div>
+</div>

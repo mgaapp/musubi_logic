@@ -23,6 +23,16 @@
   </head>
 
   <body>
+    <header style="background-color: #f8f9fa; padding: 15px; border-bottom: 1px solid #dee2e6; display: flex; justify-content: space-between; align-items: center;">
+      <h2 style="margin: 0;"><%= link_to 'Musubi logic', root_path, style: "text-decoration: none; color: #333;" %></h2>
+      <nav>
+        <ul style="list-style: none; margin: 0; padding: 0; display: flex; gap: 20px;">
+          <li><%= link_to 'About (ホーム)', root_path, style: "text-decoration: none; color: #007bff; font-weight: bold;" %></li>
+          <li><%= link_to 'サインイン', new_session_path, style: "text-decoration: none; color: #555;" %></li>
+          <li><%= link_to 'ログアウト', session_path, data: { turbo_method: :delete }, style: "text-decoration: none; color: #d9534f;" %></li>
+        </ul>
+      </nav>
+    </header>
     <%= yield %>
   </body>
 </html>
