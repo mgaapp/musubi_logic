@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  allow_unauthenticated_access
   before_action :authenticate_admin
   def index
     @users = User.all

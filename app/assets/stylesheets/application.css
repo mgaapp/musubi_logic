@@ -1,10 +1,151 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+/* app/views/layouts/applicationのヘッダー */
+.main-header {
+  background-color: #1e3a8a; /* 暗めの洗練されたネイビーブルーに変更 */
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 下部にうっすら影をつけて立体感をプラス */
+}
+
+.header-logo {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.header-link {
+  color: #bfdbfe; /* 淡いブルーにして、背景のネイビーに馴染ませます */
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* マウスを乗せたときに白く光らせる */
+.header-link:hover {
+  color: #ffffff;
+}
+
+/* 管理者専用の特別なリンク（爽やかなミントグリーン/ライトブルー系で目立たせる） */
+.header-link-admin {
+  color: #6ee7b7; 
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.header-link-admin:hover {
+  color: #a7f3d0;
+}
+
+/* ログアウトボタン */
+.header-button {
+  background: none;
+  border: none;
+  color: #bfdbfe; /* リンクと同じ淡いブルーに統一 */
+  margin-left: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  display: inline;
+  padding: 0;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.header-button:hover {
+  color: #ffffff;
+}
+
+/* app/views/admin/users/index */
+
+.header-link-admin {
+  color: #ffffff;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.header-link-admin:hover {
+  color: #ffffff;
+}
+
+.header-button {
+  background: none;
+  border: none;
+  color: #ffffff;
+  margin-left: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  display: inline;
+  padding: 0;
+}
+
+.header-button:hover {
+  color: #fff;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #d9534f;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+}
+
+.title {
+  color: #333;
+  margin: 0;
+}
+
+.admin-badge {
+  background-color: #d9534f;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.table-header-row {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #ddd;
+}
+
+.table-header-cell {
+  padding: 12px;
+  text-align: left;
+  color: #555;
+}
+
+.table-row {
+  border-bottom: 1px solid #eee;
+}
+
+.table-cell {
+  padding: 12px;
+  color: #666;
+}
+
+.table-cell.employee-number {
+  font-weight: bold;
+  color: #333;
+}
+
+/* app/views/admin/users/index */
+

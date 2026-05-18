@@ -4,7 +4,8 @@ class User < ApplicationRecord
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
-  validates : name, presence: true
-  validates : employee_number, presence: true, uniqueness: true
-  validates : role, presence: true
+  validates :name,presence: true
+  validates :employee_number,presence: true, uniqueness: true
+  validates :role,presence: true
+  enum :role,[ :general, :admin ]
 end
