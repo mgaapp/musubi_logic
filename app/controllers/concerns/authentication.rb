@@ -35,7 +35,14 @@ module Authentication
     end
 
     def after_authentication_url
-      session.delete(:return_to_after_authenticating) || root_url
+      return session[:return_to_after_authenticating] if session[:return_to_after_authenticating]
+    if Current.user&.admin?
+    admin_users_path 
+  else
+    root_path
+  end
+end
+
     end
 
     def start_new_session_for(user)
@@ -49,4 +56,4 @@ module Authentication
       Current.session.destroy
       cookies.delete(:session_id)
     end
-end
+

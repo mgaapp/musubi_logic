@@ -30,8 +30,6 @@
   <%= link_to "Musubi Logic", root_path, class: "header-logo" %>
 
   <nav>
-    <%= link_to "About", about_path, class: "header-link" %>
-
     <% if authenticated? %>
       <%= link_to "マイページ", user_path(Current.user), class: "header-link" %>
 
@@ -44,6 +42,11 @@
     <% end %>
   </nav>
 </header>
+<main>
+    <% flash.each do |message_type, message| %>
+      <div class="flash-message <%= message_type %>"><%= message %></div>
+    <% end %>
     <%= yield %>
+  </main>
   </body>
 </html>

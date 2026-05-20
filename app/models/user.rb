@@ -7,5 +7,6 @@ class User < ApplicationRecord
   validates :name,presence: true
   validates :employee_number,presence: true, uniqueness: true
   validates :role,presence: true
+  validates :password, length: { minimum: 6 }, allow_nil: true
   enum :role,[ :general, :admin ]
 end

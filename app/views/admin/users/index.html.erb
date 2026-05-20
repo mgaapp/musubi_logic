@@ -1,27 +1,35 @@
 <div class="container">
   <div class="header">
     <h1 class="title">社員登録一覧</h1>
-    <span class="admin-badge">ADMIN</span>
+    <div class="admin-container">
+    <div class="admin-header">
+    <h1 class="admin-title">社員アカウント管理メニュー</h1>
   </div>
 
-  <table class="user-table">
+  <div style="margin-bottom: 20px; text-align: right;">
+    <%= link_to "新規社員登録", new_admin_user_path, style: "background-color: #1e3a8a; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 14px;" %>
+  </div>
+
+ <table class="admin-table">
     <thead>
-      <tr class="table-header-row">
-        <th class="table-header-cell">社員番号</th>
-        <th class="table-header-cell">名前</th>
-        <th class="table-header-cell">メールアドレス</th>
-        <th class="table-header-cell">権限（Role）</th>
-      </tr>
+      <tr>
+        <th>社員番号</th>
+        <th>名前</th>
+        <th>メールアドレス</th>
+        <th>権限</th>
+        <th>操作</th> </tr>
     </thead>
     <tbody>
       <% @users.each do |user| %>
-        <tr class="table-row">
-          <td class="table-cell employee-number"><%= user.employee_number %></td>
-          <td class="table-cell"><%= user.name %></td>
-          <td class="table-cell email"><%= user.email_address %></td>
-          <td class="table-cell role"><%= user.role %></td>
+        <tr>
+          <td class="emp-number"><%= user.employee_number %></td>
+          <td><%= link_to user.name, admin_user_path(user), class: "link-edit" %></td>
+          <td class="text-muted"><%= user.email_address %></td>
+          <td class="text-muted"><%= user.role %></td>
+          <td>
+            <%= link_to "詳細", admin_user_path(user), class: "link-edit" %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-</div>
