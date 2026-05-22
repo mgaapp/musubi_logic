@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :public do
+    get "requests/index"
+    get "requests/show"
+    get "requests/new"
+  end
   resource :session
   resources :passwords, param: :token
   root to: "homes#top"
@@ -6,6 +11,10 @@ Rails.application.routes.draw do
   resources :users, only: [ :show ]
   namespace :admin do
    resources :users
+   resources :requests, only: [:index, :show, :update]
+  end
+  scope module: :public do
+    resources :requests, only: [:index, :show, :new, :create]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

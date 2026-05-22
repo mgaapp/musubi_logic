@@ -1,0 +1,54 @@
+<div class="container">
+  <h2>新規経費申請</h2>
+
+  <%= form_with model: @request, url: requests_path, local: true do |f| %>
+    
+    <div class="form-group">
+      <%= f.label :applied_at, "申請日" %>
+      <%= f.date_field :applied_at, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :category_id, "カテゴリ" %>
+      <%= f.collection_select :category_id, Category.all, :id, :name, { prompt: "選択してください" }, { class: "form-control" } %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :vendor, "購入先" %>
+      <%= f.text_field :vendor, class: "form-control", placeholder: "◯◯株式会社、Amazonなど" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :unit_price_excl_tax, "税抜単価" %>
+      <%= f.number_field :unit_price_excl_tax, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :quantity, "数量" %>
+      <%= f.number_field :quantity, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :tax_rate, "消費税率 (%)" %>
+      <%= f.number_field :tax_rate, class: "form-control", placeholder: "10 または 8" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :total_amount_incl_tax, "税込金額" %>
+      <%= f.number_field :total_amount_incl_tax, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :receipt_url, "領収書URL / 画像パス" %>
+      <%= f.text_field :receipt_url, class: "form-control" %>
+    </div>
+
+    <%= f.hidden_field :status, value: "申請中" %>
+
+    <div class="form-actions">
+      <%= f.submit "申請を提出する", class: "btn-submit" %>
+      <%= link_to "戻る", requests_path, class: "btn-cancel" %>
+    </div>
+
+  <% end %>
+</div>

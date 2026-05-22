@@ -1,52 +1,45 @@
 <% if authenticated? %>
-  <div class="dashboard-container">
+  <div>
     <div class="show-header">
-      <h1 class="backoffice-title-general">📊 マイダッシュボード</h1>
+      <h1 class="backoffice-title-general">マイページ</h1>
     </div>
     
-    <div class="backoffice-card" style="margin-top: 20px; text-align: center; padding: 40px;">
-      <p style="color: #666; font-size: 16px;">ログインに成功しました！</p>
-      <p style="color: #333; font-weight: bold; margin-top: 10px;">ここに「自分の最新の申請一覧」が表示されます。</p>
-      <p style="font-size: 14px; color: #999; margin-top: 5px;">（明日以降、申請データのモデルやテーブルをここに実装していきましょう！）</p>
+    <div class="menu-box">
+     <h3>経費精算メニュー</h3>
+     <%= link_to "経費申請をする・一覧を見る", requests_path, class: "btn-primary" %>
     </div>
   </div>
 
 <% else %>
-  <div class="welcome-container">
-    
-    <div class="hero-section">
-      <h1>🚀 バックオフィス効率化システム</h1>
-      <p class="hero-lead">
-        経費精算・固定資産管理・車両および契約書トラッキングまで、<br>
-        社内のバックオフィス業務を一元管理し、ペーパーレスと効率化を同時に実現する社内ツールです。
-      </p>
+<div class="container">
+
+  <div class="hero-section">
+    <h1>Musubi Logic</h1>
+    <p class="hero-lead">
+      経費・物品（貯蔵品）・資産・知見を繋ぐ、バックオフィス一元化プラットフォーム
+    </p>
+    <div>
+      <strong>【開発の背景】</strong><br>
+      経費精算、固定資産台帳、部材などの貯蔵品棚卸表が別々のシステムやExcelで管理されていることによる「情報の分断」や、物品購入時の「二重買い」といったエラーを解消するために生まれました。経費・資産・貯蔵品、精度高い現場の知見を一つの線で結び、情報の整合性を自動で保つ仕組みを構築します。
     </div>
-
-    <div class="features-grid">
-      <div class="feature-card">
-        <h3>💰 経費精算機能</h3>
-        <p>日々の経費申請から承認フローまでをWEB上で完結。ステータスもリアルタイムに追跡可能です。</p>
-      </div>
-
-      <div class="feature-card">
-        <h3>📦 資産・在庫管理</h3>
-        <p>社内の備品や固定資産の台帳管理。入出庫の履歴を管理し、減価償却などの複雑な計算にも対応予定です。</p>
-      </div>
-
-      <div class="feature-card">
-        <h3>📄 契約・車両管理</h3>
-        <p>社用車の稼働台帳や、各種契約書の期限をトラッキング。更新漏れを防ぐアラートのベースとなります。</p>
-      </div>
-    </div>
-
-    <div class="demo-login-card">
-      <h3>🔑 テスト用ログインアカウント</h3>
-      <p>アプリケーションの挙動や権限による画面の違いを確認するために、以下のテストアカウントをご利用いただけます。</p>
-      <ul class="demo-login-list">
-        <li>👥 <strong>一般社員権限:</strong> user@example.com / password <span>（マイダッシュボードへ）</span></li>
-        <li>🛠️ <strong>管理者権限:</strong> admin@example.com / password <span>（社員管理一覧・経理トップへ）</span></li>
-      </ul>
-    </div>
-    
   </div>
+
+
+    <div>
+      <h3>物品・在庫管理 ＆ 経費精算</h3>
+      <p>消耗品やオフィス備品を新たに購入・精算する時や、発注前に社内の在庫状況・過去の購入先を確認したい時に。申請から承認フローまでWEB上で完結します。</p>
+    </div>
+
+    <div>
+      <h3>資産管理</h3>
+      <p>備品購入時の経費精算が資産台帳や棚卸表と連動していないことによる「登録漏れ」を防ぎ、固定資産台帳は減価償却計算にも対応します。</p>
+    </div>
+
+    <div>
+      <h3>申請ルールの知見共有（Q&A機能）</h3>
+      <p>「この金額は資産計上すべきか消耗品か」「インボイス制度上、この領収書で精算可能か」といった、属人化しやすい管理部門への重複する問い合わせを解消します。</p>
+    </div>
+  </div>
+
+</div>
 <% end %>

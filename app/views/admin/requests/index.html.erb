@@ -1,0 +1,32 @@
+<div class="container">
+  <h2>【管理者用】経費申請・精査一覧</h2>
+
+  <table class="table-list">
+    <thead>
+      <tr>
+        <th>申請者</th>
+        <th>申請日</th>
+        <th>勘定科目</th>
+        <th>税込金額</th>
+        <th>ステータス</th>
+        <th>精査</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @requests.each do |request| %>
+        <tr>
+          <td><%= request.user.name if request.user %></td>
+          <td><%= request.applied_at %></td>
+          <td><%= request.category.account_item if request.category %></td> 
+          <td><%= request.total_amount_incl_tax %> 円</td>
+          <td>
+            <span class="status-tag <%= request.status %>">
+              <%= request.status %>
+            </span>
+          </td>
+          <td><%= link_to "精査する", admin_request_path(request), class: "btn-primary" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

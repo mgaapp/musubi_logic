@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>【管理者用】経費申請詳細・精査</h2>
+
+  <div class="detail-box">
+    <p><strong>現在のステータス:</strong> <span class="status-tag"><%= @request.status %></span></p>
+    <p><strong>申請者:</strong> <%= @request.user.name if @request.user %></p>
+    <p><strong>申請日:</strong> <%= @request.applied_at %></p>
+    <p><strong>勘定科目:</strong> <%= @request.category.account_item if @request.category %>（<%= @request.category.name if @request.category %>）</p>
+    <p><strong>購入先:</strong> <%= @request.vendor %></p>
+    <p><strong>税込金額:</strong> <%= @request.total_amount_incl_tax %> 円</p>
+    <p><strong>領収書URL:</strong> <%= link_to "領収書を確認する", @request.receipt_url, target: "_blank" %></p>
+  </div>
+
+  <div class="admin-actions">
+    
+    <%= form_with model: @request, url: admin_request_path(@request), method: :patch, local: true do |f| %>
+      <%= f.hidden_field :status, value: "承認" %>
+      <%= f.submit "✅ 承認する", class: "btn-approve" %>
+    <% end %>
+
+    <%= form_with model: @request, url: admin_request_path(@request), method: :patch, local: true do |f| %>
+      <%= f.hidden_field :status, value: "却下" %>
+      <%= f.submit "❌ 差戻しする", class: "btn-reject" %>
+    <% end %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= link_to "一覧に戻る", admin_requests_path, class: "btn-cancel" %>
+  </div>
+</div>

@@ -37,8 +37,9 @@
         <%= link_to "社員管理", admin_users_path, class: "header-link-admin" %>
       <% end %>
 
-<%= link_to "ログアウト", session_path, data: { turbo_method: :delete }, class: "header-link" %>    <% else %>
-      <%= link_to "サインイン", new_session_path, class: "header-link" %>
+        <%= link_to "ログアウト", session_path, data: { turbo_method: :delete }, class: "header-link" %> 
+        <% else %>
+        <%= link_to "サインイン", new_session_path, class: "header-link" %>
     <% end %>
   </nav>
 </header>

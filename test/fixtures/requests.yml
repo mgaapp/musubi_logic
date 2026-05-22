@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  category_id: 1
+  total_amount_incl_tax: 1
+  unit_price_excl_tax: 1
+  tax_rate: 1
+  quantity: 1
+  vendor: MyString
+  receipt_url: MyString
+  status: MyString
+  applied_at: 2026-05-21
+
+two:
+  user_id: 1
+  category_id: 1
+  total_amount_incl_tax: 1
+  unit_price_excl_tax: 1
+  tax_rate: 1
+  quantity: 1
+  vendor: MyString
+  receipt_url: MyString
+  status: MyString
+  applied_at: 2026-05-21
