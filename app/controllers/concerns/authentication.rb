@@ -35,13 +35,8 @@ module Authentication
     end
 
     def after_authentication_url
-      return session[:return_to_after_authenticating] if session[:return_to_after_authenticating]
-    if Current.user&.admin?
-    admin_users_path 
-  else
-    root_path
-  end
-end
+      session.delete(:return_to_after_authenticating) || root_path
+    end
 
     end
 

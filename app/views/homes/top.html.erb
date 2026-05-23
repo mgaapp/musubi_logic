@@ -1,12 +1,17 @@
 <% if authenticated? %>
   <div>
     <div class="show-header">
-      <h1 class="backoffice-title-general">マイページ</h1>
-    </div>
+    <%= Current.user&.admin? ? "管理者メニュー" : "📊マイページ" %>
+  </div>
     
     <div class="menu-box">
      <h3>経費精算メニュー</h3>
-     <%= link_to "経費申請をする・一覧を見る", requests_path, class: "btn-primary" %>
+     <% if Current.user&.admin? %>
+      <%= link_to "【管理者】届いた経費申請を精査する", admin_requests_path, class: "btn-primary" %>
+     <% else %>
+      <%= link_to "経費申請をする・一覧を見る", requests_path, class: "btn-primary" %>
+    <% end %>
+      <%= link_to "貯蔵品を探す・買う（貯蔵品棚卸一覧）", inventories_path, class: "btn-primary" %>
     </div>
   </div>
 
@@ -40,6 +45,4 @@
       <p>「この金額は資産計上すべきか消耗品か」「インボイス制度上、この領収書で精算可能か」といった、属人化しやすい管理部門への重複する問い合わせを解消します。</p>
     </div>
   </div>
-
-</div>
 <% end %>

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   root to: "homes#top"
   get "/homes/about" => "homes#about", as: "about"
   resources :users, only: [ :show ]
+  resources :inventories, only: [:index]
   namespace :admin do
    resources :users
    resources :requests, only: [:index, :show, :update]

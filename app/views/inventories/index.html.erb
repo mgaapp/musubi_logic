@@ -1,0 +1,48 @@
+<div class="container">
+  <h2>貯蔵品・在庫棚卸一覧</h2>
+
+  <div class="filter-section">
+    <span class="filter-label">拠点フィルター:</span>
+    <button class="btn-filter active">すべて</button>
+    <button class="btn-filter">本社</button>
+    <button class="btn-filter">大阪支店</button>
+    </div>
+
+  <table class="inventory-table">
+    <thead>
+      <tr>
+        <th>貯蔵品ID</th>
+        <th>拠点</th>
+        <th>購入先</th>
+        <th>税抜単価</th>
+        <th>現在の個数</th>
+        <th>入出庫ステータス</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @inventories.each do |inventory| %>
+        <tr>
+          <td><%= inventory.id %></td>
+          <td><span class="location-tag"><%= inventory.location %></span></td>
+          <td><%= inventory.vendor %></td>
+          <td><%= inventory.unit_price_excl_tax %> 円</td>
+          <td class="stock-quantity"><strong><%= inventory.stock_quantity %></strong> 個</td>
+          <td>
+            <span class="status-tag <%= inventory.status %>">
+              <%= inventory.status %>
+            </span>
+          </td>
+          <td>
+            <button class="btn-use-stock">この在庫を使う</button>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="inventory-actions">
+    <p class="alert-text">お探しの備品がありませんか？</p>
+    <%= link_to "在庫なし / 新規購入申請をする", new_request_path, class: "btn-primary" %>
+  </div>
+</div>
