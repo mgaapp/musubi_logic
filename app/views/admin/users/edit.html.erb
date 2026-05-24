@@ -34,8 +34,6 @@
       <%= f.select :role, [["一般社員", "general"], ["管理者", "admin"]], {}, class: "form-control" %>
     </div>
 
-    <div style="background-color: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
-      <p style="margin: 0 0 10px 0; font-size: 13px; color: #666;">※パスワードを変更する場合のみ入力してください</p>
       <div class="profile-group">
         <%= f.label :password, "新しいパスワード", class: "profile-label" %>
         <%= f.password_field :password, class: "form-control" %>

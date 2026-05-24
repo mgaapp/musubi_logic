@@ -3,7 +3,6 @@
 
   <%= form_with model: [:admin, @user], url: admin_users_path(@user) do |f| %>
     
-    <% # エラーメッセージがある場合に表示するエリア %>
     <% if @user.errors.any? %>
       <div class="error-messages">
         <h4>入力内容にエラーがあります：</h4>

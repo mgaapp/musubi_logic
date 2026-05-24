@@ -13,7 +13,7 @@ class Public::RequestsController < ApplicationController
   end
 
   def create
-    @request = Current.user.requests.build(request_params)
+    @request = Current.user.requests.new(request_params)
     if @request.save
       redirect_to requests_path, notice: "経費申請を提出しました。"  
     else

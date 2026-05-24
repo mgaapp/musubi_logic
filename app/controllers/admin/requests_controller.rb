@@ -20,7 +20,7 @@ class Admin::RequestsController < ApplicationController
     elsif @request.status == "承認"
       redirect_to admin_requests_path, notice: "申請を承認しました。"
     else
-      redirect_to admin_requests_path, notice: "申請を差し戻しました。"  
+      redirect_to admin_requests_path, notice: "申請を差戻ししました。"  
     end
     else
       render :show

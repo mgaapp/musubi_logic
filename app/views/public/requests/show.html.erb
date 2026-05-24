@@ -10,7 +10,7 @@
     <p><strong>数量:</strong> <%= @request.quantity %></p>
     <p><strong>消費税率:</strong> <%= @request.tax_rate %> %</p>
     <p><strong>税込金額:</strong> <%= @request.total_amount_incl_tax %> 円</p>
-    <p><strong>領収書URL:</strong> <%= link_to "領収書を確認する", @request.receipt_url, target: "_blank" %></p>
+    <p><strong>領収書URL:</strong> <%= link_to "領収書を確認する", requests_path %></p>
   </div>
 
   <div class="form-actions">

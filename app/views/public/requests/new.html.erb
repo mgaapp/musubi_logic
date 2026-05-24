@@ -15,7 +15,7 @@
 
     <div class="form-group">
       <%= f.label :vendor, "購入先" %>
-      <%= f.text_field :vendor, class: "form-control", placeholder: "◯◯株式会社、Amazonなど" %>
+      <%= f.text_field :vendor, class: "form-control" %>
     </div>
 
     <div class="form-group">
@@ -30,7 +30,7 @@
 
     <div class="form-group">
       <%= f.label :tax_rate, "消費税率 (%)" %>
-      <%= f.number_field :tax_rate, class: "form-control", placeholder: "10 または 8" %>
+      <%= f.number_field :tax_rate, class: "form-control" %>
     </div>
 
     <div class="form-group">
@@ -39,7 +39,7 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :receipt_url, "領収書URL / 画像パス" %>
+      <%= f.label :receipt_url, "領収書" %>
       <%= f.text_field :receipt_url, class: "form-control" %>
     </div>
 

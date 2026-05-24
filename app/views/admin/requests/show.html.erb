@@ -14,12 +14,12 @@
   <div class="admin-actions">
     
     <%= form_with model: [:admin, @request], method: :patch, data: { turbo: false } do |f| %>      <%= f.hidden_field :status, value: "承認" %>
-      <%= f.submit "✅ 承認する", class: "btn-approve" %>
+      <%= f.submit "承認する", class: "btn-approve" %>
     <% end %>
 
     <%= form_with model: [:admin, @request], method: :patch, data: { turbo: false } do |f| %>
       <%= f.hidden_field :status, value: "却下" %>
-      <%= f.submit "❌ 差戻しする", class: "btn-reject" %>
+      <%= f.submit "差戻しする", class: "btn-reject" %>
     <% end %>
 
   </div>

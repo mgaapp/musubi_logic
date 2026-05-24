@@ -1,6 +1,6 @@
 /* app/views/layouts/applicationのヘッダー */
 .main-header {
-  background-color: #1e3a8a; /* 暗めの洗練されたネイビーブルーに変更 */
+  background-color: #1e3a8a;
   padding: 15px 30px;
   display: flex;
   justify-content: space-between;
@@ -206,20 +206,10 @@
   font-weight: bold;
 }
 
-.link-edit:hover {
-  text-decoration: underline;
-  color: #1d4ed8;             
-}
-
 .link-delete {
   color: #d9534f;
   text-decoration: none;
   font-weight: bold;
-}
-
-.link-delete:hover {
-  text-decoration: underline;
-  color: #c9302c;
 }
 
 /* app/views/admin/users/show */
@@ -245,20 +235,11 @@
   color: #ffffff;
 }
 
-.btn-action-edit:hover {
-  background-color: #1d4ed8;
-  color: #ffffff;
-}
-
 .btn-action-delete {
   background-color: #ffebe9; 
   color: #d9534f;            
   border: 1px solid #fda7a1; 
 }
-
-.btn-action-delete:hover {
-  background-color: #d9534f; 
-  color: #ffffff;
 
   /* app/views/homes/top */
 
