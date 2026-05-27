@@ -15,5 +15,8 @@
 
   <div class="form-actions">
     <%= link_to "一覧に戻る", requests_path, class: "btn-cancel" %>
+
+    <%= link_to "この申請を削除する", request_path(@request), data:{turbo_method: :delete, turbo_confirm: "本当に削除しますか？"} %>
+
   </div>
 </div>
