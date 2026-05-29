@@ -5,7 +5,11 @@ class Public::RequestsController < ApplicationController
   end
 
   def show
-    @request = Current.user.requests.find(params[:id])
+    @request = Current.user.requests.find_by(id: params[:id])
+   if @request
+   else
+    redirect_to requests_path, alert: "アクセス権限がありません。"
+   end
   end
 
   def new
