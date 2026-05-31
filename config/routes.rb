@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get "/homes/about" => "homes#about", as: "about"
   resources :users, only: [ :show ]
   resources :inventories, only: [:index]
+  resources :inventory_histories, only: [:create]
   namespace :admin do
    resources :users
    resources :requests, only: [:index, :show, :update]
