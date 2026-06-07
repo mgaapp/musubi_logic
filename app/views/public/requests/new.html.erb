@@ -49,10 +49,11 @@
       <%= f.number_field :total_amount_incl_tax, class: "form-control" %>
     </div>
 
-    <div class="form-group">
-      <%= f.label :receipt_url, "領収書" %>
-      <%= f.text_field :receipt_url, class: "form-control" %>
-    </div>
+    <p><strong>添付された領収書:</strong></p>
+<div>
+  <%= f.label :image, "領収書・レシートの添付（画像）" %>
+  <%= f.file_field :image, accept: "image/*" %>
+</div>
 
     <%= f.hidden_field :status, value: "申請中" %>
 

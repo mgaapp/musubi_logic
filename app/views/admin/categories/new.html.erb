@@ -1,0 +1,24 @@
+<div>
+      <h3 class="card-title mb-0"> 勘定科目（カテゴリ）新規登録</h3>
+    </div>
+    <div>
+      <%= form_with model: [:admin, @category] do |f| %>
+        
+        <div>
+          <%= f.label :name, "カテゴリ名" %>
+          <%= f.text_field :name, placeholder: "アイテム名を入力" %>
+        </div>
+
+        <div>
+          <%= f.label :account_item, "勘定科目" %>
+          <%= f.text_field :account_item, placeholder: "経理上の科目を入力" %>
+        </div>
+
+        <div>
+          <%= f.submit "登録する" %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

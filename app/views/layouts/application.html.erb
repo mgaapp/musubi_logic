@@ -35,9 +35,10 @@
 
       <% if Current.user.admin? %>
         <%= link_to "社員管理", admin_users_path, class: "header-link-admin" %>
+        <%= link_to "新しい勘定科目を登録する", new_admin_category_path, class: "header-link-admin" %>
       <% end %>
 
-        <%= link_to "ログアウト", session_path, data: { turbo_method: :delete }, class: "header-link" %> 
+        <%= link_to "ログアウト", session_path, data: { turbo_method: :delete }, class: "btn btn-dark" %> 
         <% else %>
         <%= link_to "サインイン", new_session_path, class: "header-link" %>
     <% end %>

@@ -1,0 +1,48 @@
+<div>
+ <h3> 貯蔵品 在庫登録</h3>
+</div>
+  <div>
+   <%= form_with model: [:admin, @inventory] do |f| %>
+    <div>
+     <%= f.label :request_id, "申請ID" %>
+     <%= f.number_field :request_id %>
+    </div>
+
+     <div>
+      <%= f.label :location, "拠点名" %>
+      <%= f.text_field :location, placeholder: "東京本社、大阪支店など" %>
+     </div>
+
+      <div>
+       <%= f.label :unit_price_excl_tax, "税抜単価" %>
+       <%= f.number_field :unit_price_excl_tax %>
+      </div>
+
+      <div>
+       <%= f.label :stock_quantity, "個数" %>
+          <%= f.number_field :stock_quantity %>
+      </div>
+
+       <div>
+        <%= f.label :vendor, "購入先" %>
+        <%= f.text_field :vendor %>
+       </div>
+
+        <div>
+         <%= f.label :purchase_date, "購入日" %>
+         <%= f.date_field :purchase_date %>
+        </div>
+
+         <div>
+          <%= f.label :status, "入出庫ステータス" %>
+          <%= f.select :status, [["入庫済", "in_stock"], ["出庫済", "out_of_stock"]] %>
+         </div>
+
+         <div>
+          <%= f.submit "貯蔵品を登録する" %>
+         </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

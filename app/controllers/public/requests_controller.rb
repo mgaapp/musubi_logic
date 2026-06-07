@@ -28,6 +28,6 @@ end
 private
 
 def request_params
-    params.require(:request).permit(:category_id, :total_amount_incl_tax, :unit_price_excl_tax, :tax_rate, :quantity, :vendor, :receipt_url, :status, :applied_at)
+    params.require(:request).permit(:category_id, :total_amount_incl_tax, :unit_price_excl_tax, :tax_rate, :quantity, :vendor, :receipt_url, :status, :applied_at, :image)
   end
 end

@@ -2,6 +2,7 @@ class Request < ApplicationRecord
   belongs_to :user
   belongs_to :category
   has_one :inventory, dependent: :destroy
+  has_one_attached :image
 
   validates :user_id, presence: true
   validates :category_id, presence: true
@@ -10,7 +11,7 @@ class Request < ApplicationRecord
   validates :tax_rate, presence: true
   validates :quantity, presence: true
   validates :vendor, presence: true
-  validates :receipt_url, presence: true
+  validates :image, presence: true
   validates :status, presence: true
   validates :applied_at, presence: true
 end
