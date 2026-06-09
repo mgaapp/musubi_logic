@@ -10,7 +10,13 @@
     <p><strong>数量:</strong> <%= @request.quantity %></p>
     <p><strong>消費税率:</strong> <%= @request.tax_rate %> %</p>
     <p><strong>税込金額:</strong> <%= @request.total_amount_incl_tax %> 円</p>
-    <p><strong>領収書URL:</strong> <%= link_to "領収書を確認する", requests_path %></p>
+    <p><strong>領収書画像:</strong>
+     <% if @request.image.attached? %>
+     <%= link_to "領収書を確認する", @request.image %>
+     <% else %>
+      <span>未添付</span>
+  <% end %>
+</p>
   </div>
 
   <div class="form-actions">

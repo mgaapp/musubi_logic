@@ -15,7 +15,8 @@ Rails.application.routes.draw do
    resources :users
    resources :requests, only: [:index, :show, :update]
    resources :categories, only: [:new, :create]
-   resources :inventories, only: [:new, :create]
+   resources :inventories, only: [:index, :new, :create, :edit, :update]
+   resources :inventory_histories, only: [:index]
   end
   scope module: :public do
     resources :requests, only: [:index, :show, :new, :create]

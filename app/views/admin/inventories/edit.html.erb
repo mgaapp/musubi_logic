@@ -1,0 +1,39 @@
+<div>
+  <h2>貯蔵品 個数編集・調整</h2>
+  <p>現在の登録内容を修正します。</p>
+
+  <% if @inventory.errors.any? %>
+    <div>
+      <h4><%= @inventory.errors.count %>件のエラーが発生しました</h4>
+      <ul>
+        <% @inventory.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_with model: [:admin, @inventory] do |f| %>
+    
+    <div>
+      <p><strong>現在の対象物品:</strong> <%= @inventory.vendor %>（単価: <%= @inventory.unit_price_excl_tax %>円）</p>
+      <p><strong>保管場所（拠点）:</strong> <%= @inventory.location %></p>
+    </div>
+
+    <div>
+      <%= f.label :stock_quantity, "修正後の個数（在庫数）" %>
+      <%= f.number_field :stock_quantity %>
+    </div>
+
+    <div>
+      <%= f.label :status, "修正理由・ステータス" %>
+      <%= f.select :status, [["在庫微調整（入庫）", "in_stock"], ["棚卸過不足（出庫等）", "out_of_stock"]] %>
+    </div>
+
+    <div>
+      <%= f.submit "更新する" %>
+      <%= link_to "キャンセル", admin_inventories_path %>
+    </div>
+
+  <% end %>
+</div>

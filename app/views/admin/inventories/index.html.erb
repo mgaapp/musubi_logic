@@ -11,7 +11,7 @@
   <table class="inventory-table">
     <thead>
       <tr>
-        <th>貯蔵品ID</th>
+        <th>品名（貯蔵品ID）</th>
         <th>拠点</th>
         <th>購入先</th>
         <th>税抜単価</th>
@@ -23,7 +23,9 @@
     <tbody>
       <% @inventories.each do |inventory| %>
         <tr>
-          <td><%= inventory.id %></td>
+          <td><%= inventory.request&.category&.name %>
+          <span>(ID: <%= inventory.id %>)</span>
+          </td>
           <td><span class="location-tag"><%= inventory.location %></span></td>
           <td><%= inventory.vendor %></td>
           <td><%= inventory.unit_price_excl_tax %> 円</td>
@@ -35,6 +37,7 @@
           </td>
           <td>
             <button class="btn-use-stock">この在庫を使う</button>
+            <%= link_to "手動で調整", edit_admin_inventory_path(inventory) %>
           </td>
         </tr>
       <% end %>
