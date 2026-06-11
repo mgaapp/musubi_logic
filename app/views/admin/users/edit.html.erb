@@ -1,5 +1,5 @@
-<div class="backoffice-card">
-  <h1 class="backoffice-title-general">社員情報の編集</h1>
+<div>
+  <h1>社員情報の編集</h1>
 
   <%= form_with model: [:admin, @user] do |f| %>
     
@@ -14,40 +14,40 @@
       </div>
     <% end %>
 
-    <div class="profile-group">
-      <%= f.label :name, "氏名", class: "profile-label" %>
-      <%= f.text_field :name, class: "form-control" %>
+    <div>
+      <%= f.label :name, "氏名" %>
+      <%= f.text_field :name %>
     </div>
 
-    <div class="profile-group">
-      <%= f.label :employee_number, "社員番号", class: "profile-label" %>
-      <%= f.text_field :employee_number, class: "form-control" %>
+    <div>
+      <%= f.label :employee_number, "社員番号" %>
+      <%= f.text_field :employee_number %>
     </div>
 
-    <div class="profile-group">
-      <%= f.label :email_address, "メールアドレス", class: "profile-label" %>
+    <div>
+      <%= f.label :email_address, "メールアドレス" %>
       <%= f.email_field :email_address, class: "form-control" %>
     </div>
 
-    <div class="profile-group">
-      <%= f.label :role, "権限", class: "profile-label" %>
+    <div>
+      <%= f.label :role, "権限" %>
       <%= f.select :role, [["一般社員", "general"], ["管理者", "admin"]], {}, class: "form-control" %>
     </div>
 
       <div class="profile-group">
-        <%= f.label :password, "新しいパスワード", class: "profile-label" %>
-        <%= f.password_field :password, class: "form-control" %>
+        <%= f.label :password, "新しいパスワード" %>
+        <%= f.password_field :password %>
       </div>
 
-      <div class="profile-group">
-        <%= f.label :password_confirmation, "新しいパスワード（確認用）", class: "profile-label" %>
-        <%= f.password_field :password_confirmation, class: "form-control" %>
+      <div>
+        <%= f.label :password_confirmation, "新しいパスワード（確認用）" %>
+        <%= f.password_field :password_confirmation %>
       </div>
     </div>
 
-    <div class="form-actions">
-      <%= f.submit "変更を保存する", class: "btn-submit" %>
-      <%= link_to "戻る", admin_users_path, class: "link-back" %>
+    <div>
+      <%= f.submit "変更を保存する" %>
+      <%= link_to "戻る", admin_users_path %>
     </div>
   <% end %>
 </div>

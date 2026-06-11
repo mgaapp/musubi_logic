@@ -1,31 +1,30 @@
-<div class="backoffice-card">
-  <div class="show-header">
-    <h1 class="backoffice-title-general">社員詳細情報</h1>
-    <%= link_to "一覧に戻る", admin_users_path, class: "link-back" %>
+<div>
+    <h1>社員詳細情報</h1>
+    <%= link_to "一覧に戻る", admin_users_path %>
   </div>
 
-  <div class="info-group">
-    <span class="profile-label text-bold">氏名:</span>
-    <span class="profile-value user-name-large"><%= @user.name %></span>
+  <div>
+    <span>氏名:</span>
+    <span><%= @user.name %></span>
   </div>
 
-  <div class="info-group">
-    <span class="profile-label text-bold">社員番号:</span>
-    <span class="profile-value"><%= @user.employee_number %></span>
+  <div>
+    <span>社員番号:</span>
+    <span><%= @user.employee_number %></span>
   </div>
 
-  <div class="info-group">
-    <span class="profile-label text-bold">メールアドレス:</span>
-    <span class="profile-value"><%= @user.email_address %></span>
+  <div>
+    <span>メールアドレス:</span>
+    <span><%= @user.email_address %></span>
   </div>
 
-  <div class="info-group">
-    <span class="profile-label text-bold">権限:</span>
-    <span class="profile-value"><%= @user.role == 'admin' ? '管理者' : '一般社員' %></span>
+  <div>
+    <span>権限:</span>
+    <span><%= @user.role == 'admin' ? '管理者' : '一般社員' %></span>
   </div>
 
-  <div class="show-actions form-actions">
-    <%= link_to "編集する", edit_admin_user_path(@user), class: "btn-action btn-action-edit" %>
+  <div>
+    <%= link_to "編集する", edit_admin_user_path(@user) %>
     
     <% if @user != Current.user %>
       <%= link_to "削除する", admin_user_path(@user), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn-action btn-action-delete" %>

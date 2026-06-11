@@ -5,5 +5,5 @@ class InventoryHistory < ApplicationRecord
   validates :quantity, presence: true
   validates :status,   presence: true
 
-  enum status: { out: 0, fix: 1 }
+  enum :status, { out: 0, fix: 1 }
 end

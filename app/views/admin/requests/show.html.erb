@@ -1,8 +1,8 @@
-<div class="container">
+<div>
   <h2>【管理者用】経費申請詳細・精査</h2>
 
-  <div class="detail-box">
-    <p><strong>現在のステータス:</strong> <span class="status-tag"><%= @request.status %></span></p>
+  <div>
+    <p><strong>現在のステータス:</strong> <span><%= @request.status %></span></p>
     <p><strong>申請者:</strong> <%= @request.user.name if @request.user %></p>
     <p><strong>申請日:</strong> <%= @request.applied_at %></p>
     <p><strong>勘定科目:</strong> <%= @request.category.account_item if @request.category %>（<%= @request.category.name if @request.category %>）</p>
@@ -25,20 +25,21 @@
   </div>
   </div>
 
-  <div class="admin-actions">
+  <div>
     
-    <%= form_with model: [:admin, @request], method: :patch, data: { turbo: false } do |f| %>      <%= f.hidden_field :status, value: "承認" %>
-      <%= f.submit "承認する", class: "btn-approve" %>
+    <%= form_with model: [:admin, @request], method: :patch, data: { turbo: false } do |f| %>      
+      <%= f.hidden_field :status, value: "承認" %>
+      <%= f.submit "承認する" %>
     <% end %>
 
     <%= form_with model: [:admin, @request], method: :patch, data: { turbo: false } do |f| %>
       <%= f.hidden_field :status, value: "却下" %>
-      <%= f.submit "差戻しする", class: "btn-reject" %>
+      <%= f.submit "差戻しする" %>
     <% end %>
 
   </div>
 
-  <div class="form-actions">
-    <%= link_to "一覧に戻る", admin_requests_path, class: "btn-cancel" %>
-  </div>
+    <div>
+      <%= link_to "一覧に戻る", admin_requests_path %>
+    </div>
   </div>

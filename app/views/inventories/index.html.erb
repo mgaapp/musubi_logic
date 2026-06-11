@@ -1,0 +1,23 @@
+<div>
+  <h2>【一般社員用】貯蔵品棚卸一覧</h2>
+  <p>ここでは、一般社員の皆さんが貯蔵品の在庫を探したり、確認したりできます。</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>保管場所</th>
+        <th>在庫数</th>
+        <th>ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @inventories.each do |inventory| %>
+        <tr>
+          <td><%= inventory.location %></td>
+          <td><%= inventory.stock_quantity %> 個</td>
+          <td><%= inventory.status %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
