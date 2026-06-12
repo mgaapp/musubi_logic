@@ -1,0 +1,40 @@
+<div>
+  <h2> 固定資産台帳（管理者専用）</h2>
+  <p>税抜10万円以上の備品が承認されると、ここに自動で資産として登録されます。</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>資産ID</th>
+        <th>申請ID</th>
+        <th>拠点名</th>
+        <th>取得金額（税抜）</th>
+        <th>耐用年数</th>
+        <th>償却方法</th>
+        <th>供用開始日</th>
+        <th>購入先</th>
+        <th>購入日</th>
+        <th>状態</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @assets.each do |asset| %>
+        <tr>
+          <td><%= asset.id %></td>
+          <td><%= asset.request_id %></td>
+          <td><%= asset.location %></td>
+          <td><%= asset.acquisition_cost_excl %>円</td>
+          <td><%= asset.useful_life_years %>年</td>
+          <td><%= asset.depreciation_method %></td>
+          <td><%= asset.service_start_date %></td>
+          <td><%= asset.vendor %></td>
+          <td><%= asset.purchase_date %></td>
+            <span>
+              <%= asset.status %>
+            </span>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

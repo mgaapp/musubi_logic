@@ -1,14 +1,14 @@
-<div class="container">
+<div>
   <h2>貯蔵品・在庫棚卸一覧</h2>
 
-  <div class="filter-section">
-    <span class="filter-label">拠点フィルター:</span>
-    <button class="btn-filter active">すべて</button>
-    <button class="btn-filter">本社</button>
-    <button class="btn-filter">大阪支店</button>
+  <div>
+    <span >拠点フィルター:</span>
+    <button>すべて</button>
+    <button>本社</button>
+    <button>大阪支店</button>
     </div>
 
-  <table class="inventory-table">
+  <table>
     <thead>
       <tr>
         <th>品名（貯蔵品ID）</th>
@@ -26,7 +26,7 @@
           <td><%= inventory.request&.category&.name %>
           <span>(ID: <%= inventory.id %>)</span>
           </td>
-          <td><span class="location-tag"><%= inventory.location %></span></td>
+          <td><span><%= inventory.location %></span></td>
           <td><%= inventory.vendor %></td>
           <td><%= inventory.unit_price_excl_tax %> 円</td>
           <td class="stock-quantity"><strong><%= inventory.stock_quantity %></strong> 個</td>
@@ -44,6 +44,6 @@
     </tbody>
   </table>
 
-    <%= link_to "在庫なし / 新規購入申請をする", new_request_path, class: "btn-primary" %>
+    <%= link_to "在庫なし / 新規購入申請をする", new_request_path %>
   </div>
 </div>

@@ -1,15 +1,12 @@
-<div class="container">
-  <div class="header">
-    <h1 class="title">社員登録一覧</h1>
-    <div class="admin-container">
-    <div class="admin-header">
-    <h1 class="admin-title">社員アカウント管理メニュー</h1>
+<div>
+    <h1>社員登録一覧</h1>
+    <h1>社員アカウント管理メニュー</h1>
   </div>
 
     <%= link_to "新規社員登録", new_admin_user_path %>
   </div>
 
- <table class="admin-table">
+ <table>
     <thead>
       <tr>
         <th>社員番号</th>
@@ -21,12 +18,12 @@
     <tbody>
       <% @users.each do |user| %>
         <tr>
-          <td class="emp-number"><%= user.employee_number %></td>
-          <td><%= link_to user.name, admin_user_path(user), class: "link-edit" %></td>
-          <td class="text-muted"><%= user.email_address %></td>
-          <td class="text-muted"><%= user.role %></td>
+          <td><%= user.employee_number %></td>
+          <td><%= link_to user.name, admin_user_path(user) %></td>
+          <td><%= user.email_address %></td>
+          <td><%= user.role %></td>
           <td>
-            <%= link_to "詳細", admin_user_path(user), class: "link-edit" %>
+            <%= link_to "詳細", admin_user_path(user) %>
           </td>
         </tr>
       <% end %>

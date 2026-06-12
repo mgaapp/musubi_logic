@@ -6,15 +6,21 @@
     <thead>
       <tr>
         <th>保管場所</th>
+        <th>購入先</th>
+        <th>単価 (税抜)</th>
         <th>在庫数</th>
+        <th>購入日</th>
         <th>ステータス</th>
       </tr>
     </thead>
     <tbody>
-      <% @inventories.each do |inventory| %>
+    <% @inventories.each do |inventory| %>
         <tr>
           <td><%= inventory.location %></td>
-          <td><%= inventory.stock_quantity %> 個</td>
+          <td><%= inventory.vendor %></td>
+          <td><%= inventory.unit_price_excl_tax %> 円</td>
+          <td><strong><%= inventory.stock_quantity %></strong> 個</td>
+          <td><%= inventory.purchase_date %></td>
           <td><%= inventory.status %></td>
         </tr>
       <% end %>

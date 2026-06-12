@@ -1,9 +1,9 @@
-<div class="container">
+<div>
   <h2>提出済みの申請一覧</h2>
 
-  <%= link_to "新しく経費申請をする", new_request_path, class: "btn-primary" %>
+  <%= link_to "新しく経費申請をする", new_request_path %>
 
-  <table class="table-list">
+  <table>
     <thead>
       <tr>
         <th>申請日</th>
@@ -22,11 +22,9 @@
           <td><%= request.vendor %></td>
           <td><%= request.total_amount_incl_tax %> 円</td>
           <td>
-            <span class="status-tag <%= request.status %>">
-              <%= request.status %>
-            </span>
+            <span  <%= request.status %>><%= request.status %></span>
           </td>
-          <td><%= link_to "確認", request_path(request), class: "btn-sub" %></td>
+          <td><%= link_to "確認", request_path(request) %></td>
         </tr>
       <% end %>
     </tbody>

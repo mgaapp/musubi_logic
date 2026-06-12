@@ -1,7 +1,7 @@
-<div class="container">
+<div>
   <h2>【管理者用】経費申請・精査一覧</h2>
 
-  <table class="table-list">
+  <table>
     <thead>
       <tr>
         <th>申請者</th>
@@ -24,7 +24,7 @@
               <%= request.status %>
             </span>
           </td>
-          <td><%= link_to "精査する", admin_request_path(request), class: "btn-primary" %></td>
+          <td><%= link_to "精査する", admin_request_path(request) %></td>
         </tr>
       <% end %>
     </tbody>

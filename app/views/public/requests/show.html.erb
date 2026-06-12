@@ -1,7 +1,7 @@
-<div class="container">
+<div>
   <h2>申請詳細</h2>
 
-  <div class="detail-box">
+  <div>
     <p><strong>ステータス:</strong> <span class="status-tag"><%= @request.status %></span></p>
     <p><strong>申請日:</strong> <%= @request.applied_at %></p>
     <p><strong>カテゴリ:</strong> <%= @request.category.name %></p>
@@ -19,8 +19,8 @@
 </p>
   </div>
 
-  <div class="form-actions">
-    <%= link_to "一覧に戻る", requests_path, class: "btn-cancel" %>
+  <div>
+    <%= link_to "一覧に戻る", requests_path %>
 
     <%= link_to "この申請を削除する", request_path(@request), data:{turbo_method: :delete, turbo_confirm: "本当に削除しますか？"} %>
 
