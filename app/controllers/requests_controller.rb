@@ -1,4 +1,4 @@
-class Public::RequestsController < ApplicationController
+class RequestsController < ApplicationController
 
   def index
     @requests = Current.user.requests

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :users, only: [ :show ]
   resources :inventories, only: [:index]
   resources :inventory_histories, only: [:create]
+  resources :requests, only: [:index, :show, :new, :create]
   resources :posts
   resources :assets, only: [:index]
   namespace :admin do
@@ -21,9 +22,7 @@ Rails.application.routes.draw do
    resources :inventory_histories, only: [:index]
    resources :assets
   end
-  scope module: :public do
-    resources :requests, only: [:index, :show, :new, :create]
-  end
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
