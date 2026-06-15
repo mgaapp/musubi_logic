@@ -17,6 +17,7 @@
         <th>購入先</th>
         <th>購入日</th>
         <th>状態</th>
+        <th>操作</th>
       </tr>
     </thead>
     <tbody>
@@ -35,6 +36,10 @@
             <span>
               <%= asset.status %>
             </span>
+          </td>
+          <td>
+           <%= link_to "詳細", admin_asset_path(asset) %>
+           <%= link_to "削除", admin_asset_path(asset), data: { turbo_method: :delete, turbo_confirm: "本当にこの固定資産データを削除しますか？" } %>
           </td>
         </tr>
       <% end %>

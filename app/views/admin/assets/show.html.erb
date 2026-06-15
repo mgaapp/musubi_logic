@@ -1,0 +1,22 @@
+<div>
+  <%= link_to "一覧に戻る", admin_assets_path %>
+
+  <h2>固定資産 詳細情報</h2>
+
+  <div>
+    <p><strong>資産ID:</strong> <%= @asset.id %></p>
+    <p><strong>拠点名:</strong> <%= @asset.location %></p>
+    <p><strong>取得金額（税抜）:</strong> <%= @asset.acquisition_cost_excl %>円</p>
+    <p><strong>耐用年数:</strong> <%= @asset.useful_life_years %>年</p>
+    <p><strong>償却方法:</strong> <%= @asset.depreciation_method %></p>
+    <p><strong>供用開始日:</strong> <%= @asset.service_start_date %></p>
+    <p><strong>購入先:</strong> <%= @asset.vendor %></p>
+    <p><strong>購入日:</strong> <%= @asset.purchase_date %></p>
+    <p><strong>償却終了予定日:</strong> <%= @asset.purchase_date ? @asset.purchase_date + 4.years : "未定" %></p>
+    <p><strong>状態:</strong> 
+      <span>
+        <%= @asset.status %>
+      </span>
+    </p>
+  </div>
+</div>

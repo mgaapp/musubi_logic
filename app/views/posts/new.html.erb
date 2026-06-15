@@ -1,6 +1,6 @@
 <div>
-  <h2>💡 新しい知見・Q&Aの投稿</h2>
-  <p>管理部門への確認結果や、共有したい申請ルールを入力してください。</p>
+  <h2>新しい質問を投稿する</h2>
+  <p>業務の中で分からないことがあれば、ここに質問を投稿してみましょう！</p>
 
   <%= form_with model: @post do |form| %>
     
@@ -10,12 +10,12 @@
     </div>
 
     <div>
-      <%= form.label :content, "内容（質問と回答の本文）" %>
-      <%= form.text_area :content, placeholder: "例：【質問】〜〜ですか？\n【回答】〜〜として処理してください。", required: true %>
+      <%= form.label :content, "質問・知見の内容" %>
+      <%= form.text_area :content, placeholder: "例：【質問】〜〜ですか？", required: true %>
     </div>
 
     <div>
-      <%= form.submit "知見を登録する" %>
+      <%= form.submit "質問を投稿する" %>
       <%= link_to "キャンセルして戻る", posts_path %>
     </div>
 

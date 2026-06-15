@@ -1,23 +1,53 @@
 <div>
+  <%= link_to "メニューに戻る", root_path %>
   <h2>申請ルールの知見共有（Q&A一覧)</h2>
   <p>「この金額は消耗品？資産？」など、過去の質問と回答をここで確認できます。</p>
 
   <div>
-    <%= link_to "＋ 新しく質問・知見を投稿する", new_post_path %>
+    <%= link_to "新しく質問する", new_post_path %>
   </div>
 
   <table>
     <thead>
       <tr>
         <th>タイトル</th>
-        <th>内容（質問と回答）</th>
+        <th>質問内容・公式回答</th>
       </tr>
     </thead>
     <tbody>
       <% @posts.each do |post| %>
         <tr>
-          <td><strong><%= post.title %></strong></td>
-          <td><%= post.content %></td>
+          <td>
+            <strong><%= post.title %></strong>
+          </td>
+
+          <td>
+            <div><%= post.content %></div>
+
+            <% if post.answer.present? %>
+              <div>
+                <p>管理者からの公式回答：</p>
+                <div><%= post.answer %></div>
+              </div>
+            <% else %>
+              <p>（まだ公式回答はありません）</p>
+            <% end %>
+
+            <% if Current.user&.admin? %>
+              <div>
+                <p>管理者専用：公式回答を入力・編集する</p>
+                
+                <%= form_with model: post do |form| %>
+                  <div>
+                    <%= form.text_area :answer, placeholder: "ここに公式回答を入力してください..." %>
+                  </div>
+                  <div>
+                    <%= form.submit "回答を保存・更新する" %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
