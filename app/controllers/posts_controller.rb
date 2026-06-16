@@ -1,7 +1,15 @@
 class PostsController < ApplicationController
+ before_action :admin_user, only: [:update]
+  
   def index
+    if params[:filter] == "unanswered"
+      @posts = Post.where(answer: [nil, ""]).or(Post.where(is_public: false))
+    elsif params[:filter] == "answered"
+      @posts = Post.where.not(answer: [nil, ""]).where(is_public: true)
+    else
     @posts = Post.all 
   end
+end
    def new
     @post = Post.new
    end
@@ -26,7 +34,13 @@ class PostsController < ApplicationController
   end
  private
 
+ def admin_user
+  if Current.user.nil? || !Current.user.admin?
+    redirect_to root_path, alert: "管理者専用の機能です。アクセス権限がありません。"
+  end
+end
+
  def post_params
-   params.require(:post).permit(:title, :content, :answer)
+   params.require(:post).permit(:title, :content, :answer, :is_public)
  end
 end

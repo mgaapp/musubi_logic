@@ -2,9 +2,16 @@
   <%= link_to "メニューに戻る", root_path %>
   <h2>申請ルールの知見共有（Q&A一覧)</h2>
   <p>「この金額は消耗品？資産？」など、過去の質問と回答をここで確認できます。</p>
-
+  
   <div>
     <%= link_to "新しく質問する", new_post_path %>
+  </div>
+
+  <div>
+    <span>表示の切り替え</span>
+    <%= link_to "全て", posts_path %> |
+    <%= link_to "未回答のみ", posts_path(filter: "unanswered") %> |
+    <%= link_to "回答済みのみ", posts_path(filter: "answered") %>
   </div>
 
   <table>
@@ -20,27 +27,38 @@
           <td>
             <strong><%= post.title %></strong>
           </td>
-
           <td>
+            
             <div><%= post.content %></div>
 
-            <% if post.answer.present? %>
+            
+            <% if post.answer.present? && post.is_public? %>
               <div>
-                <p>管理者からの公式回答：</p>
-                <div><%= post.answer %></div>
+                <strong>公式回答</strong>
+                <p><%= post.answer %></p>
               </div>
             <% else %>
-              <p>（まだ公式回答はありません）</p>
+              
+              <div>
+                まだ公式回答はありません。
+              </div>
             <% end %>
+
 
             <% if Current.user&.admin? %>
               <div>
                 <p>管理者専用：公式回答を入力・編集する</p>
-                
+
                 <%= form_with model: post do |form| %>
                   <div>
                     <%= form.text_area :answer, placeholder: "ここに公式回答を入力してください..." %>
                   </div>
+
+                  <div>
+                    <%= form.check_box :is_public %>
+                    <%= form.label :is_public, "この公式回答を一般社員に公開する（チェックを外すと下書き保存になります）" %>
+                  </div>
+
                   <div>
                     <%= form.submit "回答を保存・更新する" %>
                   </div>
