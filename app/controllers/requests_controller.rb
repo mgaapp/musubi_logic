@@ -2,6 +2,7 @@ class RequestsController < ApplicationController
 
   def index
     @requests = Current.user.requests
+    @requests = Current.user.requests.page(params[:page]).per(5)
   end
 
   def show

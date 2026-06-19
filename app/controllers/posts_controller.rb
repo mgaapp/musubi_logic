@@ -9,7 +9,14 @@ class PostsController < ApplicationController
     else
     @posts = Post.all 
   end
+
+  if params[:search].present?
+    @posts = @posts.where("title LIKE ? OR content LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+  end
+
+  @posts =@posts.page(params[:page]).per(5)
 end
+
    def new
     @post = Post.new
    end

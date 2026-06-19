@@ -1,32 +1,73 @@
-<div>
-  <h2>提出済みの申請一覧</h2>
 
-  <%= link_to "新しく経費申請をする", new_request_path %>
+<div class="container my-5">
+ <div class="mb-4">
+  <%= link_to "メニューに戻る", root_path, class: "btn btn-outline-secondary btn-sm" %>
+  </div>
+  
+  <div class="mb-4">
+    <h2 class="fw-bold text-dark">📋 提出済みの申請一覧</h2>
+    <p class="text-muted">提出した申請の確認や、現在の審査状況を一覧でチェックできます。</p>
+  </div>
+  
+  <div class="mb-4">
+    <%= link_to "新しく経費申請をする", new_request_path, class: "btn btn-primary fw-bold px-4" %>
+  </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>申請日</th>
-        <th>カテゴリ</th>
-        <th>購入先</th>
-        <th>税込金額</th>
-        <th>ステータス</th>
-        <th>詳細</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @requests.each do |request| %>
-        <tr>
-          <td><%= request.applied_at %></td>
-          <td><%= request.category.name %></td> 
-          <td><%= request.vendor %></td>
-          <td><%= request.total_amount_incl_tax %> 円</td>
-          <td>
-            <span  <%= request.status %>><%= request.status %></span>
-          </td>
-          <td><%= link_to "確認", request_path(request) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="card shadow-sm border-0 bg-white">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <%# <thead> 見出し部分 %>
+        <thead class="table-light">
+          <tr>
+            <th class="py-3 px-4 text-secondary">申請日</th>
+            <th class="py-3 text-secondary">カテゴリ</th>
+            <th class="py-3 text-secondary">購入先</th>
+            <th class="py-3 text-secondary">税込金額</th>
+            <th class="py-3 text-secondary">ステータス</th>
+            <th class="py-3 text-center text-secondary">詳細</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <% @requests.each do |request| %>
+            <tr>
+              <td class="px-4 text-secondary small">
+                <%= request.applied_at %>
+              </td>
+
+              <td class="fw-bold text-dark">
+                <%= request.category&.name %>
+              </td>
+              
+              <td class="text-secondary">
+                <%= request.vendor %>
+              </td>
+
+              <td class="fw-bold text-dark">
+                <%= number_to_currency(request.total_amount_incl_tax, unit: "円", format: "%n %u", precision: 0) %>
+              </td>
+              
+              <td>
+                <% if request.status == "approved" || request.status == "承認" || request.status == "承認済み" %>
+                  <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1.5 rounded">承認済み</span>
+                <% elsif request.status == "rejected" || request.status == "差し戻し" %>
+                  <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1.5 rounded">差し戻し</span>
+                <% else %>
+                  <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle px-2 py-1.5 rounded">審査中</span>
+                <% end %>
+              </td>
+   
+              <td class="text-center">
+                <%= link_to "確認", request_path(request), class: "btn btn-outline-dark btn-sm rounded-pill px-3" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center mt-5">
+    <%= paginate @requests %>
+  </div>
 </div>
