@@ -16,6 +16,9 @@ class Admin::InventoriesController < ApplicationController
 
   def index
     @inventories = Inventory.all
+   if params[:location].present?
+      @inventories = @inventories.where(location: params[:location])
+    end
   end
 
   def edit

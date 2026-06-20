@@ -13,6 +13,13 @@
     <%= link_to "新しく経費申請をする", new_request_path, class: "btn btn-primary fw-bold px-4" %>
   </div>
 
+  <% if Current.user&.admin? %>
+  <div class="mb-4 p-3 bg-warning bg-opacity-10 rounded border border-warning">
+    <p class="fw-bold text-warning-emphasis mb-2">管理者メニュー</p>
+    <%= link_to "【管理者専用】全社員の申請一覧・審査画面へ", admin_requests_path, class: "btn btn-warning fw-bold btn-sm" %>
+  </div>
+  <% end %>
+
   <div class="card shadow-sm border-0 bg-white">
     <div class="table-responsive">
       <table class="table table-hover align-middle mb-0">
