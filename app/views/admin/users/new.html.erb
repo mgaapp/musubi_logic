@@ -1,7 +1,7 @@
 <div>
   <h1>新規社員登録</h1>
 
-  <%= form_with model: [:admin, @user], url: admin_users_path(@user) do |f| %>
+  <%= form_with model: [:admin, @user], url: admin_users_path do |f| %>
     
     <% if @user.errors.any? %>
       <div class="error-messages">
@@ -33,6 +33,11 @@
       <%= f.label :role, "権限" %>
       <%= f.select :role, [["一般社員", "general"], ["管理者", "admin"]] %>
     </div>
+          
+    <div>
+    <%= f.label :location, "所属拠点" %>
+    <%= f.select :location, [["本社", "本社"], ["大阪支店", "大阪支店"]] %>
+    </div>
 
     <div>
       <%= f.label :password, "パスワード" %>
@@ -40,7 +45,7 @@
     </div>
 
     <div>
-      <%= f.label :password_confirmation, "パスワード（確認用） %>
+      <%= f.label :password_confirmation, "パスワード（確認用）" %>
       <%= f.password_field :password_confirmation %>
     </div>
 

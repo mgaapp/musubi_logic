@@ -12,11 +12,13 @@
       <%= link_to "【管理者】全社の入出庫・調整履歴を見る", admin_inventory_histories_path, class: "btn-secondary" %>
       <%= link_to "固定資産台帳（管理）", admin_assets_path, class: "btn-primary" %>
       <%= link_to "【管理者】Q&Aの回答・管理をする", posts_path, class: "btn-primary" %>
+      <%= link_to "マイページ（自身の登録情報変更）", user_path(Current.user), class: "btn-secondary" %>
     <% else %>
       <%= link_to "経費申請をする・一覧を見る", requests_path, class: "btn-primary" %>
       <%= link_to "貯蔵品を探す・買う（貯蔵品棚卸一覧）", inventories_path, class: "btn-primary" %>
       <%= link_to "固定資産一覧", assets_path, class: "btn-primary" %>
       <%= link_to "申請ルールの知見共有（Q&A一覧）", posts_path, class: "btn-secondary" %>
+      <%= link_to "マイページ（登録情報変更）", user_path(Current.user), class: "btn-secondary" %>
     <% end %>
     </div>
   </div>

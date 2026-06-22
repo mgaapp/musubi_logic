@@ -1,31 +1,32 @@
-<div>
-    <h1>社員登録一覧</h1>
-    <h1>社員アカウント管理メニュー</h1>
-  </div>
 
-    <%= link_to "新規社員登録", new_admin_user_path %>
-  </div>
+  <div>
+      <h1>社員登録一覧</h1>
+      <h1>社員アカウント管理メニュー</h1>
+    </div>
 
- <table>
-    <thead>
-      <tr>
-        <th>社員番号</th>
-        <th>名前</th>
-        <th>メールアドレス</th>
-        <th>権限</th>
-        <th>操作</th> </tr>
-    </thead>
-    <tbody>
-      <% @users.each do |user| %>
+      <%= link_to "新規社員登録", new_admin_user_path %>
+    </div>
+
+  <table>
+      <thead>
         <tr>
-          <td><%= user.employee_number %></td>
-          <td><%= link_to user.name, admin_user_path(user) %></td>
-          <td><%= user.email_address %></td>
-          <td><%= user.role %></td>
-          <td>
-            <%= link_to "詳細", admin_user_path(user) %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+          <th>社員番号</th>
+          <th>名前</th>
+          <th>メールアドレス</th>
+          <th>権限</th>
+          <th>操作</th> </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.employee_number %></td>
+            <td><%= link_to user.name, admin_user_path(user) %></td>
+            <td><%= user.email_address %></td>
+            <td><%= user.role %></td>
+            <td>
+              <%= link_to "詳細", admin_user_path(user) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>

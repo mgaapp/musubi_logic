@@ -1,10 +1,16 @@
 <div>
   <h2>【一般社員用】貯蔵品棚卸一覧</h2>
   <p>ここでは、一般社員の皆さんが貯蔵品の在庫を探したり、確認したりできます。</p>
-
+    <%= form_with url: inventories_path, method: :get, local: true, class: "mb-3" do |f| %>
+        <div class="input-group" style="max-width: 400px;">
+          <%= f.text_field :keyword, value: params[:keyword], placeholder: "品名、購入先、拠点で検索...", class: "form-control" %>
+          <%= f.submit "検索", class: "btn btn-primary" %>
+        </div>
+        <% end %>
   <table>
     <thead>
       <tr>
+        <th>品名</th>
         <th>保管場所</th>
         <th>購入先</th>
         <th>単価 (税抜)</th>
@@ -16,6 +22,7 @@
     <tbody>
     <% @inventories.each do |inventory| %>
         <tr>
+          <td><strong><%= inventory.request.category.name if inventory.request&.category %></strong></td>
           <td><%= inventory.location %></td>
           <td><%= inventory.vendor %></td>
           <td><%= inventory.unit_price_excl_tax %> 円</td>

@@ -3,7 +3,7 @@
   </div>
 
   <h2>【管理者用】経費申請詳細・精査</h2>
-  <p class="text-muted">提出された申請内容を精査し、「承認」または「差し戻し」の決定を行ってください。</p>
+  <p class="text-muted">提出された申請内容を精査し、「承認」または「差戻し」の決定を行ってください。</p>
   
   <hr>
   
@@ -16,10 +16,10 @@
             <td>
               <% if @request.status == "approved" || @request.status == "承認" || @request.status == "承認済み" %>
                 <span class="badge bg-success rounded">承認済み</span>
-              <% elsif @request.status == "rejected" || @request.status == "却下" || @request.status == "差し戻し" %>
-                <span class="badge bg-danger rounded">差し戻し</span>
+              <% elsif @request.status == "rejected" || @request.status == "却下" || @request.status == "差戻し" %>
+                <span class="badge bg-danger rounded">差戻し</span>
               <% else %>
-                <span class="badge bg-warning rounded">審査中</span>
+                <span class="badge bg-warning rounded">申請中</span>
               <% end %>
             </td>
           </tr>
@@ -73,12 +73,12 @@
       
 
       <%= form_with model: [:admin, @request], method: :patch, data: { turbo: false }, class: "flex-fill" do |f| %>      
-        <%= f.hidden_field :status, value: "承認" %>
+        <%= f.hidden_field :status, value: "承認済み" %>
      <%= f.submit "承認する", class: "btn btn-success fw-bold w-100 py-2.5 shadow-sm" %>      
 <% end %>
 
       <%= form_with model: [:admin, @request], method: :patch, data: { turbo: false }, class: "flex-fill" do |f| %>
-        <%= f.hidden_field :status, value: "却下" %>
+        <%= f.hidden_field :status, value: "差戻し" %>
 <%= f.submit "差戻しする", class: "btn btn-danger  fw-bold w-100 py-2.5 shadow-sm" %>
       <% end %>
 

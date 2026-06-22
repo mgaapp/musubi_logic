@@ -34,6 +34,11 @@
       <%= f.select :role, [["一般社員", "general"], ["管理者", "admin"]], {}, class: "form-control" %>
     </div>
 
+    <div>
+      <%= f.label :location, "所属拠点" %>
+      <%= f.select :location, [["本社", "本社"], ["大阪支店", "大阪支店"]], {}, class: "form-control" %>
+    </div>
+
       <div class="profile-group">
         <%= f.label :password, "新しいパスワード" %>
         <%= f.password_field :password %>

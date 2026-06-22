@@ -1,18 +1,29 @@
-<div>
-  <h1 >マイプロフィール（一般社員画面）</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 >マイプロフィール（一般社員画面）</h1>
+    </div><!-- close col- -->
+  </div> <!-- close row -->
+  <div class="row">
+    <div class="col-md-3 text-end">
+      <strong>氏名:</strong>
+    </div>
+    <div class="col-md-9">
+      <span><%= @user.name %></span>
+    </div>
 
-  <div>
-    <strong>氏名:</strong>
-    <span><%= @user.name %></span>
-  </div>
+    <div class="col-md-3 text-end text-primary">
+      <strong>社員番号:</strong>
+    </div>
+    <div class="col-md-9 text-success">
+      <span><%= @user.employee_number %></span>
+    </div>
 
-  <div>
-    <strong>社員番号:</strong>
-    <span><%= @user.employee_number %></span>
-  </div>
-
-  <div>
-    <strong>メールアドレス:</strong>
-    <span><%= @user.email_address %></span>
+    <div class="col-md-3 text-end">
+      <strong>メールアドレス:</strong>
+    </div>
+    <div class="col-md-9">
+      <span><%= @user.email_address %></span>
+    </div>
   </div>
 </div>

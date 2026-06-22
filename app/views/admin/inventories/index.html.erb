@@ -38,12 +38,24 @@
               <td class="fw-bold text-dark"><%= inventory.stock_quantity %> 個</td>
               <td>
               <span class="badge bg-success bg-opacity-10 text-success border border-success px-2 py-1.5 rounded small">
-                <%= inventory.status %>
+                <% if inventory.status == "in_stock" || inventory.stock_quantity > 0 %>
+                    在庫あり
+                  <% else %>
+                    在庫なし
+                  <% end %>
               </span>
               </td>
               <td class="text-center">
-                <button class="btn btn-primary btn-sm fw-bold px-2 py-1 me-1">この在庫を使う</button>
-                <%= link_to "手動で調整", edit_admin_inventory_path(inventory), class: "btn btn-outline-secondary btn-sm px-2 py-1" %>
+                <div class="d-inline-flex gap-1">
+                  <% if inventory.stock_quantity > 0 %>
+                    <%= form_with url: admin_inventory_path(inventory, checkout: true), method: :patch, local: true, class: "d-inline", data: { turbo: false, confirm: "この貯蔵品を1個使用します。よろしいですか？" } do %>
+                      <%= submit_tag "この在庫を使う", class: "btn btn-outline-danger btn-sm" %>
+                    <% end %>
+                  <% else %>
+                    <button class="btn btn-secondary btn-sm" disabled>在庫なし</button>
+                  <% end %>
+                  <%= link_to "手動で調整", edit_admin_inventory_path(inventory), class: "btn btn-outline-secondary btn-sm" %>
+                </div>
               </td>
             </tr>
           <% end %>
