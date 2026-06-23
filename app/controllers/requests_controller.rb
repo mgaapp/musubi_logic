@@ -1,8 +1,7 @@
 class RequestsController < ApplicationController
 
   def index
-    @requests = Current.user.requests
-    @requests = Current.user.requests.page(params[:page]).per(5)
+    @requests = Current.user.requests.order(created_at: :desc).page(params[:page])
   end
 
   def show

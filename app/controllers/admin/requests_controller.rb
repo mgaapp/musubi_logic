@@ -18,7 +18,7 @@ class Admin::RequestsController < ApplicationController
     if request_params[:status] == "承認済み"
       
       if @request.update(status: "承認済み")
-        if @request.category&.name == "貯蔵品"
+        if @request.category&.account_item == "貯蔵品"
           inventory = Inventory.create!(
             request_id: @request.id, 
             location: @request.user.location,

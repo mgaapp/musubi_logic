@@ -8,6 +8,7 @@
       <tr>
         <th>資産ID</th>
         <th>申請ID</th>
+        <th>品名</th>
         <th>拠点名</th>
         <th>取得金額（税抜）</th>
         <th>耐用年数</th>
@@ -24,6 +25,7 @@
         <tr>
           <td><%= asset.id %></td>
           <td><%= asset.request_id %></td>
+          <td><strong><%= asset.request.category.name if asset.request&.category %></strong></td>
           <td><%= asset.location %></td>
           <td><%= asset.acquisition_cost_excl %>円</td>
           <td><%= asset.useful_life_years %>年</td>

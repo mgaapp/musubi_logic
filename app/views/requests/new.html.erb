@@ -12,6 +12,31 @@
     </div>
   <% end %>
 
+  div class="card mb-4 border-warning bg-light p-3">
+  <h5 class="fw-bold text-warning-emphasis mb-2">⚠️ 申請前の在庫チェック！</h5>
+  <p class="small text-muted mb-3">二重買い（無駄遣い）を防ぐため、社内に今ある在庫を確認してから申請してください。</p>
+  
+  <table class="table table-sm table-bordered bg-white mb-0 small">
+    <thead class="table-light">
+      <tr>
+        <th>品名</th>
+        <th>保管場所</th>
+        <th>現在の在庫数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% # 💡 コントローラから渡された @inventories をループさせて簡易表示します %>
+      <% Inventory.where("stock_quantity > 0").each do |inventory| %>
+        <tr>
+          <td><strong><%= inventory.request.category.name if inventory.request&.category %></strong></td>
+          <td><%= inventory.location %></td>
+          <td class="text-danger fw-bold"><%= inventory.stock_quantity %> 個</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
   <%= form_with model: @request, url: requests_path, local: true do |f| %>
     
     <div class="form-group">
