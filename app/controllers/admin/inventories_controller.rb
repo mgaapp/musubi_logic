@@ -16,8 +16,15 @@ class Admin::InventoriesController < ApplicationController
 
   def index
     @inventories = Inventory.all.order(Arel.sql("stock_quantity > 0 DESC"), created_at: :asc)
-   if params[:location].present?
-      @inventories = @inventories.where(location: params[:location])
+   if params[:keyword].present?
+      keyword = "%#{params[:keyword]}%"
+      
+      @inventories = @inventories.eager_load(request: :category)
+                                 .where(
+                                   "inventories.location LIKE ? OR requests.vendor LIKE ? OR categories.name LIKE ?", 
+                                   keyword, keyword, keyword
+                                 )
+                                 .references(:request, :category)
     end
   end
 

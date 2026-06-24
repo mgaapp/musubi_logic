@@ -11,6 +11,13 @@
     <%= link_to "大阪支店", admin_inventories_path(location: "大阪支店"), class: "btn btn-sm #{params[:location] == '大阪支店' ? 'btn-secondary' : 'btn-outline-secondary'}" %>
   </div>
 
+       <%= form_with url: inventories_path, method: :get, local: true, class: "mb-3" do |f| %>
+        <div class="input-group" style="max-width: 400px;">
+          <%= f.text_field :keyword, value: params[:keyword], placeholder: "品名、購入先、拠点で検索...", class: "form-control" %>
+          <%= f.submit "検索", class: "btn btn-primary" %>
+        </div>
+        <% end %>
+
   <div class="border rounded bg-white p-3 mb-3">
     <div class="table-responsive">
       <table class="table table-hover align-middle mb-0">

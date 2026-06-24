@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   namespace :admin do
    resources :users
    resources :requests, only: [:index, :show, :update]
-   resources :categories, only: [:new, :create]
+   resources :categories, only: [:new, :create, :index]
    resources :inventories, only: [:index, :new, :create, :edit, :update]
    resources :inventory_histories, only: [:index]
    resources :assets

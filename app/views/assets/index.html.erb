@@ -25,7 +25,7 @@
         <tr>
           <td><%= asset.id %></td>
           <td><%= asset.request_id %></td>
-          <td><strong><%= asset.request.category.name if asset.request&.category %></strong></td>
+          <td><strong><%= asset.request&.category&.name %></strong></td>
           <td><%= asset.location %></td>
           <td><%= asset.acquisition_cost_excl %>円</td>
           <td><%= asset.useful_life_years %>年</td>

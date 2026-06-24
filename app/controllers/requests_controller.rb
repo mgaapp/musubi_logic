@@ -18,6 +18,13 @@ class RequestsController < ApplicationController
 
   def create
     @request = Current.user.requests.new(request_params)
+
+    price = @request.unit_price_excl_tax || 0
+    quantity = @request.quantity || 0
+    tax_rate = @request.tax_rate || 0
+
+    @request.total_amount_incl_tax = (price * quantity * (1 + tax_rate / 100.0)).floor
+    
     if @request.save
       redirect_to requests_path, notice: "経費申請を提出しました。"  
     else

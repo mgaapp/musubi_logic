@@ -1,91 +1,112 @@
 <div class="container">
-  <h2>新規経費申請</h2>
-
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <h2>新規経費申請</h2>
+    </div>
+  </div>
 
   <% if @request.errors.any? %>
-   <h4><%= @request.errors.count %>件のエラーが発生しました</h4>
-      <ul>
-        <% @request.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+    <div class="row">
+      <div class="col-md-12 alert alert-danger">
+        <h4><%= @request.errors.count %>件のエラーが発生しました</h4>
+        <ul>
+          <% @request.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  div class="card mb-4 border-warning bg-light p-3">
-  <h5 class="fw-bold text-warning-emphasis mb-2">⚠️ 申請前の在庫チェック！</h5>
-  <p class="small text-muted mb-3">二重買い（無駄遣い）を防ぐため、社内に今ある在庫を確認してから申請してください。</p>
-  
-  <table class="table table-sm table-bordered bg-white mb-0 small">
-    <thead class="table-light">
-      <tr>
-        <th>品名</th>
-        <th>保管場所</th>
-        <th>現在の在庫数</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% # 💡 コントローラから渡された @inventories をループさせて簡易表示します %>
-      <% Inventory.where("stock_quantity > 0").each do |inventory| %>
-        <tr>
-          <td><strong><%= inventory.request.category.name if inventory.request&.category %></strong></td>
-          <td><%= inventory.location %></td>
-          <td class="text-danger fw-bold"><%= inventory.stock_quantity %> 個</td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="row mb-4">
+    <div class="col-md-3 text-end text-primary">
+      <strong>在庫状況:</strong>
+    </div>
+    <div class="col-md-9">
+      <h5>申請前の在庫チェック！</h5>
+      <p>二重買い（無駄遣い）を防ぐため、社内に今ある在庫を確認してから申請してください。</p>
+      
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>品名</th>
+            <th>保管場所</th>
+            <th>現在の在庫数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% Inventory.where("stock_quantity > 0").each do |inventory| %>
+            <tr>
+              <td><strong><%= inventory.request&.category&.name %></strong></td>
+              <td><%= inventory.location %></td>
+              <td class="text-danger fw-bold"><%= inventory.stock_quantity %> 個</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr> <%= form_with model: @request, url: requests_path, local: true do |f| %>
+    <div class="row">
+
+      <div class="col-md-3 text-end text-primary mb-3">
+        <strong><%= f.label :applied_at, "申請日:" %></strong>
+      </div>
+      <div class="col-md-9 mb-3">
+        <%= f.date_field :applied_at, class: "form-control" %>
+      </div>
+
+      <div class="col-md-3 text-end text-primary mb-3">
+        <strong><%= f.label :category_id, "カテゴリ:" %></strong>
+      </div>
+      <div class="col-md-9 mb-3">
+        <%= f.collection_select :category_id, Category.all, :id, :name, { prompt: "選択してください" }, { class: "form-control" } %>
+      </div>
+
+      <div class="col-md-3 text-end text-primary mb-3">
+        <strong><%= f.label :vendor, "購入先:" %></strong>
+      </div>
+      <div class="col-md-9 mb-3">
+        <%= f.text_field :vendor, class: "form-control" %>
+      </div>
+
+      <div class="col-md-3 text-end text-primary mb-3">
+        <strong><%= f.label :unit_price_excl_tax, "税抜単価:" %></strong>
+      </div>
+      <div class="col-md-9 mb-3">
+        <%= f.number_field :unit_price_excl_tax, class: "form-control" %>
+      </div>
+
+      <div class="col-md-3 text-end text-primary mb-3">
+        <strong><%= f.label :quantity, "数量:" %></strong>
+      </div>
+      <div class="col-md-9 mb-3">
+        <%= f.number_field :quantity, class: "form-control" %>
+      </div>
+
+      <div class="col-md-3 text-end text-primary mb-3">
+        <strong><%= f.label :tax_rate, "消費税率 (%):" %></strong>
+      </div>
+      <div class="col-md-9 mb-3">
+        <%= f.select :tax_rate, [["10%", 10], ["8%", 8]], { prompt: "選択してください" }, { class: "form-control" } %>
+      </div>
+            
+      <div class="col-md-3 text-end text-primary mb-4">
+        <strong>領収書・レシート:</strong>
+      </div>
+      <div class="col-md-9 mb-4">
+        <%= f.file_field :image, accept: "image/*", class: "form-control" %>
+      </div>
+
+      <%= f.hidden_field :status, value: "申請中" %>
+
+<div class="col-md-3">
 </div>
-
-  <%= form_with model: @request, url: requests_path, local: true do |f| %>
-    
-    <div class="form-group">
-      <%= f.label :applied_at, "申請日" %>
-      <%= f.date_field :applied_at, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :category_id, "カテゴリ" %>
-      <%= f.collection_select :category_id, Category.all, :id, :name, { prompt: "選択してください" }, { class: "form-control" } %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :vendor, "購入先" %>
-      <%= f.text_field :vendor, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :unit_price_excl_tax, "税抜単価" %>
-      <%= f.number_field :unit_price_excl_tax, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :quantity, "数量" %>
-      <%= f.number_field :quantity, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :tax_rate, "消費税率 (%)" %>
-      <%= f.number_field :tax_rate, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :total_amount_incl_tax, "税込金額" %>
-      <%= f.number_field :total_amount_incl_tax, class: "form-control" %>
-    </div>
-
-    <p><strong>添付された領収書:</strong></p>
-<div>
-  <%= f.label :image, "領収書・レシートの添付（画像）" %>
-  <%= f.file_field :image, accept: "image/*" %>
+<div class="col-md-9 mt-3">  
+<%= f.submit "申請を提出する", class: "btn btn-primary" %>
+<%= link_to "戻る", requests_path, class: "btn btn-outline-secondary" %>
 </div>
-
-    <%= f.hidden_field :status, value: "申請中" %>
-
-    <div class="form-actions">
-      <%= f.submit "申請を提出する" %>
-      <%= link_to "戻る", requests_path %>
-    </div>
 
   <% end %>
 </div>
