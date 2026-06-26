@@ -17,7 +17,11 @@
       </div>
     </div>
   <% end %>
-
+   <div class="col-md-9 alert alert-warning">
+          二重買い（無駄遣い）を防ぐため、新しい申請の前に 
+          <%= link_to "【貯蔵品棚卸一覧】", inventories_path, class: "fw-bold text-decoration-none" %> 
+          で社内在庫を確認してください。
+        </div>
   <div class="row mb-4">
     <div class="col-md-3 text-end text-primary">
       <strong>在庫状況:</strong>
