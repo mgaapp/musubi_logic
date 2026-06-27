@@ -20,7 +20,7 @@
         <div class="col-md-3 text-end text-primary fw-bold fs-5">物品在庫管理:</div>
         <div class="col-md-9">
           <%= link_to "貯蔵品を探す・買う（棚卸一覧）", admin_inventories_path, class: "btn btn-primary px-4 py-2" %>
-          <%= link_to "貯蔵品のの入出庫・調整履歴を見る", admin_inventory_histories_path, class: "btn btn-outline-secondary px-4 py-2" %>
+          <%= link_to "貯蔵品の入出庫・調整履歴を見る", admin_inventory_histories_path, class: "btn btn-outline-secondary px-4 py-2" %>
         </div>
       </div>
 
@@ -30,6 +30,20 @@
           <%= link_to "固定資産台帳（管理）", admin_assets_path, class: "btn btn-primary px-4 py-2" %>
         </div>
       </div>
+
+      <div class="row align-items-center mb-4">
+          <div class="col-md-3 text-end text-primary fw-bold fs-5">マスタ管理:</div>
+          <div class="col-md-9">
+            <%= link_to "勘定科目・カテゴリ一覧", admin_categories_path, class: "btn btn-primary px-4 py-2" %>
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-4">
+          <div class="col-md-3 text-end text-primary fw-bold fs-5">社員管理:</div>
+          <div class="col-md-9">
+            <%= link_to "社員アカウントの管理", "#", class: "btn btn-primary px-4 py-2" %>
+          </div>
+        </div>
 
       <div class="row align-items-center mb-4">
         <div class="col-md-3 text-end text-primary fw-bold fs-5">共有:</div>

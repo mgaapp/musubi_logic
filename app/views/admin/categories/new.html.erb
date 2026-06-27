@@ -1,24 +1,47 @@
-<div>
-      <h3> 勘定科目（カテゴリ）新規登録</h3>
-    </div>
-    <div>
-      <%= form_with model: [:admin, @category] do |f| %>
-        
-        <div>
-          <%= f.label :name, "カテゴリ名" %>
-          <%= f.text_field :name, placeholder: "アイテム名を入力" %>
-        </div>
+<div class="container">
 
-        <div>
-          <%= f.label :account_item, "勘定科目" %>
-          <%= f.text_field :account_item, placeholder: "経理上の科目を入力" %>
-        </div>
-
-        <div>
-          <%= f.submit "登録する" %>
-        </div>
-
-      <% end %>
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <h2>勘定科目（カテゴリ）新規登録</h2>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-3 text-end text-primary">
+      <strong>メニュー操作:</strong>
+    </div>
+    <div class="col-md-9">
+      <%= link_to "キャンセル（一覧に戻る）", admin_categories_path, class: "btn btn-outline-secondary" %>
+    </div>
+  </div>
+
+  <hr>
+
+  <%= form_with model: [:admin, @category] do |f| %>
+    
+    <div class="row mb-3 align-items-center">
+      <div class="col-md-3 text-end text-primary fw-bold">
+        <%= f.label :name, "カテゴリ名:" %>
+      </div>
+      <div class="col-md-9">
+        <%= f.text_field :name, placeholder: "アイテム名（例: 事務用ハサミ、ノートPCなど）を入力", class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="row mb-4 align-items-center">
+      <div class="col-md-3 text-end text-primary fw-bold">
+        <%= f.label :account_item, "勘定科目:" %>
+      </div>
+      <div class="col-md-9">
+        <%= f.text_field :account_item, placeholder: "経理上の科目（例: 消耗品費、貯蔵品など）を入力", class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-9 offset-md-3"> <%= f.submit "登録する", class: "btn btn-primary" %>
+      </div>
+    </div>
+
+  <% end %>
+
 </div>

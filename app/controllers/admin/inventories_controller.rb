@@ -45,7 +45,7 @@ class Admin::InventoriesController < ApplicationController
     end
 
     new_quantity = inventory_params[:stock_quantity].to_i
-    old_quantity = @inventory.stock_quantity
+    old_quantity = @inventory.stock_quantity.to_i
     if @inventory.update(inventory_params)
       InventoryHistory.create!(inventory_id: @inventory.id, user_id: Current.user.id, quantity: (new_quantity - old_quantity).abs, status: :fix)
       redirect_to admin_inventories_path, notice: "貯蔵品の個数を修正しました"

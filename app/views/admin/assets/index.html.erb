@@ -1,48 +1,76 @@
-<div>
- <%= link_to "管理者メニューに戻る", root_path %>
-  <h2> 固定資産台帳（管理者専用）</h2>
-  <p>税抜10万円以上の備品が承認されると、ここに自動で資産として登録されます。</p>
+<div class="container">
 
-  <table>
-    <thead>
-      <tr>
-        <th>資産ID</th>
-        <th>申請ID</th>
-        <th>拠点名</th>
-        <th>取得金額（税抜）</th>
-        <th>耐用年数</th>
-        <th>償却方法</th>
-        <th>供用開始日</th>
-        <th>償却終了予定日<th>
-        <th>購入先</th>
-        <th>購入日</th>
-        <th>状態</th>
-        <th>操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @assets.each do |asset| %>
-        <tr>
-          <td><%= asset.id %></td>
-          <td><%= asset.request_id %></td>
-          <td><%= asset.location %></td>
-          <td><%= asset.acquisition_cost_excl %>円</td>
-          <td><%= asset.useful_life_years %>年</td>
-          <td><%= asset.depreciation_method %></td>
-          <td><%= asset.service_start_date %></td>
-          <td><%= asset.purchase_date ? asset.purchase_date + 4.years : "未定" %></td>
-          <td><%= asset.vendor %></td>
-          <td><%= asset.purchase_date %></td>
-            <span>
-              <%= asset.status %>
-            </span>
-          </td>
-          <td>
-           <%= link_to "詳細", admin_asset_path(asset) %>
-           <%= link_to "削除", admin_asset_path(asset), data: { turbo_method: :delete, turbo_confirm: "本当にこの固定資産データを削除しますか？" } %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>固定資産台帳（管理者専用）</h2>
+      <p class="text-muted">税抜10万円以上の備品が承認されると、ここに自動で資産として登録されます。</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 text-end text-primary">
+      <strong>メニュー操作:</strong>
+    </div>
+    <div class="col-md-9">
+      <%= link_to "管理者メニューに戻る", root_path, class: "btn btn-outline-secondary" %>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-md-12">
+       <table class="table table-bordered align-middle"> 
+        <thead class="table-light">
+            <tr>
+              <th class="text-center">資産ID</th>
+              <th class="text-center">申請ID</th>
+              <th class="text-center">拠点名</th>
+              <th class="text-center">取得金額（税抜）</th>
+              <th class="text-center">耐用年数</th>
+              <th class="text-center">償却方法</th>
+              <th class="text-center">供用開始日</th>
+              <th class="text-center">償却終了予定日</th>
+              <th class="text-center">購入先</th>
+              <th class="text-center">購入日</th>
+              <th class="text-center">状態</th>
+              <th class="text-center">操作</th>
+            </tr>
+          </thead>
+          
+          <tbody>
+            <% @assets.each do |asset| %>
+              <tr>
+                <td class="text-center"><%= asset.id %></td>
+                <td class="text-center"><%= asset.request_id %></td>
+                <td class="text-center"><%= asset.location %></td>
+                <td class="text-center"><%= number_to_currency(asset.acquisition_cost_excl, unit: "円", format: "%n %u", precision: 0) %></td>
+                <td class="text-center"><%= asset.useful_life_years %>年</td>
+                <td class="text-center"><%= asset.depreciation_method %></td>
+                <td class="text-center"><%= asset.service_start_date %></td>
+                <td class="text-center"><%= asset.purchase_date ? asset.purchase_date + 4.years : "未定" %></td>
+                <td class="text-center"><%= asset.vendor %></td>
+                <td class="text-center"><%= asset.purchase_date %></td>
+                <td>
+                  <span class="fw-bold"><%= asset.status %></span>
+                </td>
+                <td class="text-center">
+                  <div class="row g-1 justify-content-center">
+                    <div class="col">
+                      <%= link_to "詳細", admin_asset_path(asset), class: "btn btn-outline-primary" %>
+                    </div>
+                    <div class="col">
+                      <%= link_to "削除", admin_asset_path(asset), data: { turbo_method: :delete, turbo_confirm: "本当にこの固定資産データを削除しますか？" }, class: "btn btn-outline-danger" %>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+  </div>
+
 </div>

@@ -1,39 +1,83 @@
-<div>
-  <h2>貯蔵品 個数編集・調整</h2>
-  <p>現在の登録内容を修正します。</p>
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>貯蔵品 個数編集・調整</h2>
+      <p class="text-muted">現在の登録内容を修正します。</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 text-end text-primary">
+      <strong>メニュー操作:</strong>
+    </div>
+    <div class="col-md-9">
+      <%= link_to "在庫棚卸一覧に戻る", admin_inventories_path, class: "btn btn-outline-secondary" %>
+    </div>
+  </div>
+
+  <hr>
 
   <% if @inventory.errors.any? %>
-    <div>
-      <h4><%= @inventory.errors.count %>件のエラーが発生しました</h4>
-      <ul>
-        <% @inventory.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+    <div class="row">
+      <div class="col-md-9">
+        <div class="alert alert-danger">
+          <h5 class="fw-bold"><%= @inventory.errors.count %>件のエラーが発生しました</h5>
+            <% @inventory.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+        </div>
+      </div>
     </div>
   <% end %>
 
   <%= form_with model: [:admin, @inventory] do |f| %>
     
-    <div>
-      <p><strong>現在の対象物品:</strong> <%= @inventory.vendor %>（単価: <%= @inventory.unit_price_excl_tax %>円）</p>
-      <p><strong>保管場所（拠点）:</strong> <%= @inventory.location %></p>
+    <div class="row mb-3">
+      <div class="col-md-3 text-end text-primary fw-bold">
+        現在の対象物品:
+      </div>
+      <div class="col-md-9">
+        <%= @inventory.vendor %>
+        <span>(単価: <%= number_to_currency(@inventory.unit_price_excl_tax, unit: "円", format: "%n %u", precision: 0) %>)</span>
+      </div>
     </div>
 
-    <div>
-      <%= f.label :stock_quantity, "修正後の個数（在庫数）" %>
-      <%= f.number_field :stock_quantity %>
+    <div class="row mb-4">
+      <div class="col-md-3 text-end text-primary fw-bold">
+        保管場所（拠点）:
+      </div>
+      <div class="col-md-9">
+        <%= @inventory.location %>
+      </div>
     </div>
 
-    <div>
-      <%= f.label :status, "修正理由・ステータス" %>
-      <%= f.select :status, [["在庫微調整（入庫）", "in_stock"], ["棚卸過不足（出庫等）", "out_of_stock"]] %>
+    <hr>
+
+    <div class="row mb-3 align-items-center">
+      <div class="col-md-3 text-end text-primary fw-bold">
+        <%= f.label :stock_quantity, "修正後の個数（在庫数）:" %>
+      </div>
+      <div class="col-md-9">
+        <%= f.number_field :stock_quantity, class: "form-control" %>
+      </div>
     </div>
 
-    <div>
-      <%= f.submit "更新する" %>
-      <%= link_to "キャンセル", admin_inventories_path %>
+    <div class="row mb-4 align-items-center">
+      <div class="col-md-3 text-end text-primary fw-bold">
+        <%= f.label :status, "修正理由・ステータス:" %>
+      </div>
+      <div class="col-md-9">
+        <%= f.select :status, [["在庫微調整（入庫）", "in_stock"], ["棚卸過不足（出庫等）", "out_of_stock"]], {}, class: "form-select" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-9 offset-md-3">
+        <%= f.submit "更新する", class: "btn btn-primary" %>
+      </div>
     </div>
 
   <% end %>
+
 </div>

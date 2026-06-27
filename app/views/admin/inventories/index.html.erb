@@ -69,8 +69,8 @@
               <td class="text-center"><%= inventory.vendor %></td>
               <td class="text-center"><%= number_to_currency(inventory.unit_price_excl_tax, unit: "円", format: "%n %u", precision: 0) %></td>
               <td class="text-center"><%= inventory.stock_quantity %> 個</td>
-              <td>
-                <% if inventory.status == "in_stock" || inventory.stock_quantity > 0 %>
+              <td class="text-center">
+                <% if inventory.stock_quantity.to_i > 0 %>
                   <span class="text-success fw-bold">在庫あり</span>
                 <% else %>
                   <span class="text-danger fw-bold">在庫なし</span>
@@ -78,7 +78,7 @@
               </td>
               <td class="text-center">
                  
-                    <% if inventory.stock_quantity > 0 %>
+                    <% if inventory.stock_quantity.to_i> 0 %>
                       <%= form_with url: admin_inventory_path(inventory, checkout: true), method: :patch, local: true, data: { turbo: false, confirm: "この貯蔵品を1個使用します。よろしいですか？" } do %>
                         <%= submit_tag "この在庫を使う", class: "btn btn-outline-danger" %>
                       <% end %>

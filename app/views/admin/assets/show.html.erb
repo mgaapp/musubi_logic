@@ -1,22 +1,93 @@
-<div>
-  <%= link_to "一覧に戻る", admin_assets_path %>
+<div class="container">
 
-  <h2>固定資産 詳細情報</h2>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>固定資産 詳細情報</h2>
+    </div>
+  </div>
 
-  <div>
-    <p><strong>資産ID:</strong> <%= @asset.id %></p>
-    <p><strong>拠点名:</strong> <%= @asset.location %></p>
-    <p><strong>取得金額（税抜）:</strong> <%= @asset.acquisition_cost_excl %>円</p>
-    <p><strong>耐用年数:</strong> <%= @asset.useful_life_years %>年</p>
-    <p><strong>償却方法:</strong> <%= @asset.depreciation_method %></p>
-    <p><strong>供用開始日:</strong> <%= @asset.service_start_date %></p>
-    <p><strong>購入先:</strong> <%= @asset.vendor %></p>
-    <p><strong>購入日:</strong> <%= @asset.purchase_date %></p>
-    <p><strong>償却終了予定日:</strong> <%= @asset.purchase_date ? @asset.purchase_date + 4.years : "未定" %></p>
-    <p><strong>状態:</strong> 
-      <span>
-        <%= @asset.status %>
-      </span>
-    </p>
+  <div class="row">
+    <div class="col-md-3 text-end text-primary">
+      <strong>メニュー操作:</strong>
+    </div>
+    <div class="col-md-9">
+      <%= link_to "一覧に戻る", admin_assets_path, class: "btn btn-outline-secondary" %>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+
+    <div class="col-md-3 text-end text-primary  mb-3">
+      <strong>資産ID:</strong>
+    </div>
+    <div class="col-md-9 mb-3">
+      <%= @asset.id %>
+    </div>
+
+    <div class="col-md-3 text-end text-primary mb-3">
+      <strong>拠点名:</strong>
+    </div>
+    <div class="col-md-9 mb-3">
+      <%= @asset.location %>
+    </div>
+
+    <div class="col-md-3 text-end text-primary mb-3">
+      <strong>取得金額（税抜）:</strong>
+    </div>
+    <div class="col-md-9 mb-3">
+      <%= number_to_currency(@asset.acquisition_cost_excl, unit: "円", format: "%n %u", precision: 0) %>
+    </div>
+
+    <div class="col-md-3 text-end text-primary mb-3">
+      <strong>耐用年数:</strong>
+    </div>
+    <div class="col-md-9 mb-3">
+      <%= @asset.useful_life_years %> 年
+    </div>
+
+    <div class="col-md-3 text-end text-primary mb-3">
+      <strong>償却方法:</strong>
+    </div>
+    <div class="col-md-9 mb-3">
+      <%= @asset.depreciation_method %>
+    </div>
+
+    <div class="col-md-3 text-end text-primary mb-3">
+      <strong>供用開始日:</strong>
+    </div>
+    <div class="col-md-9 mb-3">
+      <%= @asset.service_start_date %>
+    </div>
+
+    <div class="col-md-3 text-end text-primary mb-3">
+      <strong>購入先:</strong>
+    </div>
+    <div class="col-md-9 mb-3">
+      <%= @asset.vendor %>
+    </div>
+
+    <div class="col-md-3 text-end text-primary mb-3">
+      <strong>購入日:</strong>
+    </div>
+    <div class="col-md-9 mb-3">
+      <%= @asset.purchase_date %>
+    </div>
+
+    <div class="col-md-3 text-end text-primary mb-3">
+      <strong>償却終了予定日:</strong>
+    </div>
+    <div class="col-md-9 mb-3">
+      <%= @asset.purchase_date ? @asset.purchase_date + 4.years : "未定" %>
+    </div>
+
+    <div class="col-md-3 text-end text-primary">
+      <strong>状態:</strong>
+    </div>
+    <div class="col-md-9 fw-bold">
+      <%= @asset.status %>
+    </div>
+
   </div>
 </div>
