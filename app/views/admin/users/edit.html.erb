@@ -1,58 +1,113 @@
-<div>
-  <h1>社員情報の編集</h1>
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>社員情報の編集</h2>
+      <p class="text-muted">社員の基本情報や権限、所属拠点の変更、およびパスワードの再設定を行います。</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 text-end text-primary">
+      <strong>メニュー操作:</strong>
+    </div>
+    <div class="col-md-9">
+      <%= link_to "社員一覧に戻る", admin_users_path, class: "btn btn-outline-secondary" %>
+    </div>
+  </div>
+
+  <hr>
+
+  <% if @user.errors.any? %>
+    <div class="row">
+      <div class="col-md-9 offset-md-3">
+        <div class="alert alert-danger">
+          <h5><%= @user.errors.count %>件のエラーが発生しました</h5>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
   <%= form_with model: [:admin, @user] do |f| %>
     
-    <% if @user.errors.any? %>
-      <div class="error-messages">
-        <h4>入力内容にエラーがあります：</h4>
-        <ul>
-          <% @user.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
+    <div class="row mb-3 align-items-center">
+      <div class="col-md-3 text-end text-primary fw-bold">
+        <%= f.label :name, "氏名:" %>
       </div>
-    <% end %>
-
-    <div>
-      <%= f.label :name, "氏名" %>
-      <%= f.text_field :name %>
-    </div>
-
-    <div>
-      <%= f.label :employee_number, "社員番号" %>
-      <%= f.text_field :employee_number %>
-    </div>
-
-    <div>
-      <%= f.label :email_address, "メールアドレス" %>
-      <%= f.email_field :email_address, class: "form-control" %>
-    </div>
-
-    <div>
-      <%= f.label :role, "権限" %>
-      <%= f.select :role, [["一般社員", "general"], ["管理者", "admin"]], {}, class: "form-control" %>
-    </div>
-
-    <div>
-      <%= f.label :location, "所属拠点" %>
-      <%= f.select :location, [["本社", "本社"], ["大阪支店", "大阪支店"]], {}, class: "form-control" %>
-    </div>
-
-      <div class="profile-group">
-        <%= f.label :password, "新しいパスワード" %>
-        <%= f.password_field :password %>
-      </div>
-
-      <div>
-        <%= f.label :password_confirmation, "新しいパスワード（確認用）" %>
-        <%= f.password_field :password_confirmation %>
+      <div class="col-md-9">
+        <%= f.text_field :name, class: "form-control" %>
       </div>
     </div>
 
-    <div>
-      <%= f.submit "変更を保存する" %>
-      <%= link_to "戻る", admin_users_path %>
+    <div class="row mb-3 align-items-center">
+      <div class="col-md-3 text-end text-primary fw-bold">
+        <%= f.label :employee_number, "社員番号:" %>
+      </div>
+      <div class="col-md-9">
+        <%= f.text_field :employee_number, class: "form-control" %>
+      </div>
     </div>
+
+    <div class="row mb-3 align-items-center">
+      <div class="col-md-3 text-end text-primary fw-bold">
+        <%= f.label :email_address, "メールアドレス:" %>
+      </div>
+      <div class="col-md-9">
+        <%= f.email_field :email_address, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="row mb-3 align-items-center">
+      <div class="col-md-3 text-end text-primary fw-bold">
+        <%= f.label :role, "権限:" %>
+      </div>
+      <div class="col-md-9">
+        <%= f.select :role, [["一般社員", "general"], ["管理者", "admin"]], {}, class: "form-select" %>
+      </div>
+    </div>
+
+    <div class="row mb-4 align-items-center">
+      <div class="col-md-3 text-end text-primary fw-bold">
+        <%= f.label :location, "所属拠点:" %>
+      </div>
+      <div class="col-md-9">
+        <%= f.select :location, [["本社", "本社"], ["大阪支店", "大阪支店"]], {}, class: "form-select" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-9 offset-md-3">
+        <span>※パスワードの再設定（変更する場合のみ入力）</span>
+      </div>
+    </div>
+
+    <div class="row mb-3 align-items-center">
+      <div class="col-md-3 text-end text-primary fw-bold">
+        <%= f.label :password, "新しいパスワード:" %>
+      </div>
+      <div class="col-md-9">
+        <%= f.password_field :password, class: "form-control", placeholder: "変更しない場合は空欄のまま" %>
+      </div>
+    </div>
+
+    <div class="row mb-3 align-items-center">
+      <div class="col-md-3 text-end text-primary fw-bold">
+        <%= f.label :password_confirmation, "確認用コード:" %>
+      </div>
+      <div class="col-md-9">
+        <%= f.password_field :password_confirmation, class: "form-control", placeholder: "もう一度入力してください" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-9 offset-md-3">
+        <%= f.submit "変更を保存する", class: "btn btn-primary px-4 py-2" %>
+      </div>
+    </div>
+
   <% end %>
+
 </div>

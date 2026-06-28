@@ -1,92 +1,130 @@
-<div class="mb-3">
-    <%= link_to "一覧に戻る", admin_requests_path, class: "btn btn-outline-secondary btn-sm" %>
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>【管理者用】経費申請詳細・精査</h2>
+      <p>提出された申請内容を精査し、「承認」または「差戻し」の決定を行ってください。</p>
+    </div>
   </div>
 
-  <h2>【管理者用】経費申請詳細・精査</h2>
-  <p class="text-muted">提出された申請内容を精査し、「承認」または「差戻し」の決定を行ってください。</p>
-  
+  <div class="row">
+    <div class="col-md-3 text-end text-primary">
+      <strong>メニュー操作:</strong>
+    </div>
+    <div class="col-md-9">
+      <%= link_to "精査一覧に戻る", admin_requests_path, class: "btn btn-outline-secondary" %>
+    </div>
+  </div>
+
   <hr>
-  
-  <div class="card shadow-sm">
-    <div class="card-body">
-      <table class="table table-bordered align-middle">
-        <tbody>
-          <tr>
-            <th class="table-light text-secondary small">現在のステータス</th>
-            <td>
-              <% if @request.status == "approved" || @request.status == "承認" || @request.status == "承認済み" %>
-                <span class="badge bg-success rounded">承認済み</span>
-              <% elsif @request.status == "rejected" || @request.status == "却下" || @request.status == "差戻し" %>
-                <span class="badge bg-danger rounded">差戻し</span>
-              <% else %>
-                <span class="badge bg-warning rounded">申請中</span>
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <th class="table-light text-secondary small">申請者</th>
-            <td class="fw-bold"><%= @request.user.name if @request.user %></td>
-          </tr>
-          <tr>
-            <th class="table-light text-secondary small">申請日</th>
-            <td class="text-secondary"><%= @request.applied_at %></td>
-          </tr>
-          <tr>
-            <th class="table-light text-secondary small">勘定科目</th>
-            <td><%= @request.category.account_item if @request.category %>（<%= @request.category.name if @request.category %>）</td>
-          </tr>
-          <tr>
-            <th class="table-light text-secondary small">購入先</th>
-            <td><%= @request.vendor %></td>
-          </tr>
-          <tr>
-            <th class="table-light text-secondary small">税込金額</th>
-            <td class="fw-bold text-dark"><%= number_to_currency(@request.total_amount_incl_tax, unit: "円", format: "%n %u", precision: 0) %></td>
-          </tr>
-          
-          <tr>
-            <th class="table-light text-secondary small">添付された領収書</th>
-            <td>
-              <% if @request.image.attached? %>
-                <div class="mb-2">
-                  <%= link_to "領収書画像を別タブで拡大表示する", @request.image, target: "_blank", class: "btn btn-link btn-sm" %>
-                </div>
-                <div class="border rounded bg-light text-center">
-                  <%= image_tag @request.image, class: "img-fluid rounded" %>
-                </div>
-              <% else %>
-                <div class="text-muted small">
-                  領収書画像が添付されていません。
-                </div>
-              <% end %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
+  <div class="row mb-3 align-items-center">
+    <div class="col-md-3 text-end text-primary fw-bold">
+      現在のステータス:
     </div>
-  </div>
-
-  <div class="card shadow-sm border-light bg-light">
-    <h5 class="fw-bold text-dark mb-3">この申請を精査する</h5>
-    
-    <div class="d-flex gap-3">
-      
-
-      <%= form_with model: [:admin, @request], method: :patch, data: { turbo: false }, class: "flex-fill" do |f| %>      
-        <%= f.hidden_field :status, value: "承認済み" %>
-     <%= f.submit "承認する", class: "btn btn-success fw-bold w-100 py-2.5 shadow-sm" %>      
-<% end %>
-
-      <%= form_with model: [:admin, @request], method: :patch, data: { turbo: false }, class: "flex-fill" do |f| %>
-        <%= f.hidden_field :status, value: "差戻し" %>
-<%= f.submit "差戻しする", class: "btn btn-danger  fw-bold w-100 py-2.5 shadow-sm" %>
+    <div class="col-md-9">
+      <% if @request.status == "approved" || @request.status == "承認" || @request.status == "承認済み" %>
+        <span class="badge bg-success rounded fs-6">承認済み</span>
+      <% elsif @request.status == "rejected" || @request.status == "却下" || @request.status == "差戻し" %>
+        <span class="badge bg-danger rounded fs-6">差戻し</span>
+      <% else %>
+        <span class="badge bg-warning rounded text-dark fs-6">申請中</span>
       <% end %>
-
     </div>
   </div>
 
-  <div class="text-center">
-    <%= link_to "一覧に戻る", admin_requests_path, class: "text-secondary text-decoration-none small" %>
+  <div class="row mb-3">
+    <div class="col-md-3 text-end text-primary fw-bold">
+      申請者:
+    </div>
+    <div class="col-md-9 text-dark">
+      <%= @request.user&.name %>
+    </div>
   </div>
 
-</div>
+  <div class="row mb-3">
+    <div class="col-md-3 text-end text-primary fw-bold">
+      申請日:
+    </div>
+    <div class="col-md-9">
+      <%= @request.applied_at %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-3 text-end text-primary fw-bold">
+      勘定科目:
+    </div>
+    <div class="col-md-9">
+      <% if @request.category %>
+        <span><%= @request.category.account_item %></span>
+        <span>（<%= @request.category.name %>）</span>
+      <% else %>
+        <span>未設定</span>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-3 text-end text-primary fw-bold">
+      購入先:
+    </div>
+    <div class="col-md-9">
+      <% if @request.vendor.present? %>
+  <%= @request.vendor %>
+<% else %>
+  （未記入）
+<% end %>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-3 text-end text-primary fw-bold">
+      税込金額:
+    </div>
+    <div class="col-md-9">
+      <%= number_to_currency(@request.total_amount_incl_tax, unit: "円", format: "%n %u", precision: 0) %>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-3 text-end text-primary fw-bold">
+      添付された領収書:
+    </div>
+    <div class="col-md-9">
+      <% if @request.image.attached? %>
+        <div>
+          <%= link_to "🔍 領収書画像を別タブで拡大表示する", @request.image, target: "_blank", class: "btn btn-link btn-sm p-0 text-decoration-none" %>
+        </div>
+        <div class="border rounded bg-light text-start p-2 d-inline-block" style="max-width: 100%;">
+          <%= image_tag @request.image, class: "img-fluid rounded border" %>
+        </div>
+      <% else %>
+        <div>
+          領収書画像が添付されていません。
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-md-3 text-end text-primary fw-bold">
+      この申請を精査:
+    </div>
+    <div class="col-md-9">
+        <div class="d-flex align-items-center gap-2">
+          <%= form_with model: [:admin, @request], method: :patch, data: { turbo: false } do |f| %>      
+            <%= f.hidden_field :status, value: "承認済み" %>
+            <%= f.submit "承認する", class: "btn btn-success fw-bold", data: { confirm: "この申請を【承認】します。よろしいですか？" } %>      
+          <% end %>
+
+          <%= form_with model: [:admin, @request], method: :patch, data: { turbo: false } do |f| %>
+            <%= f.hidden_field :status, value: "差戻し" %>
+            <%= f.submit "差戻しする", class: "btn btn-danger fw-bold", data: { confirm: "この申請を【差戻し】します。よろしいですか？" } %>
+          <% end %>
+        </div>
+
+ </div>
+

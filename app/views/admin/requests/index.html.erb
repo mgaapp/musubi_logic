@@ -12,8 +12,7 @@
       <strong>メニュー操作:</strong>
     </div>
     <div class="col-md-9">
-      <%= link_to "勘定科目・カテゴリ一覧", admin_categories_path, class: "btn btn-info" %>
-      <%= link_to "メニューに戻る", root_path, class: "btn btn-outline-secondary" %>
+      <%= link_to "管理者メニューへ戻る", root_path, class: "btn btn-outline-secondary" %>
     </div>
   </div>
 
@@ -80,7 +79,7 @@
     </div>
   </div>
 
-  
+  <div class="row">
     <div class="col-md-9 offset-md-3">
       <%= paginate @requests %>
     </div>
