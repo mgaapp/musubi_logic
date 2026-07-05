@@ -1,33 +1,91 @@
-<div>
-    <h1>社員詳細情報</h1>
-    <%= link_to "一覧に戻る", admin_users_path %>
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>社員詳細情報</h2>
+      <p class="text-muted">登録されている社員の登録内容の詳細です。情報の編集やアカウントの削除ができます。</p>
+    </div>
   </div>
 
-  <div>
-    <span>氏名:</span>
-    <span><%= @user.name %></span>
+  <div class="row">
+    <div class="col-md-3 text-end text-primary">
+      <strong>メニュー操作:</strong>
+    </div>
+    <div class="col-md-9">
+      <%= link_to "社員一覧に戻る", admin_users_path, class: "btn btn-outline-secondary" %>
+    </div>
   </div>
 
-  <div>
-    <span>社員番号:</span>
-    <span><%= @user.employee_number %></span>
+  <hr>
+
+  <div class="row mb-3">
+    <div class="col-md-3 text-end text-primary fw-bold">
+      氏名:
+    </div>
+    <div class="col-md-9">
+      <%= @user.name %>
+    </div>
   </div>
 
-  <div>
-    <span>メールアドレス:</span>
-    <span><%= @user.email_address %></span>
+  <div class="row mb-3">
+    <div class="col-md-3 text-end text-primary fw-bold">
+      社員番号:
+    </div>
+    <div class="col-md-9">
+      <%= @user.employee_number %>
+    </div>
   </div>
 
-  <div>
-    <span>権限:</span>
-    <span><%= @user.role == 'admin' ? '管理者' : '一般社員' %></span>
+  <div class="row mb-3">
+    <div class="col-md-3 text-end text-primary fw-bold">
+      メールアドレス:
+    </div>
+    <div class="col-md-9">
+      <%= @user.email_address %>
+    </div>
   </div>
 
-  <div>
-    <%= link_to "編集する", edit_admin_user_path(@user) %>
-    
-    <% if @user != Current.user %>
-      <%= link_to "削除する", admin_user_path(@user), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn-action btn-action-delete" %>
-    <% end %>
+  <div class="row mb-3">
+    <div class="col-md-3 text-end text-primary fw-bold">
+      所属拠点:
+    </div>
+    <div class="col-md-9">
+      <%= @user.location.presence || "—" %>
+    </div>
   </div>
+
+  <div class="row mb-4">
+    <div class="col-md-3 text-end text-primary fw-bold">
+      権限:
+    </div>
+    <div class="col-md-9">
+      <% if @user.role == 'admin' || @user.role == '管理者' %>
+        <span class="badge bg-danger fs-6">管理者</span>
+      <% else %>
+        <span class="badge bg-secondary fs-6">一般社員</span>
+      <% end %>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-md-3 text-end text-primary fw-bold pt-1">
+      アカウント操作:
+    </div>
+    <div class="col-md-9">
+      <div class="d-flex align-items-center gap-2">
+        
+        <%= link_to "この情報を編集する", edit_admin_user_path(@user), class: "btn btn-primary fw-bold" %>
+        
+        <% if @user != Current.user %>
+          <%= link_to "アカウントを削除する", admin_user_path(@user), 
+                      data: { turbo_method: :delete, turbo_confirm: "本当にこの社員アカウントを削除しますか？\n（この操作は取り消せません）" }, 
+                      class: "btn btn-danger fw-bold" %>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+
 </div>

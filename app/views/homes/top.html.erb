@@ -51,14 +51,28 @@
           <%= link_to "Q&Aの回答・管理をする", posts_path, class: "btn btn-primary px-4 py-2 shadow-sm" %>
         </div>
       </div>
-
+  
+<% else %> 
+      <div class="row align-items-center mb-4">
+        <div class="col-md-3 text-end text-primary fw-bold fs-5">経費精算:</div>
+        <div class="col-md-9">
+          <%= link_to "新しく経費申請をする", new_request_path, class: "btn btn-success fw-bold" %>
+          <%= link_to "自分の申請履歴を見る", requests_path, class: "btn btn-outline-secondary" %>
         </div>
-      <% end %>
+      </div>
 
-    </div>
-  </div>
+      <div class="row align-items-center mb-4">
+        <div class="col-md-3 text-end text-primary fw-bold fs-5">知見共有:</div>
+        <div class="col-md-9">
+          <%= link_to "Q&Aを見る", posts_path, class: "btn btn-primary" %>
+        </div>
+      </div>
 
-<% else %>
+    <% end %>
+     </div> 
+     </div>
+      <% else %>
+      
  <div class="container">
     <div class="p-5 mb-4 bg-light rounded-3">
       <h1 class="fw-bold text-primary">Musubi Logic</h1>
