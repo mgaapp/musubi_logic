@@ -1,45 +1,65 @@
-<div>
- <%= link_to "メニューに戻る", root_path %>
-  <h2>固定資産一覧</h2>
-  <p>社内で稼働している固定資産の一覧です。</p>
+<div class="container">
 
-  <table>
-    <thead>
-      <tr>
-        <th>資産ID</th>
-        <th>申請ID</th>
-        <th>品名</th>
-        <th>拠点名</th>
-        <th>取得金額（税抜）</th>
-        <th>耐用年数</th>
-        <th>償却方法</th>
-        <th>供用開始日</th>
-        <th>償却終了予定日</th>
-        <th>購入先</th>
-        <th>購入日</th>
-        <th>状態</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @assets.each do |asset| %>
-        <tr>
-          <td><%= asset.id %></td>
-          <td><%= asset.request_id %></td>
-          <td><strong><%= asset.request&.category&.name %></strong></td>
-          <td><%= asset.location %></td>
-          <td><%= asset.acquisition_cost_excl %>円</td>
-          <td><%= asset.useful_life_years %>年</td>
-          <td><%= asset.depreciation_method %></td>
-          <td><%= asset.service_start_date %></td>
-          <td><%= asset.purchase_date ? asset.purchase_date + 4.years : "未定" %></td>
-          <td><%= asset.vendor %></td>
-          <td><%= asset.purchase_date %></td>
-            <span>
-              <%= asset.status %>
-            </span>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>固定資産一覧</h2>
+      <p class="text-muted">社内で稼働している固定資産の一覧です。</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 text-end text-primary fw-bold">
+      メニュー操作:
+    </div>
+    <div class="col-md-9">
+      <%= link_to "メニューに戻る", root_path, class: "btn btn-outline-secondary" %>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table table-bordered"> 
+          <thead class="table-light text-center">
+            <tr>
+              <th class="text-center">資産ID</th>
+              <th class="text-center">品名</th>
+              <th class="text-center">拠点名</th>
+              <th class="text-center">取得金額（税抜）</th>
+              <th class="text-center">耐用年数</th>
+              <th class="text-center">償却方法</th>
+              <th class="text-center">供用開始日</th>
+              <th class="text-center">償却終了予定日</th>
+              <th class="text-center">購入先</th>
+              <th class="text-center">購入日</th>
+              <th class="text-center">状態</th>
+            </tr>
+          </thead>
+          
+          <tbody class="text-center">
+            <% @assets.each do |asset| %>
+              <tr>
+                <td class="text-center"><%= asset.id %></td>
+                <td class="text-center"><%= asset.request&.category&.name %></strong></td>
+                <td class="text-center"><%= asset.location %></td>
+                <td class="text-center"><%= number_to_currency(asset.acquisition_cost_excl, unit: "円", format: "%n%u", precision: 0) %></td>
+                <td class="text-center"><%= asset.useful_life_years %>年</td>
+                <td class="text-center"><%= asset.depreciation_method %></td>
+                <td class="text-center"><%= asset.service_start_date %></td>
+                <td class="text-center"><%= asset.purchase_date ? asset.purchase_date + 4.years : "未定" %></td>
+                <td class="text-center"><%= asset.vendor %></td>
+                <td class="text-center"><%= asset.purchase_date %></td>
+                <td class="text-center">
+                  <span><%= asset.status %></span>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
 </div>

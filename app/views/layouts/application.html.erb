@@ -25,25 +25,26 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <header class="main-header">
-  <%= link_to "Musubi Logic", root_path, class: "header-logo" %>
+<body>
+  <header class="main-header align-items-center">
+    
+    <%= link_to "Musubi Logic", root_path, class: "header-logo fw-bold text-white fs-4" %>
 
-  <nav>
-    <% if authenticated? %>
-      <%= link_to "マイページ", user_path(Current.user), class: "header-link" %>
+    <nav class="d-flex align-items-center gap-4">
+      <% if authenticated? %>
+        <%= link_to "マイページ", user_path(Current.user), class: "text-white fw-bold text-decoration-none" %>
+        <%= link_to "ログアウト", session_path, data: { turbo_method: :delete }, class: "btn btn-dark fw-bold" %> 
+      <% else %>
+        <%= link_to "サインイン", new_session_path, class: "text-white fw-bold text-decoration-none" %>
+      <% end %>
+    </nav>
+  </header>
 
-        <%= link_to "ログアウト", session_path, data: { turbo_method: :delete }, class: "btn btn-dark" %> 
-        <% else %>
-        <%= link_to "サインイン", new_session_path, class: "header-link" %>
-    <% end %>
-  </nav>
-</header>
-<main>
+  <main>
     <% flash.each do |message_type, message| %>
       <div class="flash-message <%= message_type %>"><%= message %></div>
     <% end %>
     <%= yield %>
   </main>
-  </body>
+</body>
 </html>

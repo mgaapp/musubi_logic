@@ -1,80 +1,67 @@
+<div class="container">
 
-<div class="container my-5">
- <div class="mb-4">
-  <%= link_to "メニューに戻る", root_path, class: "btn btn-outline-secondary btn-sm" %>
+  <div>
+    <h2 class="fw-bold">提出済みの申請一覧</h2>
+    <p>提出した申請の確認や、現在の審査状況を一覧でチェックできます。</p>
   </div>
   
   <div class="mb-4">
-    <h2 class="fw-bold text-dark">📋 提出済みの申請一覧</h2>
-    <p class="text-muted">提出した申請の確認や、現在の審査状況を一覧でチェックできます。</p>
-  </div>
-  
-  <div class="mb-4">
-    <%= link_to "新しく経費申請をする", new_request_path, class: "btn btn-primary fw-bold px-4" %>
+    <%= link_to "新しく経費申請をする", new_request_path, class: "btn btn-primary fw-bold" %>
+    <%= link_to "メニューに戻る", root_path, class: "btn btn-outline-secondary" %>
   </div>
 
-  <% if Current.user&.admin? %>
-  <div class="mb-4 p-3 bg-warning bg-opacity-10 rounded border border-warning">
-    <p class="fw-bold text-warning-emphasis mb-2">管理者メニュー</p>
-    <%= link_to "【管理者専用】全社員の申請一覧・審査画面へ", admin_requests_path, class: "btn btn-warning fw-bold btn-sm" %>
-  </div>
-  <% end %>
-
-  <div class="card shadow-sm border-0 bg-white">
-    <div class="table-responsive">
-      <table class="table table-hover align-middle mb-0">
-        <%# <thead> 見出し部分 %>
-        <thead class="table-light">
+  <div>
+    <table class="table table-bordered">
+      <thead class="table-light text-center">
+        <tr>
+          <th>申請日</th>
+          <th>カテゴリ</th>
+          <th>購入先</th>
+          <th>税込金額</th>
+          <th>ステータス</th>
+          <th>>操作</th>
+        </tr>
+      </thead>
+      
+      <tbody class="text-center">
+        <% @requests.each do |request| %>
           <tr>
-            <th class="py-3 px-4 text-secondary">申請日</th>
-            <th class="py-3 text-secondary">カテゴリ</th>
-            <th class="py-3 text-secondary">購入先</th>
-            <th class="py-3 text-secondary">税込金額</th>
-            <th class="py-3 text-secondary">ステータス</th>
-            <th class="py-3 text-center text-secondary">詳細</th>
+            <td class="text-center">
+              <%= request.applied_at %>
+            </td>
+
+            <td class="text-center">
+              <%= request.category&.name %>
+            </td>
+            
+            <td class="text-center">
+              <%= request.vendor %>
+            </td>
+
+            <td class="text-center">
+              <%= number_to_currency(request.total_amount_incl_tax, unit: "円", format: "%n%u", precision: 0) %>
+            </td>
+            
+            <td class="text-center">
+              <% if request.status == "approved" || request.status == "承認" || request.status == "承認済み" %>
+                <span class="fw-bold text-success">承認済み</span>
+              <% elsif request.status == "rejected" || request.status == "差し戻し" %>
+                <span class="fw-bold text-danger">差し戻し</span>
+              <% else %>
+                <span class="fw-bold text-warning">申請中</span>
+              <% end %>
+            </td>
+ 
+            <td>
+              <%= link_to "確認", request_path(request), class: "btn btn-outline-primary" %>
+            </td>
           </tr>
-        </thead>
-        
-        <tbody>
-          <% @requests.each do |request| %>
-            <tr>
-              <td class="px-4 text-secondary small">
-                <%= request.applied_at %>
-              </td>
-
-              <td class="fw-bold text-dark">
-                <%= request.category&.name %>
-              </td>
-              
-              <td class="text-secondary">
-                <%= request.vendor %>
-              </td>
-
-              <td class="fw-bold text-dark">
-                <%= number_to_currency(request.total_amount_incl_tax, unit: "円", format: "%n %u", precision: 0) %>
-              </td>
-              
-              <td>
-                <% if request.status == "approved" || request.status == "承認" || request.status == "承認済み" %>
-                  <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1.5 rounded">承認済み</span>
-                <% elsif request.status == "rejected" || request.status == "差し戻し" %>
-                  <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1.5 rounded">差し戻し</span>
-                <% else %>
-                  <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle px-2 py-1.5 rounded">申請中</span>
-                <% end %>
-              </td>
-   
-              <td class="text-center">
-                <%= link_to "確認", request_path(request), class: "btn btn-outline-dark btn-sm rounded-pill px-3" %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 
-  <div class="d-flex justify-content-center mt-5">
+  <div class="d-flex justify-content-center">
     <%= paginate @requests %>
   </div>
 </div>

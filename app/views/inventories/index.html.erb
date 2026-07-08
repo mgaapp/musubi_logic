@@ -1,36 +1,69 @@
-<div>
-  <h2>【一般社員用】貯蔵品棚卸一覧</h2>
-  <p>ここでは、一般社員の皆さんが貯蔵品の在庫を探したり、確認したりできます。</p>
-    <%= form_with url: inventories_path, method: :get, local: true, class: "mb-3" do |f| %>
-        <div class="input-group" style="max-width: 400px;">
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>【一般社員用】貯蔵品棚卸一覧</h2>
+      <p class="text-muted">ここでは、一般社員の皆さんが貯蔵品の在庫を探したり、確認したりできます。</p>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-3 text-end text-primary fw-bold pt-1">
+      在庫の検索:
+    </div>
+    <div class="col-md-9">
+      <%= form_with url: inventories_path, method: :get, local: true do |f| %>
+        <div class="input-group">
           <%= f.text_field :keyword, value: params[:keyword], placeholder: "品名、購入先、拠点で検索...", class: "form-control" %>
           <%= f.submit "検索", class: "btn btn-primary" %>
         </div>
-        <% end %>
-  <table>
-    <thead>
-      <tr>
-        <th>品名</th>
-        <th>保管場所</th>
-        <th>購入先</th>
-        <th>単価 (税抜)</th>
-        <th>在庫数</th>
-        <th>購入日</th>
-        <th>ステータス</th>
-      </tr>
-    </thead>
-    <tbody>
-    <% @inventories.each do |inventory| %>
-        <tr>
-          <td><strong><%= inventory.request.category.name if inventory.request&.category %></strong></td>
-          <td><%= inventory.location %></td>
-          <td><%= inventory.vendor %></td>
-          <td><%= inventory.unit_price_excl_tax %> 円</td>
-          <td><strong><%= inventory.stock_quantity %></strong> 個</td>
-          <td><%= inventory.purchase_date %></td>
-          <td><%= inventory.status %></td>
-        </tr>
       <% end %>
-    </tbody>
-  </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 text-end text-primary fw-bold">
+      メニュー操作:
+    </div>
+    <div class="col-md-9">
+      <%= link_to "メニューに戻る", root_path, class: "btn btn-outline-secondary" %>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered"> 
+          <thead class="table-light text-center">
+            <tr>
+              <th class="text-center">品名</th>
+              <th class="text-center">保管場所</th>
+              <th class="text-center">購入先</th>
+              <th class="text-center">単価 (税抜)</th>
+              <th class="text-center">在庫数</th>
+              <th class="text-center">購入日</th>
+              <th class="text-center">>ステータス</th>
+            </tr>
+          </thead>
+          
+          <tbody class="text-center">
+            <% @inventories.each do |inventory| %>
+              <td class="text-center"><%= inventory.request&.category&.name %></strong></td>
+                 <td class="text-center"><%= inventory.location %></td>
+                 <td class="text-center"><%= inventory.vendor %></td>
+                 <td class="text-center"><%= number_to_currency(inventory.unit_price_excl_tax, unit: "円", format: "%n%u", precision: 0) %></td>
+               <td class="text-center"><%= inventory.stock_quantity %> 個</td>
+                <td class="text-center"><%= inventory.purchase_date %></td>
+               <td class="text-center">
+                  <span><%= inventory.status %></span>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
 </div>

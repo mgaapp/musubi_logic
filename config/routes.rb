@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get "/homes/about" => "homes#about", as: "about"
   resources :users, only: [ :show ]
   resources :inventories, only: [:index]
-  resources :inventory_histories, only: [:create]
+  resources :inventory_histories, only: [:create, :index]
   resources :requests, only: [:index, :show, :new, :create]
   resources :posts
   resources :assets, only: [:index]

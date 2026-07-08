@@ -1,5 +1,5 @@
 class InventoryHistoriesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticated?
 
     def create
       inventory = Inventory.find(params[:inventory_id])
@@ -13,6 +13,6 @@ class InventoryHistoriesController < ApplicationController
     end
 
     def index
-      @inventory_histories = current_user.inventory_histories.order("created_at DESC")
+      @inventory_histories = InventoryHistory.order(created_at: :desc)
     end
 end

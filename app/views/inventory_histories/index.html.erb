@@ -1,35 +1,56 @@
-<div>
-  <h2>入出庫履歴一覧</h2>
+<div class="container">
 
-  <table>
-    <thead>
-      <tr>
-        <th>日時</th>
-        <th>貯蔵品名</th>
-        <th>数量</th>
-        <th>区分</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @inventory_histories.each do |history| %>
-        <tr>
-          <td><%= history.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>入出庫履歴一覧</h2>
+      <p>貯蔵品の出庫や数量調整の履歴を確認できます。</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 text-end text-primary fw-bold">
+      メニュー操作:
+    </div>
+    <div class="col-md-9">
+      <%= link_to "メニューに戻る", root_path, class: "btn btn-outline-secondary" %>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered"> 
+          <thead class="table-light text-center">
+            <tr>
+              <th>日時</th>
+              <th>貯蔵品名</th>
+              <th>数量</th>
+              <th>区分</th>
+            </tr>
+          </thead>
           
-          <td><%= history.inventory.name %></td>
-          
-          <td><%= history.quantity %></td>
-          
-          <td>
-            <% if history.status == "out" %>
-              出庫
-            <% elsif history.status == "fix" %>
-              手動調整
-            <% else %>
-              <%= history.status %>
+          <tbody class="text-center">
+            <% @inventory_histories.each do |history| %>
+              <tr>
+                <td  class="text-center"><%= history.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+                <td  class="text-center"><%= history.inventory&.request&.category&.name %></strong></td>
+                <td  class="text-center"><%= history.quantity %></td>
+                <td  class="text-center">
+                  <% if history.status == "out" %>
+                    <span class="fw-bold text-danger">出庫</span>
+                  <% elsif history.status == "fix" %>
+                    <span class="fw-bold text-warning">手動調整</span>
+                  <% else %>
+                    <span class="text-center"><%= history.status %></span>
+                  <% end %>
+                </td>
+              </tr>
             <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
 </div>

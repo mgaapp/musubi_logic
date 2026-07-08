@@ -56,8 +56,23 @@
       <div class="row align-items-center mb-4">
         <div class="col-md-3 text-end text-primary fw-bold fs-5">経費精算:</div>
         <div class="col-md-9">
-          <%= link_to "新しく経費申請をする", new_request_path, class: "btn btn-success fw-bold" %>
+          <%= link_to "新しく経費申請をする", new_request_path, class: "btn btn-primary" %>
           <%= link_to "自分の申請履歴を見る", requests_path, class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
+
+      <div class="row align-items-center mb-4">
+        <div class="col-md-3 text-end text-primary fw-bold fs-5">物品・在庫:</div>
+        <div class="col-md-9">
+          <%= link_to "貯蔵品を探す（棚卸一覧）", inventories_path, class: "btn btn-primary" %>
+          <%= link_to "貯蔵品の入出庫履歴を見る", inventory_histories_path, class: "btn btn-outline-secondary px-4 py-2 ms-2" %>
+        </div>
+      </div>
+
+      <div class="row align-items-center mb-4">
+        <div class="col-md-3 text-end text-primary fw-bold fs-5">資産管理:</div>
+        <div class="col-md-9">
+          <%= link_to "固定資産一覧を見る", assets_path, class: "btn btn-primary" %>
         </div>
       </div>
 
