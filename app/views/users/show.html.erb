@@ -1,29 +1,44 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h1 >マイプロフィール（一般社員画面）</h1>
-    </div><!-- close col- -->
-  </div> <!-- close row -->
-  <div class="row">
-    <div class="col-md-3 text-end">
-      <strong>氏名:</strong>
-    </div>
+  
+  <div class="row mb-4">
     <div class="col-md-9">
-      <span><%= @user.name %></span>
+      <h2 class="fw-bold">マイプロフィール</h2>
+      <p>登録されているあなたの社員情報です。</p>
     </div>
+  </div>
 
-    <div class="col-md-3 text-end text-primary">
-      <strong>社員番号:</strong>
-    </div>
-    <div class="col-md-9 text-success">
-      <span><%= @user.employee_number %></span>
-    </div>
+  <hr>
 
-    <div class="col-md-3 text-end">
-      <strong>メールアドレス:</strong>
-    </div>
-    <div class="col-md-9">
-      <span><%= @user.email_address %></span>
+  <div class="row">
+    <div>
+      
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-3 text-end text-primary fw-bold">氏名:</div>
+        <div class="col-md-9">
+          <%= @user.name %>
+        </div>
+      </div>
+
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-3 text-end text-primary fw-bold">社員番号:</div>
+        <div class="col-md-9">
+          <%= @user.employee_number %>
+        </div>
+      </div>
+
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-3 text-end text-primary fw-bold">メールアドレス:</div>
+        <div class="col-md-9">
+          <%= @user.email_address %>
+        </div>
+      </div>
+
+      <hr>
+
+      <div>  
+        <%= link_to "メニューに戻る", root_path, class: "btn btn-outline-secondary" %>
+      </div>
+
     </div>
   </div>
 </div>

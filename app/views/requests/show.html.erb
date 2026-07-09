@@ -1,28 +1,101 @@
-<div>
-  <h2>申請詳細</h2>
+<div class="container">
 
-  <div>
-    <p><strong>ステータス:</strong> <span class="status-tag"><%= @request.status %></span></p>
-    <p><strong>申請日:</strong> <%= @request.applied_at %></p>
-    <p><strong>カテゴリ:</strong> <%= @request.category.name %></p>
-    <p><strong>購入先:</strong> <%= @request.vendor %></p>
-    <p><strong>税抜単価:</strong> <%= @request.unit_price_excl_tax %> 円</p>
-    <p><strong>数量:</strong> <%= @request.quantity %></p>
-    <p><strong>消費税率:</strong> <%= @request.tax_rate %> %</p>
-    <p><strong>税込金額:</strong> <%= @request.total_amount_incl_tax %> 円</p>
-    <p><strong>領収書画像:</strong>
-     <% if @request.image.attached? %>
-     <%= link_to "領収書を確認する", @request.image %>
-     <% else %>
-      <span>未添付</span>
-  <% end %>
-</p>
+  <div class="row mb-4">
+    <div class="col-md-9">
+      <h2 class="fw-bold">申請詳細</h2>
+      <p>提出した申請の具体的な内容と現在の審査状況です。</p>
+    </div>
   </div>
 
-  <div>
-    <%= link_to "一覧に戻る", requests_path %>
+  <hr>
 
-    <%= link_to "この申請を削除する", request_path(@request), data:{turbo_method: :delete, turbo_confirm: "本当に削除しますか？"} %>
+  
+  <div class="row">
+    <div>
 
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-3 text-end text-primary fw-bold">ステータス:</div>
+        <div class="col-md-9">
+          <% if @request.status == "approved" || @request.status == "承認" || @request.status == "承認済み" %>
+            <span class="fw-bold text-success">承認済み</span>
+          <% elsif @request.status == "rejected" || @request.status == "差し戻し" %>
+            <span class="fw-bold text-danger">差し戻し</span>
+          <% else %>
+            <span class="fw-bold text-warning">申請中</span>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-3 text-end text-primary fw-bold">申請日:</div>
+        <div class="col-md-9">
+          <%= @request.applied_at %>
+        </div>
+      </div>
+
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-3 text-end text-primary fw-bold">カテゴリ:</div>
+        <div class="col-md-9">
+          <%= @request.category&.name %>
+        </div>
+      </div>
+
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-3 text-end text-primary fw-bold">購入先:</div>
+        <div class="col-md-9">
+          <%= @request.vendor %>
+        </div>
+      </div>
+
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-3 text-end text-primary fw-bold">税抜単価:</div>
+        <div class="col-md-9">
+          <%= number_to_currency(@request.unit_price_excl_tax, unit: "円", format: "%n%u", precision: 0) %>
+        </div>
+      </div>
+
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-3 text-end text-primary fw-bold">数量:</div>
+        <div class="col-md-9">
+          <%= @request.quantity %>
+        </div>
+      </div>
+
+      <!-- 消費税率 -->
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-3 text-end text-primary fw-bold">消費税率:</div>
+        <div class="col-md-9">
+          <%= @request.tax_rate %> %
+        </div>
+      </div>
+
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-3 text-end text-primary fw-bold">税込金額:</div>
+        <div class="col-md-9">
+          <%= number_to_currency(@request.total_amount_incl_tax, unit: "円", format: "%n%u", precision: 0) %>
+        </div>
+      </div>
+
+      <div class="row mb-4 align-items-center">
+        <div class="col-md-3 text-end text-primary fw-bold">領収書・レシート:</div>
+        <div class="col-md-9">
+          <% if @request.image.attached? %>
+            <%= link_to "領収書を確認する", @request.image, target: "_blank", class: "btn btn-outline-dark btn-sm fw-bold" %>
+          <% else %>
+            <span>未添付</span>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-9">  
+          <%= link_to "一覧に戻る", requests_path, class: "btn btn-outline-secondary" %>
+          
+          <%= link_to "この申請を削除する", request_path(@request), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },class: "btn btn-outline-danger" %>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>

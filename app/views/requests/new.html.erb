@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12 mb-3">
+    <div class="col-md-9">
       <h2>新規経費申請</h2>
     </div>
   </div>
@@ -17,37 +17,15 @@
       </div>
     </div>
   <% end %>
-   <div class="col-md-9 alert alert-warning">
-          二重買い（無駄遣い）を防ぐため、新しい申請の前に 
-          <%= link_to "【貯蔵品棚卸一覧】", inventories_path, class: "fw-bold text-decoration-none" %> 
-          で社内在庫を確認してください。
-        </div>
-  <div class="row mb-4">
-    <div class="col-md-3 text-end text-primary">
-      <strong>在庫状況:</strong>
-    </div>
-    <div class="col-md-9">
-      <h5>申請前の在庫チェック！</h5>
-      <p>二重買い（無駄遣い）を防ぐため、社内に今ある在庫を確認してから申請してください。</p>
-      
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>品名</th>
-            <th>保管場所</th>
-            <th>現在の在庫数</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% Inventory.where("stock_quantity > 0").each do |inventory| %>
-            <tr>
-              <td><strong><%= inventory.request&.category&.name %></strong></td>
-              <td><%= inventory.location %></td>
-              <td class="text-danger fw-bold"><%= inventory.stock_quantity %> 個</td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+
+   <div class="row">
+    <div class="col-md-3"></div> 
+    <div class="col-md-9"> 
+      <div class="p-3 bg-warning bg-opacity-10 rounded border">
+        二重買い（無駄遣い）を防ぐため、新しい申請の前に 
+        <%= link_to "【貯蔵品棚卸一覧】", inventories_path, class: "fw-bold text-primary text-decoration-none" %> 
+        で社内在庫を確認してください。
+      </div>
     </div>
   </div>
 
@@ -109,7 +87,7 @@
 </div>
 <div class="col-md-9 mt-3">  
 <%= f.submit "申請を提出する", class: "btn btn-primary" %>
-<%= link_to "戻る", requests_path, class: "btn btn-outline-secondary" %>
+<%= link_to "戻る", root_path, class: "btn btn-outline-secondary" %>
 </div>
 
   <% end %>
