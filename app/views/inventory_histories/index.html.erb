@@ -33,8 +33,8 @@
           <tbody class="text-center">
             <% @inventory_histories.each do |history| %>
               <tr>
-                <td  class="text-center"><%= history.created_at.strftime("%Y/%m/%d %H:%M") %></td>
-                <td  class="text-center"><%= history.inventory&.request&.category&.name %></strong></td>
+                <td class="text-center text-nowrap"><%= history.created_at.strftime("%Y/%m/%d  %H:%M") %></td>
+                <td  class="text-center"><%= history.inventory&.request&.category&.name %></td>
                 <td  class="text-center"><%= history.quantity %></td>
                 <td  class="text-center">
                   <% if history.status == "out" %>
@@ -52,5 +52,10 @@
       </div>
     </div>
   </div>
-
+ <div class="row mt-3">
+    <div class="d-flex justify-content-center">
+      <%= paginate @inventory_histories %>
+    </div>
+  </div>
+  
 </div>

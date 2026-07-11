@@ -17,7 +17,7 @@
       </div>
 
         <div class="row align-items-center mb-4">
-        <div class="col-md-3 text-end text-primary fw-bold fs-5">物品在庫管理:</div>
+        <div class="col-md-3 text-end text-primary fw-bold fs-5">貯蔵品在庫管理:</div>
         <div class="col-md-9">
           <%= link_to "貯蔵品を探す・買う（棚卸一覧）", admin_inventories_path, class: "btn btn-primary px-4 py-2" %>
           <%= link_to "貯蔵品の入出庫・調整履歴を見る", admin_inventory_histories_path, class: "btn btn-outline-secondary px-4 py-2" %>
@@ -46,7 +46,7 @@
         </div>
 
       <div class="row align-items-center mb-4">
-        <div class="col-md-3 text-end text-primary fw-bold fs-5">共有:</div>
+        <div class="col-md-3 text-end text-primary fw-bold fs-5">Q&Aコミュニティ:</div>
         <div class="col-md-9">
           <%= link_to "Q&Aの回答・管理をする", posts_path, class: "btn btn-primary px-4 py-2 shadow-sm" %>
         </div>
@@ -62,7 +62,7 @@
       </div>
 
       <div class="row align-items-center mb-4">
-        <div class="col-md-3 text-end text-primary fw-bold fs-5">物品・在庫:</div>
+        <div class="col-md-3 text-end text-primary fw-bold fs-5">貯蔵品:</div>
         <div class="col-md-9">
           <%= link_to "貯蔵品を探す（棚卸一覧）", inventories_path, class: "btn btn-primary" %>
           <%= link_to "貯蔵品の入出庫履歴を見る", inventory_histories_path, class: "btn btn-outline-secondary px-4 py-2 ms-2" %>
@@ -70,14 +70,14 @@
       </div>
 
       <div class="row align-items-center mb-4">
-        <div class="col-md-3 text-end text-primary fw-bold fs-5">資産管理:</div>
+        <div class="col-md-3 text-end text-primary fw-bold fs-5">固定資産:</div>
         <div class="col-md-9">
           <%= link_to "固定資産一覧を見る", assets_path, class: "btn btn-primary" %>
         </div>
       </div>
 
       <div class="row align-items-center mb-4">
-        <div class="col-md-3 text-end text-primary fw-bold fs-5">知見共有:</div>
+        <div class="col-md-3 text-end text-primary fw-bold fs-5">Q&Aコミュニティ:</div>
         <div class="col-md-9">
           <%= link_to "Q&Aを見る", posts_path, class: "btn btn-primary" %>
         </div>
@@ -96,20 +96,20 @@
       <hr>
 
       <p class=" fw-bold">【開発の背景】</p>
-      <p>経費精算、固定資産台帳、部材などの貯蔵品棚卸表が別々のシステムやExcelで管理されていることによる「情報の分断」や、物品購入時の「二重買い」といったエラーを解消するために生まれました。経費・資産・貯蔵品、精度高い現場の知見を一つの線で結び、情報の整合性を自動で保つ仕組みを構築します。</p>
+      <p>経費精算、固定資産台帳、部材などの貯蔵品棚卸表が別々のシステムやExcelで管理されていることによる「情報の分断」や、物品購入時の「貯蔵品の二重買い」といったエラーを解消するために生まれました。経費・資産・貯蔵品、現場のからのQ&Aを一つの線で結び、情報の整合性を自動で保つ仕組みを構築します。</p>
     </div>
     
     <div class="row">
       <div class="col-md-4">
         <h4 class="text-primary fw-bold">物品・在庫 ＆ 経費精算</h4>
-        <p>消耗品やオフィス備品を新たに購入・精算する時や、発注前に社内の在庫状況・過去の購入先を確認したい時に。申請から承認フローまでWEB上で完結します。</p>
+        <p>消耗品やオフィス備品を新たに購入・精算する時や、高額な物品の発注前に社内の在庫状況・過去の購入先を確認したい時に。申請から承認フローまでWEB上で完結します。</p>
       </div>
       <div class="col-md-4">
         <h4 class="text-primary fw-bold">資産管理</h4>
         <p>備品購入時の経費精算が資産台帳や棚卸表と連動していないことによる「登録漏れ」を防ぎ、固定資産台帳は減価償却計算にも対応します。</p>
       </div>
       <div class="col-md-4">
-        <h4 class="text-primary fw-bold">申請ルールの知見共有</h4>
+        <h4 class="text-primary fw-bold">申請ルールのQ＆Aの共有</h4>
         <p>「この金額は資産計上すべきか消耗品か」「インボイス制度上、この領収書で精算可能か」といった、属人化しやすい管理部門への重複する問い合わせを解消します。</p>
       </div>
     </div>

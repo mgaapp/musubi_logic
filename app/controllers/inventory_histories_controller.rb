@@ -13,6 +13,6 @@ class InventoryHistoriesController < ApplicationController
     end
 
     def index
-      @inventory_histories = InventoryHistory.order(created_at: :desc)
+      @inventory_histories = InventoryHistory.order(created_at: :desc).page(params[:page])
     end
 end

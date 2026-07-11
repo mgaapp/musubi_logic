@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     @posts = @posts.where("title LIKE ? OR content LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
   end
 
-  @posts =@posts.page(params[:page]).per(5)
+  @posts =@posts.page(params[:page])
 end
 
    def new
@@ -25,7 +25,7 @@ end
     @post = Post.new(post_params)
     @post.user_id = Current.user.id
     if @post.save
-      redirect_to posts_path, notice: "知見（Q&A）を新しく投稿しました"
+      redirect_to posts_path, notice: "知見（Q&A）を新しく投稿しました。"
     else
       render :new, status: :unprocessable_entity
     end

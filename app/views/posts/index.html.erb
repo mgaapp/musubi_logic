@@ -2,7 +2,7 @@
   
   <div class="row mb-4">
     <div class="col-md-12">
-      <h2>申請ルールの知見共有（Q&A一覧）</h2>
+      <h2>申請ルールのQ&Aの共有</h2>
       <p>過去の質問と回答をここで確認できます。</p>
     </div>
   </div>
@@ -62,7 +62,7 @@
         <% if post.answer.present? && post.is_public? %>
           <p class="text-success fw-bold"><%= post.answer %></p>
         <% else %>
-          <p>※ まだ公式回答はありません。</p>
+          <span class="badge bg-secondary">回答待ち</span>
         <% end %>
       </div>
 
@@ -88,6 +88,7 @@
 
 <div class="col-md-12">
   <hr>
+  <div>
   <% end %>
   
   <div class="row">

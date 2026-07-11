@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-12">
       <h2>貯蔵品 個数編集・調整</h2>
-      <p class="text-muted">現在の登録内容を修正します。</p>
+      <p class="text-muted">現在の貯蔵品の登録内容を修正します。</p>
     </div>
   </div>
 
@@ -12,7 +12,7 @@
       <strong>メニュー操作:</strong>
     </div>
     <div class="col-md-9">
-      <%= link_to "在庫棚卸一覧に戻る", admin_inventories_path, class: "btn btn-outline-secondary" %>
+      <%= link_to "貯蔵品棚卸一覧に戻る", admin_inventories_path, class: "btn btn-outline-secondary" %>
     </div>
   </div>
 
@@ -56,7 +56,7 @@
 
     <div class="row mb-3 align-items-center">
       <div class="col-md-3 text-end text-primary fw-bold">
-        <%= f.label :stock_quantity, "修正後の個数（在庫数）:" %>
+        <%= f.label :stock_quantity, "修正後の個数:" %>
       </div>
       <div class="col-md-9">
         <%= f.number_field :stock_quantity, class: "form-control" %>

@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-12">
       <h2>【管理者用】経費申請詳細・精査</h2>
-      <p>提出された申請内容を精査し、「承認」または「差戻し」の決定を行ってください。</p>
+      <p>提出された申請内容の確認画面です。</p>
     </div>
   </div>
 
@@ -94,7 +94,7 @@
     <div class="col-md-9">
       <% if @request.image.attached? %>
         <div>
-          <%= link_to "🔍 領収書画像を別タブで拡大表示する", @request.image, target: "_blank", class: "btn btn-link btn-sm p-0 text-decoration-none" %>
+          <%= link_to "領収書画像を別タブで拡大表示する", @request.image, target: "_blank", class: "btn btn-link btn-sm p-0 text-decoration-none" %>
         </div>
         <div class="border rounded bg-light text-start p-2 d-inline-block" style="max-width: 100%;">
           <%= image_tag @request.image, class: "img-fluid rounded border" %>
@@ -115,14 +115,14 @@
     </div>
     <div class="col-md-9">
         <div class="d-flex align-items-center gap-2">
-          <%= form_with model: [:admin, @request], method: :patch, data: { turbo: false } do |f| %>      
+          <%= form_with model: [:admin, @request], method: :patch do |f| %>      
             <%= f.hidden_field :status, value: "承認済み" %>
-            <%= f.submit "承認する", class: "btn btn-success fw-bold", data: { confirm: "この申請を【承認】します。よろしいですか？" } %>      
+            <%= f.submit "承認する", class: "btn btn-success fw-bold", data: { turbo_confirm: "この申請を【承認】します。よろしいですか？" } %>      
           <% end %>
 
-          <%= form_with model: [:admin, @request], method: :patch, data: { turbo: false } do |f| %>
+          <%= form_with model: [:admin, @request], method: :patch do |f| %>
             <%= f.hidden_field :status, value: "差戻し" %>
-            <%= f.submit "差戻しする", class: "btn btn-danger fw-bold", data: { confirm: "この申請を【差戻し】します。よろしいですか？" } %>
+            <%= f.submit "差戻しする", class: "btn btn-danger fw-bold", data: { turbo_confirm: "この申請を【差戻し】します。よろしいですか？" } %>
           <% end %>
         </div>
 

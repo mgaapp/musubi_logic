@@ -11,7 +11,7 @@
       <strong>メニュー操作:</strong>
     </div>
     <div class="col-md-9">
-      <%= link_to "キャンセル（一覧に戻る）", admin_categories_path, class: "btn btn-outline-secondary" %>
+      <%= link_to "一覧に戻る", admin_categories_path, class: "btn btn-outline-secondary" %>
     </div>
   </div>
 
@@ -24,7 +24,7 @@
         <%= f.label :name, "カテゴリ名:" %>
       </div>
       <div class="col-md-9">
-        <%= f.text_field :name, placeholder: "アイテム名（例: 事務用ハサミ、ノートPCなど）を入力", class: "form-control" %>
+        <%= f.text_field :name, placeholder: "アイテム名（例: 文房具、ノートPCなど）を入力", class: "form-control" %>
       </div>
     </div>
 
@@ -33,7 +33,7 @@
         <%= f.label :account_item, "勘定科目:" %>
       </div>
       <div class="col-md-9">
-        <%= f.text_field :account_item, placeholder: "経理上の科目（例: 消耗品費、貯蔵品など）を入力", class: "form-control" %>
+        <%= f.text_field :account_item, placeholder: "経理上の勘定科目（例: 消耗品費、貯蔵品など）を入力", class: "form-control" %>
       </div>
     </div>
 

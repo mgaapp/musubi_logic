@@ -2,7 +2,7 @@
 
   <div class="row">
     <div class="col-md-12">
-      <h2>貯蔵品・在庫棚卸一覧</h2>
+      <h2>貯蔵品棚卸一覧</h2>
       <p class="text-muted">各拠点の在庫状況の確認や、手動での在庫調整が行えます。</p>
     </div>
   </div>
@@ -63,26 +63,27 @@
           <% @inventories.each do |inventory| %>
             <tr>
               <td class="text-center">
-                <span><%= inventory.request&.category&.name %></span>
-                <span>(ID: <%= inventory.id %>)</span>
+                <span><%= inventory.category_name %></span>
               </td>
               <td class="text-center"><%= inventory.location %></td>
               <td class="text-center"><%= inventory.vendor %></td>
               <td class="text-center"><%= number_to_currency(inventory.unit_price_excl_tax, unit: "円", format: "%n %u", precision: 0) %></td>
-              <td class="text-center"><%= inventory.stock_quantity %> 個</td>
+              <td class="text-center"><%= inventory.total_stock %> 個</td>
               <td class="text-center">
-                <% if inventory.stock_quantity.to_i > 0 %>
+                <% if inventory.total_stock.to_i > 0 %>
                   <span class="text-success fw-bold">在庫あり</span>
                 <% else %>
                   <span class="text-danger fw-bold">在庫なし</span>
                 <% end %>
               </td>
               <td class="text-center">
-                 
+                 <div class="mb-2">
                     <% if inventory.stock_quantity.to_i> 0 %>
                       <%= form_with url: admin_inventory_path(inventory, checkout: true), method: :patch, local: true, data: { turbo: false, confirm: "この貯蔵品を1個使用します。よろしいですか？" } do %>
                         <%= submit_tag "この在庫を使う", class: "btn btn-outline-danger" %>
-                      <% end %>
+               
+                        <% end %>
+
                     <% else %>
                       <button class="btn btn-secondary">在庫なし</button>
                     <% end %>

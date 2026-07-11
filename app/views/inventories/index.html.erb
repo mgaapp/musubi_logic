@@ -37,26 +37,31 @@
         <table class="table table-bordered"> 
           <thead class="table-light text-center">
             <tr>
-              <th class="text-center">品名</th>
-              <th class="text-center">保管場所</th>
-              <th class="text-center">購入先</th>
-              <th class="text-center">単価 (税抜)</th>
-              <th class="text-center">在庫数</th>
-              <th class="text-center">購入日</th>
-              <th class="text-center">>ステータス</th>
+              <th class="text-center text-nowrap">品名</th>
+              <th class="text-center text-nowrap">保管場所</th>
+              <th class="text-center text-nowrap">購入先</th>
+              <th class="text-center text-nowrap">単価 (税抜)</th>
+              <th class="text-center text-nowrap">在庫数</th>
+              <th class="text-center text-nowrap">購入日</th>
+              <th class="text-center text-nowrap">ステータス</th>
             </tr>
           </thead>
           
           <tbody class="text-center">
+           <tr>
             <% @inventories.each do |inventory| %>
-              <td class="text-center"><%= inventory.request&.category&.name %></strong></td>
+              <td class="text-center"><%= inventory.category_name %></td>
                  <td class="text-center"><%= inventory.location %></td>
                  <td class="text-center"><%= inventory.vendor %></td>
-                 <td class="text-center"><%= number_to_currency(inventory.unit_price_excl_tax, unit: "円", format: "%n%u", precision: 0) %></td>
-               <td class="text-center"><%= inventory.stock_quantity %> 個</td>
-                <td class="text-center"><%= inventory.purchase_date %></td>
+                <td class="text-center text-nowrap"><%= number_to_currency(inventory.unit_price_excl_tax, unit: "円", format: "%n%u", precision: 0) %></td>               <td class="text-center"><%= inventory.total_stock %> 個</td>
+                <td class="text-center text-nowrap""><%= inventory.purchase_date %></td>
+
                <td class="text-center">
-                  <span><%= inventory.status %></span>
+                <% if inventory.total_stock.to_i > 0 %>
+                    <span class="badge bg-success">在庫あり</span>
+                  <% else %>
+                    <span class="badge bg-secondary text-white">在庫なし</span>
+                  <% end %>
                 </td>
               </tr>
             <% end %>

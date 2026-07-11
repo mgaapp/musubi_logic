@@ -18,7 +18,7 @@ class Admin::RequestsController < ApplicationController
     if request_params[:status] == "承認済み"
       
       if @request.update(status: "承認済み")
-        if @request.category&.account_item == "貯蔵品"
+        if @request.category&.account_item == "貯蔵品（在庫連動）"
           inventory = Inventory.create!(
             request_id: @request.id, 
             location: @request.user.location,
@@ -35,7 +35,7 @@ class Admin::RequestsController < ApplicationController
             quantity: 1, 
             status: :fix
           )
-          @notice_message = "申請を承認し、貯蔵品棚卸表に反映しました！"
+          @notice_message = "申請を承認し、貯蔵品棚卸表に反映しました。"
 
         elsif @request.unit_price_excl_tax >= 100000
           Asset.create!(
@@ -49,7 +49,7 @@ class Admin::RequestsController < ApplicationController
             purchase_date: Date.today, 
             status: "稼働中"
           )
-          @notice_message = "申請を承認し、10万円以上のマスタとして固定資産台帳に自動登録しました！"
+          @notice_message = "申請を承認し、10万円以上のマスタとして固定資産台帳に自動登録しました。"
         else
           @notice_message = "申請を承認しました。"
         end
