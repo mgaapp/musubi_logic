@@ -90,8 +90,9 @@
         <div class="col-md-3"></div>
         <div class="col-md-9">  
           <%= link_to "一覧に戻る", requests_path, class: "btn btn-outline-secondary" %>
-          
-          <%= link_to "この申請を削除する", request_path(@request), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },class: "btn btn-outline-danger" %>
+          <%= form_with url: request_path(@request), method: :delete, local: true, data: { turbo_confirm: "申請を削除しますか？" }, class: "d-inline" do %>
+          <%= submit_tag "この申請を削除する", class: "btn btn-outline-danger" %>
+        <% end %>
         </div>
       </div>
 

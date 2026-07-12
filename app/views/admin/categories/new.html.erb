@@ -17,6 +17,16 @@
 
   <hr>
 
+  <% if @category.errors.any? %>
+    <div class="alert alert-danger">
+      <ul class="mb-0">
+        <% @category.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= form_with model: [:admin, @category] do |f| %>
     
     <div class="row mb-3 align-items-center">
@@ -33,7 +43,10 @@
         <%= f.label :account_item, "勘定科目:" %>
       </div>
       <div class="col-md-9">
-        <%= f.text_field :account_item, placeholder: "経理上の勘定科目（例: 消耗品費、貯蔵品など）を入力", class: "form-control" %>
+        <%= f.select :account_item, 
+                     Category::ACCOUNT_ITEMS, 
+                     { prompt: "--- 勘定科目を選択してください ---" }, 
+                     { class: "form-select" } %>
       </div>
     </div>
 

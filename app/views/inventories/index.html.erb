@@ -48,16 +48,23 @@
           </thead>
           
           <tbody class="text-center">
-           <tr>
             <% @inventories.each do |inventory| %>
-              <td class="text-center"><%= inventory.category_name %></td>
+              <tr>
+              <td class="text-center">
+              <% if inventory.request.present? %>
+                <span><%= inventory.request.category&.name %></span>
+              <% else %>
+                <span class="text-muted">-</span>
+              <% end %>
+            </td>
                  <td class="text-center"><%= inventory.location %></td>
                  <td class="text-center"><%= inventory.vendor %></td>
-                <td class="text-center text-nowrap"><%= number_to_currency(inventory.unit_price_excl_tax, unit: "円", format: "%n%u", precision: 0) %></td>               <td class="text-center"><%= inventory.total_stock %> 個</td>
-                <td class="text-center text-nowrap""><%= inventory.purchase_date %></td>
+                <td class="text-center text-nowrap"><%= number_to_currency(inventory.unit_price_excl_tax, unit: "円", format: "%n%u", precision: 0) %></td>
+                <td class="text-center"><%= inventory.stock_quantity %> 個</td>
+                <td class="text-center text-nowrap"><%= inventory.purchase_date %></td>
 
                <td class="text-center">
-                <% if inventory.total_stock.to_i > 0 %>
+                <% if inventory.stock_quantity.to_i > 0 %>
                     <span class="badge bg-success">在庫あり</span>
                   <% else %>
                     <span class="badge bg-secondary text-white">在庫なし</span>

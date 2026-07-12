@@ -43,7 +43,7 @@ class Admin::UsersController < ApplicationController
  private
 
   def authenticate_admin
-    if !authenticated? || !Current.user.admin?
+    if Current.user.nil? || !Current.user.admin?
       redirect_to root_path, alert: "管理者権限が必要です。"
     end
   end

@@ -42,13 +42,13 @@
             <% @assets.each do |asset| %>
               <tr>
                 <td class="text-center"><%= asset.id %></td>
-                <td class="text-center"><%= asset.request&.category&.name %></strong></td>
+                <td class="text-center"><%= asset.request&.category&.name %></td>
                 <td class="text-center"><%= asset.location %></td>
                 <td class="text-center"><%= number_to_currency(asset.acquisition_cost_excl, unit: "円", format: "%n%u", precision: 0) %></td>
                 <td class="text-center"><%= asset.useful_life_years %>年</td>
                 <td class="text-center"><%= asset.depreciation_method %></td>
                 <td class="text-center"><%= asset.service_start_date %></td>
-                <td class="text-center"><%= asset.purchase_date ? asset.purchase_date + 4.years : "未定" %></td>
+                <td class="text-center"><%= asset.depreciation_end_date ? asset.depreciation_end_date : "未定" %></td>
                 <td class="text-center"><%= asset.vendor %></td>
                 <td class="text-center"><%= asset.purchase_date %></td>
                 <td class="text-center">

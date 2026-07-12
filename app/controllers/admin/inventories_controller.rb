@@ -8,33 +8,23 @@ class Admin::InventoriesController < ApplicationController
   def create
     @inventory = Inventory.new(inventory_params)
     if @inventory.save
-     redirect_to inventories_path, notice: "貯蔵品を新しく登録しました。"
+     redirect_to admin_inventories_path, notice: "貯蔵品を新しく登録しました。"
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   def index
-    @inventories = Inventory.joins(request: :category)
-                            .select(
-                              "MAX(inventories.id) AS id",
-                              "categories.name AS category_name",
-                              "inventories.location AS location",
-                              "inventories.vendor AS vendor",
-                              "MAX(inventories.unit_price_excl_tax) AS unit_price_excl_tax", 
-                              "MAX(inventories.purchase_date) AS purchase_date",             
-                              "SUM(inventories.stock_quantity) AS total_stock",
-                              "SUM(inventories.stock_quantity) AS stock_quantity"
-                            )
-                            .group("categories.name", "inventories.location", "inventories.vendor", "inventories.unit_price_excl_tax")
+    @inventories = Inventory.includes(request: :category).order(stock_quantity: :desc, created_at: :desc)
 
     if params[:location].present?
-      @inventories = @inventories.where(inventories: { location: params[:location] })
+      @inventories = @inventories.where(location: params[:location])
     end
 
     if params[:keyword].present?
       keyword = "%#{params[:keyword]}%"
-      @inventories = @inventories.where(
+      
+      @inventories = @inventories.joins(request: :category).select("inventories.*").where(
         "inventories.location LIKE ? OR inventories.vendor LIKE ? OR categories.name LIKE ?", 
         keyword, keyword, keyword
       )
@@ -45,8 +35,9 @@ class Admin::InventoriesController < ApplicationController
     @inventory = Inventory.find(params[:id])
   end
 
-  def update
+def update
     @inventory = Inventory.find(params[:id])
+
     if params[:checkout] == "true"
       if @inventory.stock_quantity <= 0
         redirect_to admin_inventories_path, alert: "在庫がないため、これ以上使用できません。" and return

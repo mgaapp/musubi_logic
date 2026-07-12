@@ -79,7 +79,7 @@
       <strong>償却終了予定日:</strong>
     </div>
     <div class="col-md-9 mb-3">
-      <%= @asset.purchase_date ? @asset.purchase_date + 4.years : "未定" %>
+      <%= @asset.depreciation_end_date ? @asset.depreciation_end_date : "未定" %>
     </div>
 
     <div class="col-md-3 text-end text-primary">

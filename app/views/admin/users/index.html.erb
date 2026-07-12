@@ -48,7 +48,7 @@
               <td class="text-center"><%= user.email_address %></td>
               
               <td class="text-center">
-                <% if user.role == "admin" || user.role == "管理者" %>
+                <% if user.admin? %>
                   <span class="badge bg-danger">管理者</span>
                 <% else %>
                   <span class="badge bg-secondary">一般社員</span>

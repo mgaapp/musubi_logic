@@ -59,10 +59,10 @@
       権限:
     </div>
     <div class="col-md-9">
-      <% if @user.role == 'admin' || @user.role == '管理者' %>
-        <span class="badge bg-danger fs-6">管理者</span>
+      <% if @user.admin? %>
+        <span class="badge bg-danger">管理者</span>
       <% else %>
-        <span class="badge bg-secondary fs-6">一般社員</span>
+        <span class="badge bg-secondary">一般社員</span>
       <% end %>
     </div>
   </div>

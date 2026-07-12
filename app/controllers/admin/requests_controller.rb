@@ -6,10 +6,11 @@ class Admin::RequestsController < ApplicationController
   end
 
   def index
-    @requests = Request.all.order(created_at: :desc).page(params[:page])
+    @requests = Request.includes(:user, :category).order(created_at: :desc)
     if params[:status].present?
       @requests = @requests.where(status: params[:status])
     end
+    @requests = @requests.page(params[:page])
   end
 
   def update
@@ -69,7 +70,7 @@ end
   private
 
     def admin_user
-    if !Current.user.admin?
+    if !Current.user&.admin?
       redirect_to root_path, alert: "管理者権限が必要です。"
     end
   end

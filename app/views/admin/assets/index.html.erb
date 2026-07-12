@@ -24,6 +24,7 @@
         <thead class="table-light">
             <tr>
               <th class="text-center">資産ID</th>
+              <th class="text-center">品名</th>
               <th class="text-center">申請ID</th>
               <th class="text-center">拠点名</th>
               <th class="text-center">取得金額（税抜）</th>
@@ -48,7 +49,7 @@
                 <td class="text-center"><%= asset.useful_life_years %>年</td>
                 <td class="text-center"><%= asset.depreciation_method %></td>
                 <td class="text-center"><%= asset.service_start_date %></td>
-                <td class="text-center"><%= asset.purchase_date ? asset.purchase_date + 4.years : "未定" %></td>
+                <td class="text-center"><%= asset.depreciation_end_date ? asset.depreciation_end_date : "未定" %></td>
                 <td class="text-center"><%= asset.vendor %></td>
                 <td class="text-center"><%= asset.purchase_date %></td>
                 <td>

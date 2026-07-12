@@ -10,7 +10,7 @@ class Admin::CategoriesController < ApplicationController
     def create
       @category=Category.new(category_params)
       if @category.save
-        redirect_to root_path, notice: "勘定科目を追加しました"
+        redirect_to admin_categories_path, notice: "勘定科目を追加しました"
       else
         render :new, status: :unprocessable_entity
       end

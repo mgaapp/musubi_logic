@@ -1,19 +1,10 @@
 class InventoriesController < ApplicationController
   def index
-    @inventories = Inventory.joins(request: :category)
-                            .select(
-                              "categories.name AS category_name",
-                              "inventories.location AS location",
-                              "inventories.vendor AS vendor",
-                              "MAX(inventories.unit_price_excl_tax) AS unit_price_excl_tax", 
-                              "MAX(inventories.purchase_date) AS purchase_date",             
-                              "SUM(inventories.stock_quantity) AS total_stock"             
-                            )
-                            .group("categories.name", "inventories.location", "inventories.vendor", "inventories.unit_price_excl_tax")
+    @inventories = Inventory.includes(request: :category).order(stock_quantity: :desc, created_at: :desc)
 
     if params[:keyword].present?
       keyword = "%#{params[:keyword]}%"
-      @inventories = @inventories.where(
+      @inventories = @inventories.joins(request: :category).where(
         "inventories.location LIKE ? OR inventories.vendor LIKE ? OR categories.name LIKE ?", 
         keyword, keyword, keyword
       )

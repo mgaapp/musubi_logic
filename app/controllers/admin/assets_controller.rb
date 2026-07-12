@@ -1,6 +1,6 @@
 class Admin::AssetsController < ApplicationController
   def index
-    @assets = Asset.all
+    @assets = Asset.includes(request: :category).all
   end
 
   def show

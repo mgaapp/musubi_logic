@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :users, only: [ :show ]
   resources :inventories, only: [:index]
   resources :inventory_histories, only: [:create, :index]
-  resources :requests, only: [:index, :show, :new, :create]
+  resources :requests, only: [:index, :show, :new, :create, :destroy]
   resources :posts
   resources :assets, only: [:index]
   namespace :admin do
