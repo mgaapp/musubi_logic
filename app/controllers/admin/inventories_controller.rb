@@ -7,6 +7,7 @@ class Admin::InventoriesController < ApplicationController
 
   def create
     @inventory = Inventory.new(inventory_params)
+    @inventory.status = "在庫あり"
     if @inventory.save
      redirect_to admin_inventories_path, notice: "貯蔵品を新しく登録しました。"
     else
@@ -65,6 +66,6 @@ def update
   private
 
   def inventory_params
-    params.require(:inventory).permit(:request_id, :location, :unit_price_excl_tax, :stock_quantity, :vendor, :purchase_date, :status)
+    params.require(:inventory).permit(:request_id, :location, :unit_price_excl_tax, :stock_quantity, :vendor, :purchase_date, :status, :name)
   end
 end

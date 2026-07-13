@@ -1,8 +1,24 @@
-<h1>Forgot your password?</h1>
+<div class="container">
+    <div class="col-md-6">
+        <div>
+          <h2 class="text-center text-primary fw-bold">パスワードを忘れた方</h2>
+          <p class="text-muted text-center">登録されているメールアドレスを入力してください。再設定用のリンクをお送りします。</p>
 
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+          <%= tag.div(flash[:alert], class: "alert alert-danger mb-3") if flash[:alert] %>
 
-<%= form_with url: passwords_path do |form| %>
-  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
-  <%= form.submit "Email reset instructions" %>
-<% end %>
+          <%= form_with url: passwords_path do |form| %>
+            <div class="mb-3">
+              <%= form.label :email_address, "メールアドレス", class: "form-label fw-bold" %>
+              <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "example@example.com", class: "form-control" %>
+            </div>
+
+            <div class="d-grid gap-2">
+              <%= form.submit "再設定メールを送信する", class: "btn btn-primary py-2" %>
+              <%= link_to "ログイン画面に戻る", new_session_path, class: "btn btn-outline-secondary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

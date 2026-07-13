@@ -20,20 +20,20 @@
   <%= form_with model: [:admin, @inventory] do |f| %>
     
     <div class="row mb-3 align-items-center">
-      <div class="col-md-3 text-end text-primary fw-bold">
-        <%= f.label :request_id, "申請ID:" %>
-      </div>
-      <div class="col-md-9">
-        <%= f.number_field :request_id, class: "form-control" %>
-      </div>
+    <div class="col-md-3 text-end text-primary fw-bold">
+      <%= f.label :name, "品名:" %>
     </div>
+    <div class="col-md-9">
+      <%= f.text_field :name, class: "form-control", placeholder: "例：コピー用紙 A4" %>
+    </div>
+  </div>
 
     <div class="row mb-3 align-items-center">
       <div class="col-md-3 text-end text-primary fw-bold">
         <%= f.label :location, "拠点名:" %>
       </div>
       <div class="col-md-9">
-        <%= f.text_field :location, placeholder: "東京本社、大阪支店など", class: "form-control" %>
+        <%= f.select :location, [["本社", "本社"], ["大阪支店", "大阪支店"]], { prompt: "拠点を選択してください" }, class: "form-select" %>
       </div>
     </div>
 
@@ -70,15 +70,6 @@
       </div>
       <div class="col-md-9">
         <%= f.date_field :purchase_date, class: "form-control" %>
-      </div>
-    </div>
-
-    <div class="row mb-4 align-items-center">
-      <div class="col-md-3 text-end text-primary fw-bold">
-        <%= f.label :status, "入出庫ステータス:" %>
-      </div>
-      <div class="col-md-9">
-        <%= f.select :status, [["入庫済", "in_stock"], ["出庫済", "out_of_stock"]], {}, class: "form-select" %>
       </div>
     </div>
 

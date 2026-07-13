@@ -34,9 +34,8 @@ end
     @post = Post.find(params[:id])
     if @post.update(post_params)
       redirect_to posts_path, notice: "公式回答を登録・回答しました"
-    else
-      @posts = Post.all
-      render :index, status: :unprocessable_entity
+      else
+      redirect_to posts_path, alert: "回答の保存に失敗しました。入力内容を確認してください。"
     end
   end
  private

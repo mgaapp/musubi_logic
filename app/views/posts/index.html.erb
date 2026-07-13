@@ -81,18 +81,17 @@
               <%= form.label :is_public, "この公式回答を一般社員に公開する", for: "public_check_#{post.id}" %>
             </div>
 
-            <%= form.submit "回答を保存する", class: "btn btn-success" %>
+            <%= form.submit "回答を保存する", class: "btn btn-sm btn-success" %>
           <% end %>
         </div>
       <% end %>
 
-<div class="col-md-12">
-  <hr>
-  <div>
+    </div>
+    <hr>
   <% end %>
   
-  <div class="row">
-    <div>
+  <div class="row mt-4">
+    <div class="col-md-12 d-flex justify-content-center">
       <%= paginate @posts %>
     </div>
   </div>

@@ -60,15 +60,15 @@
           </tr>
         </thead>
         <tbody>
-          <% @inventories.each do |inventory| %>
-            <tr>
-              <td class="text-center">
-                <% if inventory.request.present? %>
-                <span><%= inventory.request.category&.name %></span>
-              <% else %>
-                <span class="text-muted">-</span>
-              <% end %>
-             </td>
+  <% @inventories.each do |inventory| %>
+    <tr>
+      <td class="text-center">
+        <% if inventory.request.present? %>
+          <span><%= inventory.request.category&.name %></span>
+        <% else %>
+          <span><%= inventory.name %></span>
+        <% end %>
+      </td>
               <td class="text-center"><%= inventory.location %></td>
               <td class="text-center"><%= inventory.vendor %></td>
               <td class="text-center"><%= number_to_currency(inventory.unit_price_excl_tax, unit: "円", format: "%n %u", precision: 0) %></td>

@@ -38,8 +38,6 @@ module Authentication
       session.delete(:return_to_after_authenticating) || root_path
     end
 
-    end
-
     def start_new_session_for(user)
       user.sessions.create!(user_agent: request.user_agent, ip_address: request.remote_ip).tap do |session|
         Current.session = session
@@ -51,4 +49,4 @@ module Authentication
       Current.session.destroy
       cookies.delete(:session_id)
     end
-
+ end
