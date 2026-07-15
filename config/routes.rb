@@ -1,13 +1,7 @@
 Rails.application.routes.draw do
-  namespace :public do
-    get "requests/index"
-    get "requests/show"
-    get "requests/new"
-  end
   resource :session
   resources :passwords, param: :token
   root to: "homes#top"
-  get "/homes/about" => "homes#about", as: "about"
   resources :users, only: [ :show ]
   resources :inventories, only: [:index]
   resources :inventory_histories, only: [:create, :index]
