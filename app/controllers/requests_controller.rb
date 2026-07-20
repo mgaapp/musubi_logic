@@ -1,5 +1,4 @@
 class RequestsController < ApplicationController
-
   def index
     @requests = Current.user.requests.includes(:category).order(created_at: :desc).page(params[:page])
   end
@@ -23,17 +22,17 @@ class RequestsController < ApplicationController
     tax_rate = @request.tax_rate || 0
 
     @request.total_amount_incl_tax = (price * quantity * (1 + tax_rate / 100.0)).floor
-    
+
     if @request.save
-      redirect_to requests_path, notice: "経費申請を提出しました。"  
+      redirect_to requests_path, notice: "経費申請を提出しました。"
     else
       render :new, status: :unprocessable_entity
     end
-  end 
+  end
 
   def destroy
     @request = Current.user.requests.find(params[:id])
-    
+
     if @request.status == "approved" || @request.status == "承認" || @request.status == "承認済み"
       redirect_to requests_path, alert: "承認済みの申請は削除できません。"
     else
@@ -41,7 +40,6 @@ class RequestsController < ApplicationController
       redirect_to requests_path, notice: "申請を削除しました。"
     end
   end
-
 
   private
 

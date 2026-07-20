@@ -28,7 +28,7 @@
   <% end %>
 
   <%= form_with model: [:admin, @category] do |f| %>
-    
+
     <div class="row mb-3 align-items-center">
       <div class="col-md-3 text-end text-primary fw-bold">
         <%= f.label :name, "カテゴリ名:" %>
@@ -43,15 +43,16 @@
         <%= f.label :account_item, "勘定科目:" %>
       </div>
       <div class="col-md-9">
-        <%= f.select :account_item, 
-                     Category::ACCOUNT_ITEMS, 
-                     { prompt: "--- 勘定科目を選択してください ---" }, 
+        <%= f.select :account_item,
+                     Category::ACCOUNT_ITEMS,
+                     { prompt: "--- 勘定科目を選択してください ---" },
                      { class: "form-select" } %>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-9 offset-md-3"> <%= f.submit "登録する", class: "btn btn-primary" %>
+      <div class="col-md-9 offset-md-3">
+        <%= f.submit "登録する", class: "btn btn-primary" %>
       </div>
     </div>
 

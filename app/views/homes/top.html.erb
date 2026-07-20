@@ -1,6 +1,6 @@
 <% if authenticated? %>
   <div class="container"> 
-   <div class="row mb-5">
+    <div class="row mb-5">
       <div class="col-md-12">
         <h2><%= Current.user&.admin? ? "管理者メニュー" : "一般社員用メニュー" %></h2>
       </div>
@@ -10,28 +10,28 @@
 
       <% if Current.user&.admin? %>
         <div class="row mb-4">
-        <div class="col-md-3 text-end text-primary fw-bold fs-5">承認・精査:</div>
-        <div class="col-md-9">
-          <%= link_to "届いた経費申請を精査する", admin_requests_path, class: "btn btn-primary px-4" %>
+          <div class="col-md-3 text-end text-primary fw-bold fs-5">承認・精査:</div>
+          <div class="col-md-9">
+            <%= link_to "届いた経費申請を精査する", admin_requests_path, class: "btn btn-primary px-4" %>
+          </div>
         </div>
-      </div>
 
         <div class="row align-items-center mb-4">
-        <div class="col-md-3 text-end text-primary fw-bold fs-5">貯蔵品在庫管理:</div>
-        <div class="col-md-9">
-          <%= link_to "貯蔵品を探す・買う（棚卸一覧）", admin_inventories_path, class: "btn btn-primary px-4 py-2" %>
-          <%= link_to "貯蔵品の入出庫・調整履歴を見る", admin_inventory_histories_path, class: "btn btn-outline-secondary px-4 py-2" %>
+          <div class="col-md-3 text-end text-primary fw-bold fs-5">貯蔵品在庫管理:</div>
+          <div class="col-md-9">
+            <%= link_to "貯蔵品を探す・買う（棚卸一覧）", admin_inventories_path, class: "btn btn-primary px-4 py-2" %>
+            <%= link_to "貯蔵品の入出庫・調整履歴を見る", admin_inventory_histories_path, class: "btn btn-outline-secondary px-4 py-2" %>
+          </div>
         </div>
-      </div>
 
-      <div class="row align-items-center mb-4">
-        <div class="col-md-3 text-end text-primary fw-bold fs-5">資産管理:</div>
-        <div class="col-md-9">
-          <%= link_to "固定資産台帳（管理）", admin_assets_path, class: "btn btn-primary px-4 py-2" %>
+        <div class="row align-items-center mb-4">
+          <div class="col-md-3 text-end text-primary fw-bold fs-5">資産管理:</div>
+          <div class="col-md-9">
+            <%= link_to "固定資産台帳（管理）", admin_assets_path, class: "btn btn-primary px-4 py-2" %>
+          </div>
         </div>
-      </div>
 
-      <div class="row align-items-center mb-4">
+        <div class="row align-items-center mb-4">
           <div class="col-md-3 text-end text-primary fw-bold fs-5">マスタ管理:</div>
           <div class="col-md-9">
             <%= link_to "勘定科目・カテゴリ一覧", admin_categories_path, class: "btn btn-primary px-4 py-2" %>
@@ -45,50 +45,48 @@
           </div>
         </div>
 
-      <div class="row align-items-center mb-4">
-        <div class="col-md-3 text-end text-primary fw-bold fs-5">Q&Aコミュニティ:</div>
-        <div class="col-md-9">
-          <%= link_to "Q&Aの回答・管理をする", posts_path, class: "btn btn-primary px-4 py-2 shadow-sm" %>
+        <div class="row align-items-center mb-4">
+          <div class="col-md-3 text-end text-primary fw-bold fs-5">Q&Aコミュニティ:</div>
+          <div class="col-md-9">
+            <%= link_to "Q&Aの回答・管理をする", posts_path, class: "btn btn-primary px-4 py-2 shadow-sm" %>
+          </div>
         </div>
-      </div>
-  
-<% else %> 
-      <div class="row align-items-center mb-4">
-        <div class="col-md-3 text-end text-primary fw-bold fs-5">経費精算:</div>
-        <div class="col-md-9">
-          <%= link_to "新しく経費申請をする", new_request_path, class: "btn btn-primary" %>
-          <%= link_to "自分の申請履歴を見る", requests_path, class: "btn btn-outline-secondary" %>
+      <% else %> 
+        <div class="row align-items-center mb-4">
+          <div class="col-md-3 text-end text-primary fw-bold fs-5">経費精算:</div>
+          <div class="col-md-9">
+            <%= link_to "新しく経費申請をする", new_request_path, class: "btn btn-primary" %>
+            <%= link_to "自分の申請履歴を見る", requests_path, class: "btn btn-outline-secondary" %>
+          </div>
         </div>
-      </div>
 
-      <div class="row align-items-center mb-4">
-        <div class="col-md-3 text-end text-primary fw-bold fs-5">貯蔵品:</div>
-        <div class="col-md-9">
-          <%= link_to "貯蔵品を探す（棚卸一覧）", inventories_path, class: "btn btn-primary" %>
-          <%= link_to "貯蔵品の入出庫履歴を見る", inventory_histories_path, class: "btn btn-outline-secondary px-4 py-2 ms-2" %>
+        <div class="row align-items-center mb-4">
+          <div class="col-md-3 text-end text-primary fw-bold fs-5">貯蔵品:</div>
+          <div class="col-md-9">
+            <%= link_to "貯蔵品を探す（棚卸一覧）", inventories_path, class: "btn btn-primary" %>
+            <%= link_to "貯蔵品の入出庫履歴を見る", inventory_histories_path, class: "btn btn-outline-secondary px-4 py-2 ms-2" %>
+          </div>
         </div>
-      </div>
 
-      <div class="row align-items-center mb-4">
-        <div class="col-md-3 text-end text-primary fw-bold fs-5">固定資産:</div>
-        <div class="col-md-9">
-          <%= link_to "固定資産一覧を見る", assets_path, class: "btn btn-primary" %>
+        <div class="row align-items-center mb-4">
+          <div class="col-md-3 text-end text-primary fw-bold fs-5">固定資産:</div>
+          <div class="col-md-9">
+            <%= link_to "固定資産一覧を見る", assets_path, class: "btn btn-primary" %>
+          </div>
         </div>
-      </div>
 
-      <div class="row align-items-center mb-4">
-        <div class="col-md-3 text-end text-primary fw-bold fs-5">Q&Aコミュニティ:</div>
-        <div class="col-md-9">
-          <%= link_to "Q&Aを見る", posts_path, class: "btn btn-primary" %>
+        <div class="row align-items-center mb-4">
+          <div class="col-md-3 text-end text-primary fw-bold fs-5">Q&Aコミュニティ:</div>
+          <div class="col-md-9">
+            <%= link_to "Q&Aを見る", posts_path, class: "btn btn-primary" %>
+          </div>
         </div>
-      </div>
+      <% end %>
 
-    <% end %>
-     </div> 
-     </div>
-      <% else %>
-      
- <div class="container">
+    </div> 
+  </div>
+<% else %>
+  <div class="container">
     <div class="p-5 mb-4 bg-light rounded-3">
       <h1 class="fw-bold text-primary">Musubi Logic</h1>
       <p class="text-muted">経費・物品（貯蔵品）・資産・知見を繋ぐ、バックオフィス一元化プラットフォーム</p>

@@ -18,7 +18,7 @@
     </div>
   <% end %>
 
-   <div class="row">
+  <div class="row">
     <div class="col-md-3"></div> 
     <div class="col-md-9"> 
       <div class="p-3 bg-warning bg-opacity-10 rounded border">
@@ -29,7 +29,9 @@
     </div>
   </div>
 
-  <hr> <%= form_with model: @request, url: requests_path, local: true do |f| %>
+  <hr>
+
+  <%= form_with model: @request, url: requests_path, local: true do |f| %>
     <div class="row">
 
       <div class="col-md-3 text-end text-primary mb-3">
@@ -83,12 +85,13 @@
 
       <%= f.hidden_field :status, value: "申請中" %>
 
-<div class="col-md-3">
-</div>
-<div class="col-md-9 mt-3">  
-<%= f.submit "申請を提出する", class: "btn btn-primary" %>
-<%= link_to "戻る", root_path, class: "btn btn-outline-secondary" %>
-</div>
+      <div class="col-md-3"></div>
+      <div class="col-md-9 mt-3">  
+        <%= f.submit "申請を提出する", class: "btn btn-primary" %>
+        <%= link_to "戻る", root_path, class: "btn btn-outline-secondary" %>
+      </div>
 
+    </div>
   <% end %>
+
 </div>

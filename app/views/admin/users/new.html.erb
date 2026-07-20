@@ -23,9 +23,9 @@
       <div class="col-md-9">
         <div class="alert alert-danger">
           <h5><%= @user.errors.count %>件のエラーが発生しました</h5>
-            <% @user.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
         </div>
       </div>
     </div>

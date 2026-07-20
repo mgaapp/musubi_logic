@@ -79,8 +79,8 @@
         <%= link_to "この情報を編集する", edit_admin_user_path(@user), class: "btn btn-primary fw-bold" %>
         
         <% if @user != Current.user %>
-          <%= link_to "アカウントを削除する", admin_user_path(@user), 
-                      data: { turbo_method: :delete, turbo_confirm: "本当にこの社員アカウントを削除しますか？\n（この操作は取り消せません）" }, 
+          <%= link_to "アカウントを削除する", admin_user_path(@user),
+                      data: { turbo_method: :delete, turbo_confirm: "本当にこの社員アカウントを削除しますか？\n（この操作は取り消せません）" },
                       class: "btn btn-danger fw-bold" %>
         <% end %>
 

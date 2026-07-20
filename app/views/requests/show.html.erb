@@ -9,9 +9,8 @@
 
   <hr>
 
-  
   <div class="row">
-    <div>
+    <div class="col-md-12">
 
       <div class="row mb-3 align-items-center">
         <div class="col-md-3 text-end text-primary fw-bold">ステータス:</div>
@@ -91,11 +90,12 @@
         <div class="col-md-9">  
           <%= link_to "一覧に戻る", requests_path, class: "btn btn-outline-secondary" %>
           <%= form_with url: request_path(@request), method: :delete, local: true, data: { turbo_confirm: "申請を削除しますか？" }, class: "d-inline" do %>
-          <%= submit_tag "この申請を削除する", class: "btn btn-outline-danger" %>
-        <% end %>
+            <%= submit_tag "この申請を削除する", class: "btn btn-outline-danger" %>
+          <% end %>
         </div>
       </div>
 
     </div>
   </div>
+
 </div>

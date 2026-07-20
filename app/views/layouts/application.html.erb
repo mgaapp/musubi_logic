@@ -2,7 +2,7 @@
 <html>
   <head>
     <title><%= content_for(:title) || "Musubi Logic" %></title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -25,26 +25,26 @@
     <%= javascript_importmap_tags %>
   </head>
 
-<body>
-  <header class="main-header align-items-center">
-    
-    <%= link_to "Musubi Logic", root_path, class: "header-logo fw-bold text-white fs-4" %>
+  <body>
+    <header class="main-header align-items-center">
+      <%= link_to "Musubi Logic", root_path, class: "header-logo fw-bold text-white fs-4" %>
 
-    <nav class="d-flex align-items-center gap-4">
-      <% if authenticated? %>
-        <%= link_to "マイページ", user_path(Current.user), class: "text-white fw-bold text-decoration-none" %>
-        <%= link_to "ログアウト", session_path, data: { turbo_method: :delete }, class: "btn btn-dark fw-bold" %> 
-      <% else %>
-        <%= link_to "サインイン", new_session_path, class: "text-white fw-bold text-decoration-none" %>
+      <nav class="d-flex align-items-center gap-4">
+        <% if authenticated? %>
+          <%= link_to "マイページ", user_path(Current.user), class: "text-white fw-bold text-decoration-none" %>
+          <%= link_to "ログアウト", session_path, data: { turbo_method: :delete }, class: "btn btn-dark fw-bold" %> 
+        <% else %>
+          <%= link_to "サインイン", new_session_path, class: "text-white fw-bold text-decoration-none" %>
+        <% end %>
+      </nav>
+    </header>
+
+    <main>
+      <% flash.each do |message_type, message| %>
+        <div class="flash-message <%= message_type %>"><%= message %></div>
       <% end %>
-    </nav>
-  </header>
 
-  <main>
-    <% flash.each do |message_type, message| %>
-      <div class="flash-message <%= message_type %>"><%= message %></div>
-    <% end %>
-    <%= yield %>
-  </main>
-</body>
+      <%= yield %>
+    </main>
+  </body>
 </html>

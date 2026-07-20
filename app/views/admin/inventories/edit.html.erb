@@ -1,31 +1,33 @@
-<div class="container">
+<div class="container my-4">
 
-  <div class="row">
+  <div class="row mb-3">
     <div class="col-md-12">
       <h2>貯蔵品 個数編集・調整</h2>
       <p class="text-muted">現在の貯蔵品の登録内容を修正します。</p>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-3 text-end text-primary">
-      <strong>メニュー操作:</strong>
+  <div class="row mb-3 align-items-center">
+    <div class="col-md-3 text-md-end text-primary fw-bold">
+      メニュー操作:
     </div>
     <div class="col-md-9">
       <%= link_to "貯蔵品棚卸一覧に戻る", admin_inventories_path, class: "btn btn-outline-secondary" %>
     </div>
   </div>
 
-  <hr>
+  <hr class="my-4">
 
   <% if @inventory.errors.any? %>
-    <div class="row">
-      <div class="col-md-9">
-        <div class="alert alert-danger">
-          <h5 class="fw-bold"><%= @inventory.errors.count %>件のエラーが発生しました</h5>
+    <div class="row mb-3">
+      <div class="col-md-9 offset-md-3">
+        <div class="alert alert-danger mb-0">
+          <h5 class="fw-bold alert-heading"><%= @inventory.errors.count %>件のエラーが発生しました</h5>
+          <ul class="mb-0">
             <% @inventory.errors.full_messages.each do |message| %>
               <li><%= message %></li>
             <% end %>
+          </ul>
         </div>
       </div>
     </div>
@@ -34,17 +36,17 @@
   <%= form_with model: [:admin, @inventory] do |f| %>
     
     <div class="row mb-3">
-      <div class="col-md-3 text-end text-primary fw-bold">
+      <div class="col-md-3 text-md-end text-primary fw-bold">
         現在の対象物品:
       </div>
       <div class="col-md-9">
         <%= @inventory.vendor %>
-        <span>(単価: <%= number_to_currency(@inventory.unit_price_excl_tax, unit: "円", format: "%n %u", precision: 0) %>)</span>
+        <span class="text-muted ms-2">(単価: <%= number_to_currency(@inventory.unit_price_excl_tax, unit: "円", format: "%n %u", precision: 0) %>)</span>
       </div>
     </div>
 
     <div class="row mb-4">
-      <div class="col-md-3 text-end text-primary fw-bold">
+      <div class="col-md-3 text-md-end text-primary fw-bold">
         保管場所（拠点）:
       </div>
       <div class="col-md-9">
@@ -52,29 +54,25 @@
       </div>
     </div>
 
-    <hr>
+    <hr class="my-4">
 
     <div class="row mb-3 align-items-center">
-      <div class="col-md-3 text-end text-primary fw-bold">
-        <%= f.label :stock_quantity, "修正後の個数:" %>
-      </div>
-      <div class="col-md-9">
+      <%= f.label :stock_quantity, "修正後の個数:", class: "col-md-3 col-form-label text-md-end text-primary fw-bold" %>
+      <div class="col-md-4">
         <%= f.number_field :stock_quantity, class: "form-control" %>
       </div>
     </div>
 
     <div class="row mb-4 align-items-center">
-      <div class="col-md-3 text-end text-primary fw-bold">
-        <%= f.label :status, "修正理由・ステータス:" %>
-      </div>
-      <div class="col-md-9">
+      <%= f.label :status, "修正理由・ステータス:", class: "col-md-3 col-form-label text-md-end text-primary fw-bold" %>
+      <div class="col-md-6">
         <%= f.select :status, [["在庫微調整（入庫）", "in_stock"], ["棚卸過不足（出庫等）", "out_of_stock"]], {}, class: "form-select" %>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-9 offset-md-3">
-        <%= f.submit "更新する", class: "btn btn-primary" %>
+        <%= f.submit "更新する", class: "btn btn-primary px-4" %>
       </div>
     </div>
 

@@ -7,4 +7,3 @@ class Admin::InventoryHistoriesController < ApplicationController
                                            .page(params[:page])
   end
 end
-

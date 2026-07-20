@@ -12,6 +12,7 @@
           <%= flash[:alert] %>
         </div>
       <% end %>
+
       <% if flash[:notice] %>
         <div class="alert alert-success text-center" role="alert">
           <%= flash[:notice] %>
@@ -22,21 +23,21 @@
         
         <div class="mb-3">
           <%= form.label :email_address, "メールアドレス", class: "form-label fw-bold" %>
-          <%= form.email_field :email_address, 
-                               required: true, 
-                               autofocus: true, 
-                               autocomplete: "username", 
-                               placeholder: "example@musubi-logic.com", 
+          <%= form.email_field :email_address,
+                               required: true,
+                               autofocus: true,
+                               autocomplete: "username",
+                               placeholder: "example@musubi-logic.com",
                                value: params[:email_address],
                                class: "form-control" %>
         </div>
 
         <div class="mb-3">
           <%= form.label :password, "パスワード", class: "form-label fw-bold" %>
-          <%= form.password_field :password, 
-                                  required: true, 
-                                  autocomplete: "current-password", 
-                                  placeholder: "パスワードを入力してください", 
+          <%= form.password_field :password,
+                                  required: true,
+                                  autocomplete: "current-password",
+                                  placeholder: "パスワードを入力してください",
                                   maxlength: 72,
                                   class: "form-control" %>
         </div>

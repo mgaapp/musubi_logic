@@ -1,25 +1,25 @@
 class PostsController < ApplicationController
- before_action :admin_user, only: [:update]
-  
+  before_action :admin_user, only: [:update]
+
   def index
     if params[:filter] == "unanswered"
       @posts = Post.where(answer: [nil, ""]).or(Post.where(is_public: false))
     elsif params[:filter] == "answered"
       @posts = Post.where.not(answer: [nil, ""]).where(is_public: true)
     else
-    @posts = Post.all 
+      @posts = Post.all
+    end
+
+    if params[:search].present?
+      @posts = @posts.where("title LIKE ? OR content LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+    end
+
+    @posts = @posts.page(params[:page])
   end
 
-  if params[:search].present?
-    @posts = @posts.where("title LIKE ? OR content LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
-  end
-
-  @posts =@posts.page(params[:page])
-end
-
-   def new
+  def new
     @post = Post.new
-   end
+  end
 
   def create
     @post = Post.new(post_params)
@@ -29,24 +29,26 @@ end
     else
       render :new, status: :unprocessable_entity
     end
- end
+  end
+
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
       redirect_to posts_path, notice: "公式回答を登録・回答しました"
-      else
+    else
       redirect_to posts_path, alert: "回答の保存に失敗しました。入力内容を確認してください。"
     end
   end
- private
 
- def admin_user
-  if Current.user.nil? || !Current.user.admin?
-    redirect_to root_path, alert: "管理者専用の機能です。アクセス権限がありません。"
+  private
+
+  def admin_user
+    if Current.user.nil? || !Current.user.admin?
+      redirect_to root_path, alert: "管理者専用の機能です。アクセス権限がありません。"
+    end
   end
-end
 
- def post_params
-   params.require(:post).permit(:title, :content, :answer, :is_public)
- end
+  def post_params
+    params.require(:post).permit(:title, :content, :answer, :is_public)
+  end
 end

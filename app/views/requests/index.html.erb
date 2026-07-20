@@ -1,67 +1,81 @@
 <div class="container">
 
-  <div>
-    <h2 class="fw-bold">提出済みの申請一覧</h2>
-    <p>提出した申請の確認や、現在の状況を一覧でチェックできます。</p>
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <h2 class="fw-bold">提出済みの申請一覧</h2>
+      <p class="text-muted">提出した申請の確認や、現在の状況を一覧でチェックできます。</p>
+    </div>
   </div>
   
-  <div class="mb-4">
-    <%= link_to "新しく経費申請をする", new_request_path, class: "btn btn-primary fw-bold" %>
-    <%= link_to "メニューに戻る", root_path, class: "btn btn-outline-secondary" %>
+  <div class="row mb-4">
+    <div class="col-md-3 text-end text-primary fw-bold">
+      メニュー操作:
+    </div>
+    <div class="col-md-9">
+      <%= link_to "新しく経費申請をする", new_request_path, class: "btn btn-primary fw-bold" %>
+      <%= link_to "メニューに戻る", root_path, class: "btn btn-outline-secondary" %>
+    </div>
   </div>
 
-  <div>
-    <table class="table table-bordered">
-      <thead class="table-light text-center">
-        <tr>
-          <th>申請日</th>
-          <th>カテゴリ</th>
-          <th>購入先</th>
-          <th>税込金額</th>
-          <th>ステータス</th>
-          <th>操作</th>
-        </tr>
-      </thead>
-      
-      <tbody class="text-center">
-        <% @requests.each do |request| %>
+  <hr>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered">
+        <thead class="table-light text-center">
           <tr>
-            <td class="text-center">
-              <%= request.applied_at %>
-            </td>
-
-            <td class="text-center">
-              <%= request.category&.name %>
-            </td>
-            
-            <td class="text-center">
-              <%= request.vendor %>
-            </td>
-
-            <td class="text-center">
-              <%= number_to_currency(request.total_amount_incl_tax, unit: "円", format: "%n%u", precision: 0) %>
-            </td>
-            
-            <td class="text-center">
-              <% if request.status == "approved" || request.status == "承認" || request.status == "承認済み" %>
-                <span class="fw-bold text-success">承認済み</span>
-              <% elsif request.status == "rejected" || request.status == "差し戻し" %>
-                <span class="fw-bold text-danger">差し戻し</span>
-              <% else %>
-                <span class="fw-bold text-warning">申請中</span>
-              <% end %>
-            </td>
- 
-            <td>
-              <%= link_to "確認", request_path(request), class: "btn btn-outline-primary" %>
-            </td>
+            <th class="text-center">申請日</th>
+            <th class="text-center">カテゴリ</th>
+            <th class="text-center">購入先</th>
+            <th class="text-center">税込金額</th>
+            <th class="text-center">ステータス</th>
+            <th class="text-center">操作</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        
+        <tbody class="text-center">
+          <% @requests.each do |request| %>
+            <tr>
+              <td class="text-center">
+                <%= request.applied_at %>
+              </td>
+
+              <td class="text-center">
+                <%= request.category&.name %>
+              </td>
+              
+              <td class="text-center">
+                <%= request.vendor %>
+              </td>
+
+              <td class="text-center">
+                <%= number_to_currency(request.total_amount_incl_tax, unit: "円", format: "%n%u", precision: 0) %>
+              </td>
+              
+              <td class="text-center">
+                <% if request.status == "approved" || request.status == "承認" || request.status == "承認済み" %>
+                  <span class="fw-bold text-success">承認済み</span>
+                <% elsif request.status == "rejected" || request.status == "差し戻し" %>
+                  <span class="fw-bold text-danger">差し戻し</span>
+                <% else %>
+                  <span class="fw-bold text-warning">申請中</span>
+                <% end %>
+              </td>
+   
+              <td class="text-center">
+                <%= link_to "確認", request_path(request), class: "btn btn-outline-primary" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <div class="d-flex justify-content-center">
-    <%= paginate @requests %>
+  <div class="row mt-4">
+    <div class="col-md-12 d-flex justify-content-center">
+      <%= paginate @requests %>
+    </div>
   </div>
+
 </div>

@@ -1,5 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_admin
+
   def index
     @users = User.all
   end
@@ -40,7 +41,7 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_path, notice: "社員「#{@user.name}」さんを削除しました。"
   end
 
- private
+  private
 
   def authenticate_admin
     if Current.user.nil? || !Current.user.admin?

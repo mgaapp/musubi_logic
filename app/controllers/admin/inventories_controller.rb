@@ -9,7 +9,7 @@ class Admin::InventoriesController < ApplicationController
     @inventory = Inventory.new(inventory_params)
     @inventory.status = "在庫あり"
     if @inventory.save
-     redirect_to admin_inventories_path, notice: "貯蔵品を新しく登録しました。"
+      redirect_to admin_inventories_path, notice: "貯蔵品を新しく登録しました。"
     else
       render :new, status: :unprocessable_entity
     end
@@ -24,9 +24,9 @@ class Admin::InventoriesController < ApplicationController
 
     if params[:keyword].present?
       keyword = "%#{params[:keyword]}%"
-      
+
       @inventories = @inventories.joins(request: :category).select("inventories.*").where(
-        "inventories.location LIKE ? OR inventories.vendor LIKE ? OR categories.name LIKE ?", 
+        "inventories.location LIKE ? OR inventories.vendor LIKE ? OR categories.name LIKE ?",
         keyword, keyword, keyword
       )
     end
@@ -36,7 +36,7 @@ class Admin::InventoriesController < ApplicationController
     @inventory = Inventory.find(params[:id])
   end
 
-def update
+  def update
     @inventory = Inventory.find(params[:id])
 
     if params[:checkout] == "true"
@@ -46,7 +46,7 @@ def update
 
       new_stock = @inventory.stock_quantity - 1
       new_status = new_stock == 0 ? "在庫なし" : "在庫あり"
-      
+
       if @inventory.update(stock_quantity: new_stock, status: new_status)
         InventoryHistory.create!(inventory_id: @inventory.id, user_id: Current.user.id, quantity: 1, status: :out)
         redirect_to admin_inventories_path, notice: "貯蔵品を1個使用しました。" and return

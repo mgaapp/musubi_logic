@@ -1,4 +1,4 @@
-<div class="container">
+div class="container">
 
   <div class="row">
     <div class="col-md-12">
@@ -18,15 +18,15 @@
   <hr>
 
   <%= form_with model: [:admin, @inventory] do |f| %>
-    
+
     <div class="row mb-3 align-items-center">
-    <div class="col-md-3 text-end text-primary fw-bold">
-      <%= f.label :name, "品名:" %>
+      <div class="col-md-3 text-end text-primary fw-bold">
+        <%= f.label :name, "品名:" %>
+      </div>
+      <div class="col-md-9">
+        <%= f.text_field :name, class: "form-control", placeholder: "例：コピー用紙 A4" %>
+      </div>
     </div>
-    <div class="col-md-9">
-      <%= f.text_field :name, class: "form-control", placeholder: "例：コピー用紙 A4" %>
-    </div>
-  </div>
 
     <div class="row mb-3 align-items-center">
       <div class="col-md-3 text-end text-primary fw-bold">

@@ -71,10 +71,10 @@
     </div>
     <div class="col-md-9">
       <% if @request.vendor.present? %>
-  <%= @request.vendor %>
-<% else %>
-  （未記入）
-<% end %>
+        <%= @request.vendor %>
+      <% else %>
+        （未記入）
+      <% end %>
     </div>
   </div>
 
@@ -114,17 +114,18 @@
       この申請を精査:
     </div>
     <div class="col-md-9">
-        <div class="d-flex align-items-center gap-2">
-          <%= form_with model: [:admin, @request], method: :patch do |f| %>      
-            <%= f.hidden_field :status, value: "承認済み" %>
-            <%= f.submit "承認する", class: "btn btn-success fw-bold", data: { turbo_confirm: "この申請を【承認】します。よろしいですか？" } %>      
-          <% end %>
+      <div class="d-flex align-items-center gap-2">
+        <%= form_with model: [:admin, @request], method: :patch do |f| %>      
+          <%= f.hidden_field :status, value: "承認済み" %>
+          <%= f.submit "承認する", class: "btn btn-success fw-bold", data: { turbo_confirm: "この申請を【承認】します。よろしいですか？" } %>      
+        <% end %>
 
-          <%= form_with model: [:admin, @request], method: :patch do |f| %>
-            <%= f.hidden_field :status, value: "差戻し" %>
-            <%= f.submit "差戻しする", class: "btn btn-danger fw-bold", data: { turbo_confirm: "この申請を【差戻し】します。よろしいですか？" } %>
-          <% end %>
-        </div>
+        <%= form_with model: [:admin, @request], method: :patch do |f| %>
+          <%= f.hidden_field :status, value: "差戻し" %>
+          <%= f.submit "差戻しする", class: "btn btn-danger fw-bold", data: { turbo_confirm: "この申請を【差戻し】します。よろしいですか？" } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
- </div>
-
+</div>

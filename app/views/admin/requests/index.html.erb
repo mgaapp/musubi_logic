@@ -53,10 +53,10 @@
               <td>
                 <% if request.category %>
                   <%= request.category.account_item %>
-                  <span  class="text-center">(<%= request.category.name %>)</span>
+                  <span class="text-center">(<%= request.category.name %>)</span>
                 <% end %>
               </td>
-              <td  class="text-center">
+              <td class="text-center">
                 <%= number_to_currency(request.total_amount_incl_tax, unit: "円", format: "%n %u", precision: 0) %>
               </td>
               <td>

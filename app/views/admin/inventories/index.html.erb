@@ -1,106 +1,108 @@
-<div class="container">
+<div class="container my-4">
 
-  <div class="row">
+  <div class="row mb-4">
     <div class="col-md-12">
       <h2>貯蔵品棚卸一覧</h2>
       <p class="text-muted">各拠点の在庫状況の確認や、手動での在庫調整が行えます。</p>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-3 text-end text-primary">
-      <strong>メニュー操作:</strong>
+  <%# 操作メニュー %>
+  <div class="row mb-3 align-items-center">
+    <div class="col-md-3 text-md-end text-primary fw-bold">
+      メニュー操作:
     </div>
-    <div class="col-md-9">
+    <div class="col-md-9 d-flex gap-2 flex-wrap">
       <%= link_to "在庫なし / 新規購入申請をする", new_request_path, class: "btn btn-primary" %>
       <%= link_to "新規貯蔵品の直接登録", new_admin_inventory_path, class: "btn btn-primary" %>
       <%= link_to "メニューに戻る", root_path, class: "btn btn-outline-secondary" %>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-3 text-end text-primary">
-      <strong>拠点フィルター:</strong>
+  <%# 拠点フィルター %>
+  <div class="row mb-3 align-items-center">
+    <div class="col-md-3 text-md-end text-primary fw-bold">
+      拠点フィルター:
     </div>
-    <div class="col-md-9">
+    <div class="col-md-9 d-flex gap-1">
       <%= link_to "すべて", admin_inventories_path, class: "btn btn-sm btn-outline-secondary" %>
       <%= link_to "本社", admin_inventories_path(location: "本社"), class: "btn btn-sm btn-outline-secondary" %>
       <%= link_to "大阪支店", admin_inventories_path(location: "大阪支店"), class: "btn btn-sm btn-outline-secondary" %>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-3 text-end text-primary">
-      <strong>キーワード検索:</strong>
+  <%# キーワード検索バー %>
+  <div class="row mb-4 align-items-center">
+    <div class="col-md-3 text-md-end text-primary fw-bold">
+      キーワード検索:
     </div>
-    <div class="col-md-9">
-      <%= form_with url: admin_inventories_path, method: :get, local: true do |f| %>
-        <div>
+    <div class="col-md-6">
+      <%= form_with url: admin_inventories_path, method: :get do |f| %>
+        <div class="input-group">
           <%= f.text_field :keyword, value: params[:keyword], placeholder: "品名、購入先、拠点で検索...", class: "form-control" %>
+          <%= f.submit "検索", class: "btn btn-dark" %>
         </div>
-        <%= f.submit "検索", class: "btn btn-dark" %>
       <% end %>
     </div>
   </div>
 
-  <hr>
+  <hr class="my-4">
 
+  <%# 一覧テーブル %>
   <div class="row">
     <div class="col-md-12">
-      <table class="table table-bordered align-middle">
-        <thead class="table-light">
-          <tr>
-            <th class="text-center">品名（貯蔵品ID）</th>
-            <th class="text-center">拠点</th>
-            <th class="text-center">購入先</th>
-            <th class="text-center">税抜単価</th>
-            <th class="text-center">現在の個数</th>
-            <th class="text-center">ステータス</th>
-            <th class="text-center">操作</th>
-          </tr>
-        </thead>
-        <tbody>
-  <% @inventories.each do |inventory| %>
-    <tr>
-      <td class="text-center">
-        <% if inventory.request.present? %>
-          <span><%= inventory.request.category&.name %></span>
-        <% else %>
-          <span><%= inventory.name %></span>
-        <% end %>
-      </td>
-              <td class="text-center"><%= inventory.location %></td>
-              <td class="text-center"><%= inventory.vendor %></td>
-              <td class="text-center"><%= number_to_currency(inventory.unit_price_excl_tax, unit: "円", format: "%n %u", precision: 0) %></td>
-              <td class="text-center"><%= inventory.stock_quantity %> 個</td>
-              <td class="text-center">
-                <% if inventory.stock_quantity.to_i > 0 %>
-                  <span class="text-success fw-bold">在庫あり</span>
-                <% else %>
-                  <span class="text-danger fw-bold">在庫なし</span>
-                <% end %>
-              </td>
-              <td class="text-center">
-                 <div class="mb-2">
-                    <% if inventory.stock_quantity.to_i> 0 %>
-                      <%= form_with url: admin_inventory_path(inventory, checkout: true), method: :patch, local: true, data: { turbo: false, confirm: "この貯蔵品を1個使用します。よろしいですか？" } do %>
-                        <%= submit_tag "この在庫を使う", class: "btn btn-outline-danger" %>
-               
-                        <% end %>
-
-                    <% else %>
-                      <button class="btn btn-secondary">在庫なし</button>
-                    <% end %>
-                  </div>
-                  <div>
-                    <%= link_to "手動で調整", edit_admin_inventory_path(inventory), class: "btn btn-outline-secondary" %>
-                  </div>
-                </div>
-              </td>
+      <div class="table-responsive">
+        <table class="table table-bordered align-middle">
+          <thead class="table-light">
+            <tr>
+              <th class="text-center">品名（貯蔵品ID）</th>
+              <th class="text-center">拠点</th>
+              <th class="text-center">購入先</th>
+              <th class="text-center">税抜単価</th>
+              <th class="text-center">現在の個数</th>
+              <th class="text-center">ステータス</th>
+              <th class="text-center" style="width: 180px;">操作</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% @inventories.each do |inventory| %>
+              <tr>
+                <td class="text-center">
+                  <% if inventory.request.present? %>
+                    <span><%= inventory.request.category&.name %></span>
+                  <% else %>
+                    <span><%= inventory.name %></span>
+                  <% end %>
+                </td>
+                <td class="text-center"><%= inventory.location %></td>
+                <td class="text-center"><%= inventory.vendor %></td>
+                <td class="text-center"><%= number_to_currency(inventory.unit_price_excl_tax, unit: "円", format: "%n %u", precision: 0) %></td>
+                <td class="text-center"><%= inventory.stock_quantity %> 個</td>
+                <td class="text-center">
+                  <% if inventory.stock_quantity.to_i > 0 %>
+                    <span class="badge bg-success">在庫あり</span>
+                  <% else %>
+                    <span class="badge bg-danger">在庫なし</span>
+                  <% end %>
+                </td>
+                <td class="text-center">
+                  <div class="d-grid gap-1">
+                    <% if inventory.stock_quantity.to_i > 0 %>
+                      <%= form_with url: admin_inventory_path(inventory, checkout: true), method: :patch, data: { turbo_confirm: "この貯蔵品を1個使用します。よろしいですか？" } do %>
+                        <%= submit_tag "この在庫を使う", class: "btn btn-sm btn-outline-danger w-100" %>
+                      <% end %>
+                    <% else %>
+                      <button class="btn btn-sm btn-secondary w-100" disabled>在庫なし</button>
+                    <% end %>
+
+                    <%= link_to "手動で調整", edit_admin_inventory_path(inventory), class: "btn btn-sm btn-outline-secondary w-100" %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 

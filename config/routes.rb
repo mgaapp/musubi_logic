@@ -2,21 +2,22 @@ Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
   root to: "homes#top"
-  resources :users, only: [ :show ]
+  resources :users, only: [:show]
   resources :inventories, only: [:index]
   resources :inventory_histories, only: [:create, :index]
   resources :requests, only: [:index, :show, :new, :create, :destroy]
   resources :posts
   resources :assets, only: [:index]
+
   namespace :admin do
-   resources :users
-   resources :requests, only: [:index, :show, :update]
-   resources :categories, only: [:new, :create, :index]
-   resources :inventories, only: [:index, :new, :create, :edit, :update]
-   resources :inventory_histories, only: [:index]
-   resources :assets
+    resources :users
+    resources :requests, only: [:index, :show, :update]
+    resources :categories, only: [:new, :create, :index]
+    resources :inventories, only: [:index, :new, :create, :edit, :update]
+    resources :inventory_histories, only: [:index]
+    resources :assets
   end
-  
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
