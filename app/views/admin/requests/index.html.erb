@@ -1,3 +1,5 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <div class="container">
 
   <div class="row">
@@ -13,6 +15,7 @@
     </div>
     <div class="col-md-9">
       <%= link_to "管理者メニューへ戻る", root_path, class: "btn btn-outline-secondary" %>
+      <%= link_to "CSV出力", admin_requests_path(format: :csv, status: params[:status]), class: "btn btn-success" %>
     </div>
   </div>
 
@@ -21,14 +24,33 @@
       <strong>ステータスで絞り込み:</strong>
     </div>
     <div class="col-md-9">
-      <%= link_to "すべて", admin_requests_path, class: "btn btn-sm btn-outline-dark" %>
-      <%= link_to "申請中", admin_requests_path(status: "申請中"), class: "btn btn-sm btn-outline-warning" %>
-      <%= link_to "承認済み", admin_requests_path(status: "承認済み"), class: "btn btn-sm btn-outline-success" %>
-      <%= link_to "差戻し", admin_requests_path(status: "差戻し"), class: "btn btn-sm btn-outline-danger" %>
+      <%= link_to "すべて", admin_requests_path, class: "btn btn-outline-dark" %>
+      <%= link_to "申請中", admin_requests_path(status: "申請中"), class: "btn btn-outline-warning" %>
+      <%= link_to "承認済み", admin_requests_path(status: "承認済み"), class: "btn btn-outline-success" %>
+      <%= link_to "差戻し", admin_requests_path(status: "差戻し"), class: "btn btn-outline-danger" %>
     </div>
   </div>
 
   <hr>
+
+  <div class="row mb-4">
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <div class="card-header fw-bold">月別 承認金額推移（円）</div>
+        <div class="card-body">
+          <canvas id="monthlyChart" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <div class="card-header fw-bold">勘定科目別 支出内訳</div>
+        <div class="card-body">
+          <canvas id="categoryChart" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-md-12">
@@ -86,3 +108,61 @@
   </div>
 
 </div>
+
+<script>
+  document.addEventListener("turbo:load", renderCharts);
+  document.addEventListener("turbolinks:load", renderCharts);
+
+  function renderCharts() {
+    const monthlyCanvas = document.getElementById('monthlyChart');
+    const categoryCanvas = document.getElementById('categoryChart');
+
+    if (!monthlyCanvas || !categoryCanvas) return;
+
+    if (window.myMonthlyChart instanceof Chart) {
+      window.myMonthlyChart.destroy();
+    }
+    if (window.myCategoryChart instanceof Chart) {
+      window.myCategoryChart.destroy();
+    }
+
+    const monthlyctx = monthlyCanvas.getContext('2d');
+    window.myMonthlyChart = new Chart(monthlyctx, {
+      type: 'bar',
+      data: {
+        labels: <%= raw @monthly_labels.to_json %>,
+        datasets: [{
+          label: '承認金額 (円)',
+          data: <%= raw @monthly_values.to_json %>,
+          backgroundColor: 'rgba(13, 110, 253, 0.6)',
+          borderColor: 'rgba(13, 110, 253, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+
+    const categoryctx = categoryCanvas.getContext('2d');
+    window.myCategoryChart = new Chart(categoryctx, {
+      type: 'doughnut',
+      data: {
+        labels: <%= raw @category_labels.to_json %>,
+        datasets: [{
+          data: <%= raw @category_values.to_json %>,
+          backgroundColor: [
+            '#0d6efd', '#198754', '#ffc107', '#dc3545', '#0dcaf0', '#6c757d'
+          ]
+        }]
+      },
+      options: {
+        responsive: true
+      }
+    });
+  }
+</script>
+

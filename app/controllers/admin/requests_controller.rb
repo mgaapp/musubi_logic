@@ -10,7 +10,30 @@ class Admin::RequestsController < ApplicationController
     if params[:status].present?
       @requests = @requests.where(status: params[:status])
     end
-    @requests = @requests.page(params[:page])
+
+    approved_requests = Request.joins(:category).where(status: ["approved", "承認", "承認済み"])
+
+    monthly_data = approved_requests.to_a
+                      .group_by { |r| r.applied_at&.strftime('%Y/%m') }
+                      .transform_values { |reqs| reqs.sum(&:total_amount_incl_tax) }
+                      .compact
+                      .sort.to_h
+
+    @monthly_labels = monthly_data.keys
+    @monthly_values = monthly_data.values
+
+    category_data = approved_requests.group("categories.account_item").sum(:total_amount_incl_tax)
+    @category_labels = category_data.keys
+    @category_values = category_data.values
+    
+    respond_to do |format|
+      format.html do
+        @requests = @requests.page(params[:page])
+      end
+      format.csv do
+        send_data generate_csv(@requests), filename: "requests-#{Date.today}.csv", type: "text/csv; charset=utf-8"
+      end
+    end
   end
 
   def update
@@ -75,4 +98,30 @@ class Admin::RequestsController < ApplicationController
   def request_params
     params.require(:request).permit(:status)
   end
+
+  def generate_csv(requests)
+    require 'csv'
+
+    bom = "\uFEFF"
+    
+    csv_data = CSV.generate(bom) do |csv|
+      csv << ["ID", "申請者", "申請日", "勘定科目", "カテゴリ名", "購入先", "税抜単価", "税込合計金額", "ステータス"]
+
+      requests.each do |req|
+        csv << [
+          req.id,
+          req.user&.name,
+          req.applied_at,
+          req.category&.account_item,
+          req.category&.name,
+          req.vendor,
+          req.unit_price_excl_tax,
+          req.total_amount_incl_tax,
+          req.status
+        ]
+      end
+    end
+    csv_data
+  end
+
 end
