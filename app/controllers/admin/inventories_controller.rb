@@ -30,6 +30,13 @@ class Admin::InventoriesController < ApplicationController
         keyword, keyword, keyword
       )
     end
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        send_data generate_csv(@inventories), filename: "inventories-#{Date.today}.csv", type: "text/csv; charset=utf-8"
+      end
+    end
   end
 
   def edit
@@ -67,5 +74,27 @@ class Admin::InventoriesController < ApplicationController
 
   def inventory_params
     params.require(:inventory).permit(:request_id, :location, :unit_price_excl_tax, :stock_quantity, :vendor, :purchase_date, :status, :name)
+  end
+
+  def generate_csv(inventories)
+    require 'csv'
+
+    bom = "\uFEFF"
+    CSV.generate(bom) do |csv|
+      csv << ["貯蔵品ID", "品名", "拠点", "購入先", "税抜単価", "現在の個数", "ステータス"]
+
+      inventories.each do |inventory|
+        name = inventory.request.present? ? inventory.request.category&.name : inventory.name
+        csv << [
+          inventory.id,
+          name,
+          inventory.location,
+          inventory.vendor,
+          inventory.unit_price_excl_tax,
+          inventory.stock_quantity,
+          inventory.status
+        ]
+      end
+    end
   end
 end

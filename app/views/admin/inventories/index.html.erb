@@ -15,6 +15,7 @@
     <div class="col-md-9 d-flex gap-2 flex-wrap">
       <%= link_to "在庫なし / 新規購入申請をする", new_request_path, class: "btn btn-primary" %>
       <%= link_to "新規貯蔵品の直接登録", new_admin_inventory_path, class: "btn btn-primary" %>
+      <%= link_to "CSV出力", admin_inventories_path(format: :csv, location: params[:location], keyword: params[:keyword]), class: "btn btn-success" %>
       <%= link_to "メニューに戻る", root_path, class: "btn btn-outline-secondary" %>
     </div>
   </div>
