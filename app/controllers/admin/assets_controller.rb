@@ -1,4 +1,6 @@
 class Admin::AssetsController < ApplicationController
+  before_action :admin_user
+  
   def index 
     @assets = Asset.includes(request: :category).all
 

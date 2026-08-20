@@ -4,7 +4,7 @@ class InventoriesController < ApplicationController
 
     if params[:keyword].present?
       keyword = "%#{params[:keyword]}%"
-      @inventories = @inventories.joins(request: :category).where(
+      @inventories = @inventories.left_outer_joins(request: :category).where(
         "inventories.location LIKE ? OR inventories.vendor LIKE ? OR categories.name LIKE ?",
         keyword, keyword, keyword
       )
