@@ -19,12 +19,11 @@
 ・「この領収書は経費にできるか」など、判断に迷う申請を行う時 
 ​
 ## 設計書
-後ほど作成予定
+AWSインフラ構成図・設計書:https://docs.google.com/spreadsheets/d/1HF7sDYfsy9vkQcdgRfS6qv-_ONGw78MPwLzjnhHsDJU/edit?usp=drive_link
 ​
 ## 開発環境
 - OS：Windows
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
-- JSライブラリ：jQuery
+- JSライブラリ：Chart.js, jQuery
 - IDE：Visual Studio Code（VSCode）
-​
