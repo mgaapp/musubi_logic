@@ -5,6 +5,7 @@ class Admin::RequestsController < ApplicationController
     @request = Request.find(params[:id])
   end
 
+  # 申請一覧の表示、集計データ（月別・科目別）の作成、およびCSV出力を行う
   def index
     @requests = Request.includes(:user, :category).order(created_at: :desc)
     if params[:status].present?
@@ -36,6 +37,7 @@ class Admin::RequestsController < ApplicationController
     end
   end
 
+  # 申請の承認処理と、金額や勘定科目に応じた他テーブル（貯蔵品・固定資産）への自動連携処理
   def update
     @request = Request.find(params[:id])
 
@@ -99,6 +101,7 @@ class Admin::RequestsController < ApplicationController
     params.require(:request).permit(:status)
   end
 
+  # 申請一覧データをCSV形式に変換する
   def generate_csv(requests)
     require 'csv'
 
