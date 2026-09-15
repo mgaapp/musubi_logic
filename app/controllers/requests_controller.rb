@@ -1,8 +1,10 @@
 class RequestsController < ApplicationController
+  # 申請一覧画面の表示
   def index
     @requests = Current.user.requests.includes(:category).order(created_at: :desc).page(params[:page])
   end
 
+  # 申請詳細画面の表示
   def show
     @request = Current.user.requests.find_by(id: params[:id])
     if @request.nil?
@@ -14,6 +16,7 @@ class RequestsController < ApplicationController
     @request = Request.new
   end
 
+  # 申請データの新規登録処理
   def create
     @request = Current.user.requests.new(request_params)
 
